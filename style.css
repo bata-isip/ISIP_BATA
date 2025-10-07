@@ -65,6 +65,8 @@ button.wrong {
   padding: 20px;
   background: white;
   display: inline-block;
+  position: relative;
+  z-index: 1;           
 }
 
 #folkloreContainer {
@@ -160,6 +162,7 @@ body::before::after {
 .hidden {
   display: none !important;
 }
+
 
 
 
