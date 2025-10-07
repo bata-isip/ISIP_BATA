@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta charset="UTF-8">
+<title>ISIP BATA</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div id="app">
+  <!-- Login/Register -->
+  <div id="authPage">
+    <h1>ISIP BATA</h1>
+    <div id="loginForm">
+      <h2>Login</h2>
+      <input type="text" id="loginUsername" placeholder="Username">
+      <div class="password-field">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button type="button" onclick="togglePassword()">👁️</button>
+      </div>
+      <label><input type="checkbox" id="rememberMe"> Remember Me</label>
+      <button onclick="login()">Login</button>
+      <p class="switch">Don't have an account yet? <span onclick="showRegister()">Register</span></p>
+    </div>
+
+    <div id="registerForm" class="hidden">
+      <h2>Register</h2>
+      <input type="text" id="regFullName" placeholder="Full Name">
+      <input type="text" id="regUsername" placeholder="Username">
+      <input type="password" id="regPassword" placeholder="Password">
+      <button onclick="register()">Register</button>
+      <p class="switch">Already have an account? <span onclick="showLogin()">Login</span></p>
+    </div>
+  </div>
+
+  <!-- Home Page -->
+  <div id="homePage" class="hidden">
+    <h1>Welcome, <span id="studentName"></span>!</h1>
+    <p class="tagline">Your offline Filipino learning companion — lessons, quizzes, folklore, and fun!</p>
+    <div class="subjects">
+      <button class="subject-btn math" onclick="openSubject('Math')">Math</button>
+      <button class="subject-btn science" onclick="openSubject('Science')">Science</button>
+    </div>
+    <button onclick="openProfile()">📊 My Profile</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Lesson/Quiz Page -->
+  <div id="lessonPage" class="hidden">
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonContent"></div>
+    <div id="quizContainer"></div>
+    <div id="folkloreContainer" class="hidden">
+      <h3>Folklore Story:</h3>
+      <p id="folkloreText"></p>
+    </div>
+    <button onclick="goHome()">Back</button>
+  </div>
+
+  <!-- Profile Page -->
+  <div id="profilePage" class="hidden">
+    <h2>Profile Dashboard</h2>
+    <p><strong>Name:</strong> <span id="profileName"></span></p>
+    <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+    <p><strong>Lessons Completed:</strong> <span id="profileLessons"></span></p>
+    <p><strong>Average Score:</strong> <span id="profileScore"></span></p>
+    <p><strong>Certificates:</strong></p>
+    <ul id="certificatesList"></ul>
+    <p><strong>Badges Earned:</strong></p>
+    <ul id="badgesList"></ul>
+    <button onclick="goHome()">Back to Home</button>
+  </div>
+
+  <!-- Certificate Page -->
+  <div id="certificatePage" class="hidden">
+    <h2>Certificate of Completion</h2>
+    <p>This certificate is proudly awarded to</p>
+    <h3 id="certName"></h3>
+    <p>For successfully completing the quiz in</p>
+    <h4 id="certLesson"></h4>
+    <button onclick="downloadCertificate()">Download Certificate</button>
+    <button onclick="goHome()">Back to Home</button>
+  </div>
+</div>
+<script src="script.js"></script>
+<script>
+  // for offline support
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(reg => console.log("Service Worker registered!", reg))
+        .catch(err => console.log("Service Worker failed:", err));
+    });
+  }
+</script>
+</body>
+</html>

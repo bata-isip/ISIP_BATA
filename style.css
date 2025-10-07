@@ -1,0 +1,161 @@
+body {
+  font-family: 'Poppins', 'Arial Rounded MT Bold', sans-serif;
+  background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,0.05) 2px, transparent 2px),
+    radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 40px 40px, 20px 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden { display: none; }
+
+h1 { margin-top: 20px; }
+h2, h3, h4 { margin: 10px 0; }
+
+#authPage, #homePage, #lessonPage, #profilePage, #certificatePage { padding: 20px; }
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 250px;
+  background: #fef9e7;
+}
+
+.password-field { display: flex; justify-content: center; align-items: center; }
+.password-field input { width: 200px; margin: 0; }
+.password-field button { margin-left: 5px; padding: 10px; border-radius: 10px; cursor: pointer; }
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  
+}
+
+button.correct {
+  background-color: green !important;
+  color: white;
+}
+
+button.wrong {
+  background-color: red !important;
+  color: white;
+}
+
+.switch span { color: blue; text-decoration: underline; cursor: pointer; }
+
+.subjects { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
+.subject-btn { margin: 10px; padding: 15px 25px; font-size: 18px; border-radius: 12px; cursor: pointer; color: white; }
+.math { background-color: #e74c3c; }
+.science { background-color: #27ae60; }
+
+#certificatePage {
+  border: 2px solid black;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  display: inline-block;
+}
+
+#folkloreContainer {
+  margin-top: 20px;
+  background: #fff0b3;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#lessonContent { margin: 15px 0; text-align: left; max-width: 600px; margin-left:auto; margin-right:auto;}
+/* 🌤 Kid-friendly animated background (works 100% offline) */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 🌈 Floating colorful pastel circles */
+body::before {
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 223, 186, 0.9) 15px, transparent 50px),
+    radial-gradient(circle at 85% 25%, rgba(186, 225, 255, 0.9) 20px, transparent 50px),
+    radial-gradient(circle at 25% 85%, rgba(255, 200, 221, 0.9) 18px, transparent 50px),
+    radial-gradient(circle at 80% 75%, rgba(200, 255, 200, 0.9) 22px, transparent 50px),
+    radial-gradient(circle at 45% 55%, rgba(255, 255, 200, 0.8) 30px, transparent 70px);
+  background-repeat: no-repeat;
+  animation: floatShapes 40s ease-in-out infinite alternate;
+  opacity: 1;
+}
+
+/* ☁️ Pure CSS clouds (no image needed!) */
+body::after {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 40px, transparent 60px),
+    radial-gradient(circle at 25% 33%, rgba(255, 255, 255, 0.9) 60px, transparent 80px),
+    radial-gradient(circle at 75% 60%, rgba(255, 255, 255, 0.8) 50px, transparent 70px),
+    radial-gradient(circle at 70% 63%, rgba(255, 255, 255, 0.9) 70px, transparent 90px),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.8) 40px, transparent 60px),
+    radial-gradient(circle at 53% 83%, rgba(255, 255, 255, 0.9) 60px, transparent 80px);
+  background-size: 800px 800px;
+  background-repeat: no-repeat;
+  animation: moveClouds 120s linear infinite;
+  opacity: 0.6;
+}
+
+/* ✨ More visible twinkling stars (pure CSS sparkles) */
+body::before::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 3px, transparent 3px),
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 4px, transparent 4px);
+  background-size: 80px 80px, 120px 120px, 160px 160px, 200px 200px;
+  animation: twinkle 3s ease-in-out infinite alternate;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 🌈 Floating shapes animation */
+@keyframes floatShapes {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(25px) translateX(15px); }
+  100% { transform: translateY(-20px) translateX(-10px); }
+}
+
+/* ☁️ Slow drifting clouds */
+@keyframes moveClouds {
+  0% { background-position: -200px 10%; }
+  50% { background-position: 200px 50%; }
+  100% { background-position: -200px 80%; }
+}
+
+/* ✨ Brighter star twinkle */
+@keyframes twinkle {
+  0% { opacity: 0.2; filter: drop-shadow(0 0 5px white); }
+  50% { opacity: 1; filter: drop-shadow(0 0 15px white); }
+  100% { opacity: 0.3; filter: drop-shadow(0 0 5px white); }
+}
+
+
+
