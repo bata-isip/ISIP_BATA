@@ -159,6 +159,12 @@ body::before::after {
 #certificatePage {
   display: none;
 }
+/* Hide elements when not active */
+.hidden {
+  display: none !important;
+}
+
+
 
 
 
