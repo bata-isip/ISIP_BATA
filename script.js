@@ -1,4 +1,4 @@
-// js
+// --- script.js (cleaned + fixes) ---
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -83,15 +83,11 @@ function openSubject(subject){
   quizSessionId++;
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("lessonPage").classList.remove("hidden");
-  document.getElementById("lessonTitle").innerText = subject + " Lessons";
+  document.getElementById("lessonTitle").innerText=subject+" Lessons";
   showLessonContent(subject);
-
-  // ✅ full cleanup when switching subjects
-  document.getElementById("lessonContent").innerHTML = "";
+  // clear any quiz UI leftover
   document.getElementById("quizContainer").innerHTML = "";
-  document.getElementById("folkloreContainer").classList.add("hidden");
 }
-
 
 function goHome(){
   // cancel active quiz
@@ -296,61 +292,119 @@ function shuffle(array){
 }
 
 // Certificate (show UI)
-function downloadCertificate() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({
-    orientation: "landscape",
-    unit: "px",
-    format: [800, 600]
+function showCertificate(user, lesson, badge){
+  const cert = document.getElementById("certificatePage");
+  cert.classList.remove("hidden");
+  cert.style.display = "block";
+  document.getElementById("certName").innerText = users[user].fullName;
+  document.getElementById("certLesson").innerText = lesson;
+  document.getElementById("certBadge").innerText = badge;
+  // Smooth scroll / focus
+  cert.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+// Profile
+function openProfile(){
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("profilePage").classList.remove("hidden");
+  const u=users[currentUser];
+  document.getElementById("profileName").innerText=u.fullName;
+  document.getElementById("profileUsername").innerText=currentUser;
+  document.getElementById("profileLessons").innerText=u.lessonsCompleted;
+  const avg=u.scores.length?Math.round(u.scores.reduce((a,b)=>a+b)/u.scores.length):0;
+  document.getElementById("profileScore").innerText=avg;
+
+  const certList=document.getElementById("certificatesList");
+  certList.innerHTML="";
+  u.certificates.forEach(c=>{
+    let li=document.createElement("li");
+    li.innerText=c;
+    certList.appendChild(li);
   });
 
+  const badgesList=document.getElementById("badgesList");
+  badgesList.innerHTML="";
+  u.badges.forEach(b=>{
+    let li=document.createElement("li");
+    li.innerText=b;
+    badgesList.appendChild(li);
+  });
+}
+
+// DOWNLOAD Certificate as PNG (Canvas)
+function downloadCertificate(){
   const name = document.getElementById("certName").innerText || "Student";
   const lesson = document.getElementById("certLesson").innerText || "Lesson";
-  const badge = document.getElementById("certBadge")?.innerText || "";
+  const badge = document.getElementById("certBadge").innerText || "";
 
-  // pastel background
-  doc.setFillColor(255, 250, 240);
-  doc.rect(0, 0, 800, 600, "F");
+  const canvas = document.getElementById("certCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // Draw background
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // soft gradient
+  const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+  g.addColorStop(0, "#fffaf0");
+  g.addColorStop(1, "#f0f7ff");
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 
   // border
-  doc.setDrawColor(242, 201, 76);
-  doc.setLineWidth(8);
-  doc.rect(20, 20, 760, 560);
+  ctx.strokeStyle = "#f2c94c";
+  ctx.lineWidth = 8;
+  roundRect(ctx, 24, 24, canvas.width-48, canvas.height-48, 28, false, true);
+
+  // Confetti (simple circles)
+  for(let i=0;i<60;i++){
+    const cx = Math.random()*(canvas.width-100)+50;
+    const cy = Math.random()*(canvas.height-200)+80;
+    const r = Math.random()*6 + 2;
+    ctx.beginPath();
+    ctx.fillStyle = randomPastel();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.fill();
+  }
 
   // Title
-  doc.setTextColor(40, 40, 40);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(32);
-  doc.text("Certificate of Completion", 400, 120, { align: "center" });
+  ctx.fillStyle = "#333";
+  ctx.font = "48px 'Poppins', sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText("Certificate of Completion", canvas.width/2, 160);
 
-  // Motivational subtitle
-  doc.setTextColor(43, 122, 120);
-  doc.setFont("courier", "italic");
-  doc.setFontSize(28);
-  doc.text("Congratulations!", 400, 170, { align: "center" });
+  // Motivational subtitle in script font
+  ctx.fillStyle = "#2b7a78";
+  ctx.font = "48px 'Great Vibes', cursive";
+  ctx.fillText("Congratulations!", canvas.width/2, 220);
 
-  // Name
-  doc.setTextColor(0, 0, 0);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(24);
-  doc.text(name, 400, 250, { align: "center" });
+  // Student name
+  ctx.fillStyle = "#111";
+  ctx.font = "36px 'Poppins', sans-serif";
+  ctx.fillText(name, canvas.width/2, 320);
 
-  // Lesson + Badge
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(18);
-  doc.text(`for successfully completing: ${lesson}`, 400, 290, { align: "center" });
-  if (badge)
-    doc.text(`Badge Earned: ${badge}`, 400, 320, { align: "center" });
+  // Lesson
+  ctx.font = "28px 'Poppins', sans-serif";
+  ctx.fillText(`For successfully completing: ${lesson}`, canvas.width/2, 380);
+
+  // Badge
+  if(badge){
+    ctx.fillStyle = "#ff7043";
+    ctx.font = "24px 'Poppins', sans-serif";
+    ctx.fillText(`Badge earned: ${badge}`, canvas.width/2, 430);
+  }
 
   // Footer
-  doc.setTextColor(90, 90, 90);
-  doc.setFontSize(14);
-  doc.text("ISIP BATA — Keep learning, keep shining ✨", 400, 560, { align: "center" });
+  ctx.fillStyle = "#555";
+  ctx.font = "18px 'Poppins', sans-serif";
+  ctx.fillText("ISIP BATA — Keep learning, keep shining ✨", canvas.width/2, canvas.height - 80);
 
-  // save PDF
-  const safeName = name.replace(/\s+/g, "_");
-  const safeLesson = lesson.replace(/\s+/g, "_");
-  doc.save(`${safeName}_${safeLesson}_Certificate.pdf`);
+  // convert to data URL and download
+  const dataURL = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.href = dataURL;
+  const safeName = name.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+  const safeLesson = lesson.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+  link.download = `${safeName}_${safeLesson}_Certificate.png`;
+  link.click();
 }
 
 // small helpers
@@ -403,4 +457,3 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
-
