@@ -265,10 +265,12 @@ function shuffle(array){
 
 // Certificate
 function showCertificate(user, lesson, badge){
-  document.getElementById("certificatePage").classList.remove("hidden");
-  document.getElementById("certName").innerText=users[user].fullName;
-  document.getElementById("certLesson").innerText=lesson;
-  document.getElementById("certBadge").innerText=badge;
+  const cert = document.getElementById("certificatePage");
+  cert.classList.remove("hidden");
+  cert.style.display = "block"; // 👉 this line is the key
+  document.getElementById("certName").innerText = users[user].fullName;
+  document.getElementById("certLesson").innerText = lesson;
+  document.getElementById("certBadge").innerText = badge;
 }
 
 // Profile
@@ -298,3 +300,4 @@ function openProfile(){
     badgesList.appendChild(li);
   });
 }
+
