@@ -1,4 +1,4 @@
-//script.js
+// --- script.js (cleaned + fixes) ---
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -78,19 +78,15 @@ function logout(){
 }
 
 // Subjects
-// Subjects
 function openSubject(subject){
   // cancel any active quiz and start fresh session
   quizSessionId++;
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("lessonPage").classList.remove("hidden");
-  document.getElementById("lessonTitle").innerText = subject + " Lessons";
+  document.getElementById("lessonTitle").innerText=subject+" Lessons";
   showLessonContent(subject);
-
-  // ✅ full cleanup when switching subjects
-  document.getElementById("lessonContent").innerHTML = "";
+  // clear any quiz UI leftover
   document.getElementById("quizContainer").innerHTML = "";
-  document.getElementById("folkloreContainer").classList.add("hidden");
 }
 
 function goHome(){
@@ -461,5 +457,3 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
-
-
