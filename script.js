@@ -267,7 +267,7 @@ function shuffle(array){
 function showCertificate(user, lesson, badge){
   const cert = document.getElementById("certificatePage");
   cert.classList.remove("hidden");
-  cert.style.display = "block"; // 👉 this line is the key
+  cert.style.display = "block";
   document.getElementById("certName").innerText = users[user].fullName;
   document.getElementById("certLesson").innerText = lesson;
   document.getElementById("certBadge").innerText = badge;
@@ -314,5 +314,6 @@ function downloadCertificate() {
   link.download = `${name}_${lesson}_Certificate.txt`;
   link.click();
 }
+
 
 
