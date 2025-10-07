@@ -156,13 +156,11 @@ body::before::after {
   50% { opacity: 1; filter: drop-shadow(0 0 15px white); }
   100% { opacity: 0.3; filter: drop-shadow(0 0 5px white); }
 }
-#certificatePage {
-  display: none;
-}
 /* Hide elements when not active */
 .hidden {
   display: none !important;
 }
+
 
 
 
