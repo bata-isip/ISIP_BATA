@@ -1,4 +1,4 @@
-// --- script.js (cleaned + fixes) ---
+// --- script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -9,7 +9,6 @@ let quizSessionId = 0;
 function showRegister(){
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.remove("hidden");
-  // small animation reset
   animateCard(document.getElementById("registerForm"));
 }
 function showLogin(){
@@ -73,37 +72,36 @@ function logout(){
   document.getElementById("loginUsername").value="";
   document.getElementById("loginPassword").value="";
   document.getElementById("rememberMe").checked=false;
-  // cancel any active quiz
   quizSessionId++;
 }
 
 // Subjects
 function openSubject(subject){
-  // cancel any active quiz and start fresh session
   quizSessionId++;
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("lessonPage").classList.remove("hidden");
   document.getElementById("lessonTitle").innerText=subject+" Lessons";
   showLessonContent(subject);
-  // clear any quiz UI leftover
   document.getElementById("quizContainer").innerHTML = "";
+  document.getElementById("folkloreContainer").classList.add("hidden");
 }
 
 function goHome(){
-  // cancel active quiz
   quizSessionId++;
   document.getElementById("lessonPage").classList.add("hidden");
   document.getElementById("profilePage").classList.add("hidden");
   document.getElementById("certificatePage").classList.add("hidden");
   document.getElementById("homePage").classList.remove("hidden");
-  // clear UI
   document.getElementById("quizContainer").innerHTML = "";
+  document.getElementById("folkloreContainer").classList.add("hidden");
 }
 
 // Lessons per subject
 const lessonsContent = {
   Math:["Addition","Subtraction","Multiplication","Division"],
-  Science:["Circulatory","Respiratory","Digestive","Nervous","Skeletal/Muscular"]
+  Science:["Circulatory","Respiratory","Digestive","Nervous","Skeletal/Muscular"],
+  "English Vocabulary":["Animals","Colors","Numbers","Fruits"],
+  "Filipino Vocabulary":["Hayop","Kulay","Numero","Prutas"]
 };
 
 function showLessonContent(subject){
@@ -120,7 +118,7 @@ function showLessonContent(subject){
 
 // Question Pools
 function generateQuestionPool(subject,lesson){
-  const questions=[];
+  let questions=[];
   if(subject==="Math"){
     for(let i=0;i<200;i++){
       let a=Math.floor(Math.random()*50)+1;
@@ -133,15 +131,17 @@ function generateQuestionPool(subject,lesson){
       questions.push({q,a:ans,choices:shuffle([ans,ans+1,ans-1,ans+2])});
     }
   } else if(subject==="Science"){
-    const scienceQuestions = generateScienceQuestions(lesson,20); // added more questions
-    questions.push(...scienceQuestions);
+    questions.push(...generateScienceQuestions(lesson,20));
+  } else if(subject==="English Vocabulary" || subject==="Filipino Vocabulary"){
+    questions.push(...generateVocabularyQuestions(subject,lesson));
   }
   return questions;
 }
 
+// --- Science questions (same as before) ---
 function generateScienceQuestions(topic,count){
   const qs=[];
-  for(let i=0;i<count;i++){
+for(let i=0;i<count;i++){
     let q,a;
     // (same content as before) - keep questions same
     if(topic==="Circulatory"){q=`What organ pumps blood throughout the body?`; a="Heart"; qs.push({q,a,choices:shuffle([a,"Liver","Lungs","Brain","Kidney"])});}
@@ -205,12 +205,78 @@ function generateScienceQuestions(topic,count){
   return qs;
 }
 
+// --- Vocabulary questions ---
+function generateVocabularyQuestions(subject, lesson){
+  const qs=[];
+  // English Vocabulary
+  if(subject==="English Vocabulary"){
+    if(lesson==="Animals"){
+      qs.push({q:"What is a 'dog'?", a:"A domesticated animal", choices:shuffle(["A domesticated animal","A fruit","A color","A vehicle"])});
+      qs.push({q:"What is a 'cat'?", a:"A small domesticated animal", choices:shuffle(["A small domesticated animal","A type of plant","A number","A school subject"])});
+      qs.push({q:"What is a 'bird'?", a:"An animal that can fly", choices:shuffle(["An animal that can fly","A type of food","A color","A toy"])});
+    }
+    if(lesson==="Colors"){
+      qs.push({q:"What color is the sky?", a:"Blue", choices:shuffle(["Blue","Red","Green","Yellow"])});
+      qs.push({q:"What color is a lemon?", a:"Yellow", choices:shuffle(["Yellow","Purple","Orange","Black"])});
+      qs.push({q:"What color is grass?", a:"Green", choices:shuffle(["Green","Pink","White","Brown"])});
+    }
+    if(lesson==="Numbers"){
+      qs.push({q:"How many fingers do we have?", a:"10", choices:shuffle(["10","5","20","15"])});
+      qs.push({q:"What comes after 2?", a:"3", choices:shuffle(["3","4","1","5"])});
+      qs.push({q:"How many days are in a week?", a:"7", choices:shuffle(["7","5","10","6"])});
+    }
+    if(lesson==="Fruits"){
+      qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
+      qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
+      qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
+    }
+  }
+
+  // Filipino Vocabulary
+  if(subject==="Filipino Vocabulary"){
+    if(lesson==="Hayop"){
+      qs.push({q:"Ano ang 'aso'?", a:"A domesticated animal", choices:shuffle(["A domesticated animal","A fruit","A color","A vehicle"])});
+      qs.push({q:"Ano ang 'pusa'?", a:"A small domesticated animal", choices:shuffle(["A small domesticated animal","A type of plant","A number","A school subject"])});
+      qs.push({q:"Ano ang 'ibon'?", a:"An animal that can fly", choices:shuffle(["An animal that can fly","A type of food","A color","A toy"])});
+    }
+    if(lesson==="Kulay"){
+      qs.push({q:"Ano ang kulay ng langit?", a:"Asul", choices:shuffle(["Asul","Pula","Berde","Dilaw"])});
+      qs.push({q:"Ano ang kulay ng lemon?", a:"Dilaw", choices:shuffle(["Dilaw","Lila","Kahel","Itim"])});
+      qs.push({q:"Ano ang kulay ng damo?", a:"Berde", choices:shuffle(["Berde","Rosas","Puti","Kayumanggi"])});
+    }
+    if(lesson==="Numero"){
+      qs.push({q:"Ilan ang daliri natin?", a:"10", choices:shuffle(["10","5","20","15"])});
+      qs.push({q:"Ano ang kasunod ng 2?", a:"3", choices:shuffle(["3","4","1","5"])});
+      qs.push({q:"Ilang araw sa isang linggo?", a:"7", choices:shuffle(["7","5","10","6"])});
+    }
+    if(lesson==="Prutas"){
+      qs.push({q:"Alin ang prutas?", a:"Mansanas", choices:shuffle(["Mansanas","Karot","Patatas","Lettuce"])});
+      qs.push({q:"Aling prutas ay dilaw at maasim?", a:"Lemon", choices:shuffle(["Lemon","Saging","Mansanas","Mango"])});
+      qs.push({q:"Aling prutas ay tropikal at kulay kahel sa loob?", a:"Mango", choices:shuffle(["Mango","Mansanas","Strawberry","Ubas"])});
+    }
+  }
+
+  return qs;
+}
+
+// --- Folklore Stories ---
+const folkloreStories = [
+  "Legend of Mariang Makiling",
+  "The Monkey and the Turtle",
+  "Alamat ng Pinya",
+  "Alamat ng Rosas",
+  "Legend of Bathala",
+  "The Clever Rabbit",
+  "Legend of Mayon Volcano",
+  "The Tale of Juan Tamad",
+  "Alamat ng Bahaghari",
+  "The Talking Bird"
+];
+
 // Quiz
 function startQuiz(subject,lesson){
-  // increment session and capture for this quiz instance
   quizSessionId++;
   const mySession = quizSessionId;
-
   const quizContainer=document.getElementById("quizContainer");
   quizContainer.innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
@@ -220,9 +286,7 @@ function startQuiz(subject,lesson){
   let current=0, score=0;
 
   function showQuestion(){
-    // if session changed, stop rendering this quiz
     if(mySession !== quizSessionId) return;
-
     quizContainer.innerHTML=`<h4>Q${current+1}: ${quizSet[current].q}</h4>`;
     const choicesEl=document.createElement("div");
     choicesEl.className = "choices";
@@ -232,10 +296,9 @@ function startQuiz(subject,lesson){
       const btn=document.createElement("button");
       btn.innerText=choice;
       btn.onclick=()=>{
-        if(mySession !== quizSessionId) return; // abort if user switched
+        if(mySession !== quizSessionId) return;
         if(choice===quizSet[current].a){btn.classList.add("correct"); score++;}
         else{btn.classList.add("wrong");}
-
         Array.from(choicesEl.children).forEach(b=>b.disabled=true);
 
         setTimeout(()=>{
@@ -253,16 +316,13 @@ function startQuiz(subject,lesson){
   function finishQuiz(){
     if(mySession !== quizSessionId) return;
     alert(`You scored ${score} out of ${quizSet.length}`);
-
     const percent = (score/quizSet.length)*100;
 
-    // Track completions
     if(!users[currentUser].completions[lesson]) users[currentUser].completions[lesson]=0;
     users[currentUser].completions[lesson]++;
     users[currentUser].lessonsCompleted++;
     users[currentUser].scores.push(score);
 
-    // Badge upgrade only if ≥65%
     if(percent>=65){
       let badge = getBadgeLevel(users[currentUser].completions[lesson]);
       users[currentUser].badges.push(`${lesson}: ${badge}`);
@@ -271,10 +331,15 @@ function startQuiz(subject,lesson){
     }
 
     localStorage.setItem("users", JSON.stringify(users));
+
+    // --- Show random folklore story ---
+    const folkloreContainer=document.getElementById("folkloreContainer");
+    folkloreContainer.innerHTML=`<h4>Random Folklore Story:</h4><p>${folkloreStories[Math.floor(Math.random()*folkloreStories.length)]}</p>`;
+    folkloreContainer.classList.remove("hidden");
   }
 }
 
-// Badge helper
+// --- Badge helper ---
 function getBadgeLevel(attempt){
   if(attempt===1) return "Bronze Star";
   if(attempt===2) return "Silver Star";
@@ -282,7 +347,7 @@ function getBadgeLevel(attempt){
   return "Diamond Badge";
 }
 
-// Shuffle helper
+// --- Shuffle helper ---
 function shuffle(array){
   for(let i=array.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
@@ -299,7 +364,6 @@ function showCertificate(user, lesson, badge){
   document.getElementById("certName").innerText = users[user].fullName;
   document.getElementById("certLesson").innerText = lesson;
   document.getElementById("certBadge").innerText = badge;
-  // Smooth scroll / focus
   cert.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
@@ -316,22 +380,14 @@ function openProfile(){
 
   const certList=document.getElementById("certificatesList");
   certList.innerHTML="";
-  u.certificates.forEach(c=>{
-    let li=document.createElement("li");
-    li.innerText=c;
-    certList.appendChild(li);
-  });
+  u.certificates.forEach(c=>{let li=document.createElement("li");li.innerText=c;certList.appendChild(li);});
 
   const badgesList=document.getElementById("badgesList");
   badgesList.innerHTML="";
-  u.badges.forEach(b=>{
-    let li=document.createElement("li");
-    li.innerText=b;
-    badgesList.appendChild(li);
-  });
+  u.badges.forEach(b=>{let li=document.createElement("li");li.innerText=b;badgesList.appendChild(li);});
 }
 
-// DOWNLOAD Certificate as PNG (Canvas)
+// DOWNLOAD Certificate as PNG
 function downloadCertificate(){
   const name = document.getElementById("certName").innerText || "Student";
   const lesson = document.getElementById("certLesson").innerText || "Lesson";
@@ -339,22 +395,17 @@ function downloadCertificate(){
 
   const canvas = document.getElementById("certCanvas");
   const ctx = canvas.getContext("2d");
-
-  // Draw background
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  // soft gradient
   const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
   g.addColorStop(0, "#fffaf0");
   g.addColorStop(1, "#f0f7ff");
   ctx.fillStyle = g;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // border
   ctx.strokeStyle = "#f2c94c";
   ctx.lineWidth = 8;
   roundRect(ctx, 24, 24, canvas.width-48, canvas.height-48, 28, false, true);
 
-  // Confetti (simple circles)
   for(let i=0;i<60;i++){
     const cx = Math.random()*(canvas.width-100)+50;
     const cy = Math.random()*(canvas.height-200)+80;
@@ -365,39 +416,31 @@ function downloadCertificate(){
     ctx.fill();
   }
 
-  // Title
   ctx.fillStyle = "#333";
   ctx.font = "48px 'Poppins', sans-serif";
   ctx.textAlign = "center";
   ctx.fillText("Certificate of Completion", canvas.width/2, 160);
-
-  // Motivational subtitle in script font
   ctx.fillStyle = "#2b7a78";
   ctx.font = "48px 'Great Vibes', cursive";
   ctx.fillText("Congratulations!", canvas.width/2, 220);
 
-  // Student name
   ctx.fillStyle = "#111";
   ctx.font = "36px 'Poppins', sans-serif";
   ctx.fillText(name, canvas.width/2, 320);
 
-  // Lesson
   ctx.font = "28px 'Poppins', sans-serif";
   ctx.fillText(`For successfully completing: ${lesson}`, canvas.width/2, 380);
 
-  // Badge
   if(badge){
     ctx.fillStyle = "#ff7043";
     ctx.font = "24px 'Poppins', sans-serif";
     ctx.fillText(`Badge earned: ${badge}`, canvas.width/2, 430);
   }
 
-  // Footer
   ctx.fillStyle = "#555";
   ctx.font = "18px 'Poppins', sans-serif";
   ctx.fillText("ISIP BATA — Keep learning, keep shining ✨", canvas.width/2, canvas.height - 80);
 
-  // convert to data URL and download
   const dataURL = canvas.toDataURL("image/png");
   const link = document.createElement("a");
   link.href = dataURL;
@@ -409,51 +452,30 @@ function downloadCertificate(){
 
 // small helpers
 function randomPastel(){
-  const hues = ["#FFD6A5","#FDFFA5","#BDE0FE","#FBB4B4","#CDEAC0","#FFECB3","#E0BBE4"];
+  const hues = ["#FFD6A5","#FDFFA5","#BDE0FE","#FBB4B4","#CDB4DB","#B5EAEA","#FFABAB"];
   return hues[Math.floor(Math.random()*hues.length)];
 }
-
-function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
-  if (typeof stroke === 'undefined') {
-    stroke = true;
-  }
-  if (typeof radius === 'undefined') {
-    radius = 5;
-  }
-  if (typeof radius === 'number') {
-    radius = {tl: radius, tr: radius, br: radius, bl: radius};
-  } else {
-    var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
-    for (var side in defaultRadius) {
-      radius[side] = radius[side] || defaultRadius[side];
-    }
-  }
+function roundRect(ctx, x, y, w, h, r, fill, stroke){
+  if(typeof stroke==='undefined'){stroke=true;}
+  if(typeof r==='undefined'){r=5;}
+  if(typeof r==='number'){r={tl:r,tr:r,br:r,bl:r};}else{const defaultRadius={tl:0,tr:0,br:0,bl:0}; for(let k in defaultRadius){r[k]=r[k]||defaultRadius[k];}}
   ctx.beginPath();
-  ctx.moveTo(x + radius.tl, y);
-  ctx.lineTo(x + width - radius.tr, y);
-  ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-  ctx.lineTo(x + width, y + height - radius.br);
-  ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-  ctx.lineTo(x + radius.bl, y + height);
-  ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-  ctx.lineTo(x, y + radius.tl);
-  ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+  ctx.moveTo(x+r.tl,y);
+  ctx.lineTo(x+w-r.tr,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r.tr);
+  ctx.lineTo(x+w,y+h-r.br);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r.br,y+h);
+  ctx.lineTo(x+r.bl,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r.bl);
+  ctx.lineTo(x,y+r.tl);
+  ctx.quadraticCurveTo(x,y,x+r.tl,y);
   ctx.closePath();
-  if (fill) {
-    ctx.fill();
-  }
-  if (stroke) {
-    ctx.stroke();
-  }
+  if(fill)ctx.fill();
+  if(stroke)ctx.stroke();
 }
 
+// Animate card
 function animateCard(el){
-  if(!el) return;
-  el.style.transition = "transform 300ms ease, opacity 300ms ease";
-  el.style.transform = "translateY(8px)";
-  el.style.opacity = "0";
-  requestAnimationFrame(()=> {
-    el.style.transform = "translateY(0)";
-    el.style.opacity = "1";
-  });
+  el.style.transform="scale(0.9)";
+  setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
