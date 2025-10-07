@@ -300,4 +300,19 @@ function openProfile(){
     badgesList.appendChild(li);
   });
 }
+// Download Certificate
+function downloadCertificate() {
+  const name = document.getElementById("certName").innerText;
+  const lesson = document.getElementById("certLesson").innerText;
+  const badge = document.getElementById("certBadge").innerText;
+
+  const content = `Certificate of Completion\n\nThis certificate is proudly awarded to ${name}\nFor successfully completing the lesson: ${lesson}\nBadge Earned: ${badge}`;
+
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${name}_${lesson}_Certificate.txt`;
+  link.click();
+}
+
 
