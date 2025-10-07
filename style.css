@@ -157,16 +157,11 @@ body::before::after {
   100% { opacity: 0.3; filter: drop-shadow(0 0 5px white); }
 }
 #certificatePage {
-  display: none !important;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
-#profilePage {
-  display: none !important;
-}
-
-#lessonPage {
-  display: none !important;
-}
 
 
 
