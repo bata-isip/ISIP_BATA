@@ -157,10 +157,10 @@ body::before::after {
   100% { opacity: 0.3; filter: drop-shadow(0 0 5px white); }
 }
 #certificatePage {
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
+  display: none;
 }
+
+
 
 
 
