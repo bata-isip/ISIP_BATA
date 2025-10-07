@@ -211,9 +211,37 @@ function generateVocabularyQuestions(subject, lesson){
   // English Vocabulary
   if(subject==="English Vocabulary"){
     if(lesson==="Animals"){
-      qs.push({q:"What is a 'dog'?", a:"A domesticated animal", choices:shuffle(["A domesticated animal","A fruit","A color","A vehicle"])});
-      qs.push({q:"What is a 'cat'?", a:"A small domesticated animal", choices:shuffle(["A small domesticated animal","A type of plant","A number","A school subject"])});
-      qs.push({q:"What is a 'bird'?", a:"An animal that can fly", choices:shuffle(["An animal that can fly","A type of food","A color","A toy"])});
+        qs.push({q:"What is a 'dog'?", a:"A domesticated animal", choices:shuffle(["A domesticated animal","A fruit","A color","A vehicle"])});
+        qs.push({q:"What is a 'cat'?", a:"A small domesticated animal", choices:shuffle(["A small domesticated animal","A type of plant","A number","A school subject"])});
+        qs.push({q:"What is a 'bird'?", a:"An animal that can fly", choices:shuffle(["An animal that can fly","A type of food","A color","A toy"])});
+        qs.push({q:"What is a 'fish'?", a:"An animal that lives in water", choices:shuffle(["An animal that lives in water","A flying insect","A fruit","A building"])});
+        qs.push({q:"What is a 'cow'?", a:"An animal that gives milk", choices:shuffle(["An animal that gives milk","A type of tree","A color","A vehicle"])});
+        qs.push({q:"What is a 'lion'?", a:"A big wild cat", choices:shuffle(["A big wild cat","A small bird","A type of fish","A fruit"])});
+        qs.push({q:"What is a 'tiger'?", a:"A striped wild cat", choices:shuffle(["A striped wild cat","A vegetable","A type of car","A planet"])});
+        qs.push({q:"What is a 'elephant'?", a:"A large animal with a trunk", choices:shuffle(["A large animal with a trunk","A small insect","A type of shoe","A flower"])});
+        qs.push({q:"What is a 'monkey'?", a:"An animal that climbs trees", choices:shuffle(["An animal that climbs trees","A type of fish","A bird","A chair"])});
+        qs.push({q:"What is a 'rabbit'?", a:"A small animal with long ears", choices:shuffle(["A small animal with long ears","A vehicle","A color","A building"])});
+        qs.push({q:"What is a 'horse'?", a:"An animal used for riding", choices:shuffle(["An animal used for riding","A type of food","A tree","A chair"])});
+        qs.push({q:"What is a 'sheep'?", a:"An animal that gives wool", choices:shuffle(["An animal that gives wool","A fruit","A car","A mountain"])});
+      qs.push({q:"What is a 'goat'?", a:"An animal with horns", choices:shuffle(["An animal with horns","A type of flower","A building","A planet"])});
+        qs.push({q:"What is a 'duck'?", a:"A bird that swims", choices:shuffle(["A bird that swims","A type of fruit","A car","A chair"])});
+        qs.push({q:"What is a 'chicken'?", a:"A bird that lays eggs", choices:shuffle(["A bird that lays eggs","A type of tree","A vehicle","A fruit"])});
+        qs.push({q:"What is a 'bear'?", a:"A large wild animal", choices:shuffle(["A large wild animal","A small insect","A color","A building"])});
+        qs.push({q:"What is a 'wolf'?", a:"A wild animal that lives in packs", choices:shuffle(["A wild animal that lives in packs","A tree","A chair","A planet"])});
+      qs.push({q:"What is a 'fox'?", a:"A small wild animal with a bushy tail", choices:shuffle(["A small wild animal with a bushy tail","A type of fish","A color","A flower"])});
+      qs.push({q:"What is a 'frog'?", a:"An animal that can jump and croak", choices:shuffle(["An animal that can jump and croak","A vehicle","A fruit","A chair"])});
+        qs.push({q:"What is a 'snake'?", a:"A legless reptile", choices:shuffle(["A legless reptile","A bird","A flower","A car"])});
+        qs.push({q:"What is a 'penguin'?", a:"A bird that cannot fly", choices:shuffle(["A bird that cannot fly","A fish","A mammal","A vehicle"])});
+    qs.push({q:"What is a 'koala'?", a:"A tree-dwelling animal", choices:shuffle(["A tree-dwelling animal","A type of bird","A fruit","A flower"])});
+  qs.push({q:"What is a 'kangaroo'?", a:"An animal that hops", choices:shuffle(["An animal that hops","A small fish","A bird","A tree"])});
+  qs.push({q:"What is a 'panda'?", a:"A bear that eats bamboo", choices:shuffle(["A bear that eats bamboo","A type of cat","A fish","A flower"])});
+ qs.push({q:"What is a 'whale'?", a:"A large sea mammal", choices:shuffle(["A large sea mammal","A type of bird","A reptile","A tree"])});
+  qs.push({q:"What is a 'dolphin'?", a:"A smart marine animal", choices:shuffle(["A smart marine animal","A land animal","A bird","A vegetable"])});
+  qs.push({q:"What is a 'shark'?", a:"A predator fish", choices:shuffle(["A predator fish","A mammal","A bird","A tree"])});
+    qs.push({q:"What is a 'crab'?", a:"A crustacean that walks sideways", choices:shuffle(["A crustacean that walks sideways","A bird","A mammal","A vegetable"])});
+  qs.push({q:"What is a 'lobster'?", a:"A sea animal with claws", choices:shuffle(["A sea animal with claws","A type of bird","A mammal","A tree"])});
+qs.push({q:"What is a 'octopus'?", a:"A sea animal with eight arms", choices:shuffle(["A sea animal with eight arms","A fish","A bird","A reptile"])});
+
     }
     if(lesson==="Colors"){
       qs.push({q:"What color is the sky?", a:"Blue", choices:shuffle(["Blue","Red","Green","Yellow"])});
@@ -479,3 +507,4 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
+
