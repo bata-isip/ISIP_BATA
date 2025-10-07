@@ -254,10 +254,37 @@ qs.push({q:"What is a 'octopus'?", a:"A sea animal with eight arms", choices:shu
       qs.push({q:"How many days are in a week?", a:"7", choices:shuffle(["7","5","10","6"])});
     }
     if(lesson==="Fruits"){
-      qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
-      qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
-      qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
-    }
+    qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
+    qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
+    qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
+    qs.push({q:"Which fruit is small and red?", a:"Strawberry", choices:shuffle(["Strawberry","Apple","Banana","Orange"])});
+    qs.push({q:"Which fruit is purple and grows in bunches?", a:"Grapes", choices:shuffle(["Grapes","Plum","Blueberry","Mango"])});
+    qs.push({q:"Which fruit is long and yellow?", a:"Banana", choices:shuffle(["Banana","Apple","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green on the outside and red inside?", a:"Watermelon", choices:shuffle(["Watermelon","Apple","Grapes","Mango"])});
+    qs.push({q:"Which fruit is round and orange?", a:"Orange", choices:shuffle(["Orange","Mango","Apple","Banana"])});
+    qs.push({q:"Which fruit has a spiky skin and yellow inside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Kiwi"])});
+    qs.push({q:"Which fruit is small and blue?", a:"Blueberry", choices:shuffle(["Blueberry","Grapes","Plum","Apple"])});
+    qs.push({q:"Which fruit is green and often used in salads?", a:"Kiwi", choices:shuffle(["Kiwi","Apple","Banana","Mango"])});
+    qs.push({q:"Which fruit is brown and fuzzy outside, green inside?", a:"Kiwi", choices:shuffle(["Kiwi","Coconut","Avocado","Plum"])});
+    qs.push({q:"Which fruit is red and often used for juice?", a:"Apple", choices:shuffle(["Apple","Cherry","Tomato","Strawberry"])});
+    qs.push({q:"Which fruit is small, round, and red?", a:"Cherry", choices:shuffle(["Cherry","Grape","Strawberry","Apple"])});
+    qs.push({q:"Which fruit is orange and small, often peeled easily?", a:"Mandarin", choices:shuffle(["Mandarin","Orange","Peach","Apricot"])});
+    qs.push({q:"Which fruit is green and sour?", a:"Lime", choices:shuffle(["Lime","Lemon","Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, green outside and orange inside?", a:"Papaya", choices:shuffle(["Papaya","Mango","Pineapple","Banana"])});
+    qs.push({q:"Which fruit is red and has tiny seeds outside?", a:"Strawberry", choices:shuffle(["Strawberry","Raspberry","Cherry","Apple"])});
+    qs.push({q:"Which fruit is purple and sweet?", a:"Plum", choices:shuffle(["Plum","Grape","Blueberry","Mango"])});
+    qs.push({q:"Which fruit is green or purple and grows on vines?", a:"Grapes", choices:shuffle(["Grapes","Plum","Apple","Blueberry"])});
+    qs.push({q:"Which fruit is yellow and curved?", a:"Banana", choices:shuffle(["Banana","Lemon","Mango","Apple"])});
+    qs.push({q:"Which fruit has a hard shell and white inside?", a:"Coconut", choices:shuffle(["Coconut","Pineapple","Papaya","Avocado"])});
+    qs.push({q:"Which fruit is small, orange, and sweet?", a:"Apricot", choices:shuffle(["Apricot","Peach","Mandarin","Mango"])});
+    qs.push({q:"Which fruit is tropical, orange inside, and black seeds?", a:"Papaya", choices:shuffle(["Papaya","Mango","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green, smooth, and creamy inside?", a:"Avocado", choices:shuffle(["Avocado","Kiwi","Cucumber","Papaya"])});
+    qs.push({q:"Which fruit is red, heart-shaped, and juicy?", a:"Strawberry", choices:shuffle(["Strawberry","Cherry","Apple","Tomato"])});
+    qs.push({q:"Which fruit is round, orange or red, fuzzy skin?", a:"Peach", choices:shuffle(["Peach","Apricot","Plum","Mango"])});
+    qs.push({q:"Which fruit is sour and green?", a:"Lime", choices:shuffle(["Lime","Lemon","Green Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, yellow, and spiky outside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Papaya"])});
+    qs.push({q:"Which fruit is tiny, red, and tart?", a:"Raspberry", choices:shuffle(["Raspberry","Cherry","Strawberry","Cranberry"])});
+}
   }
 
   // Filipino Vocabulary
@@ -507,4 +534,5 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
+
 
