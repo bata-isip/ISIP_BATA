@@ -88,6 +88,8 @@ button:active{ transform: translateY(2px); }
 .subject-btn{ padding:14px 22px; font-size:18px; border-radius:14px; cursor:pointer; color:white; border:none; box-shadow:0 6px 12px rgba(0,0,0,0.06); }
 .math{ background: linear-gradient(90deg,#ff8a8a,#ff6b6b); }
 .science{ background: linear-gradient(90deg,#7ee7b8,#27ae60); }
+.english { background: linear-gradient(90deg,#FFD6A5,#FDFFA5); }
+.filipino { background: linear-gradient(90deg,#BDE0FE,#7CC6FE); }
 
 .lesson-btn{ display:block; width:100%; text-align:left; padding:10px 12px; border-radius:10px; background:#f6fbff; border:1px dashed #e6eefb; margin:8px 0; cursor:pointer; }
 
