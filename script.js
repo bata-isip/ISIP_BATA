@@ -1,4 +1,4 @@
-// --- script.js (cleaned + fixes) ---
+//script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -457,3 +457,4 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
