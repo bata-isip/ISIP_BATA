@@ -283,5 +283,15 @@ body::after, body::before {
 #homePage button {
   pointer-events: auto;
 }
+#authPage {
+  position: relative;
+  z-index: 5; /* iangat para clickable */
+}
+
+#authPage button,
+#authPage input {
+  pointer-events: auto;
+}
+
 
 
