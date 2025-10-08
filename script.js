@@ -1,4 +1,4 @@
-// --- script.js
+// script.js - final offline-ready + Philippine History Taglish + landscape cert
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -18,7 +18,7 @@ function showLogin(){
 }
 function togglePassword(){
   const pwd=document.getElementById("loginPassword");
-  pwd.type=pwd.type==='password'?'text':'password';
+  pwd.type = pwd.type === 'password' ? 'text' : 'password';
 }
 
 function register(){
@@ -77,7 +77,7 @@ function logout(){
 
 // Subjects
 function openSubject(subject){
-  quizSessionId++;
+  quizSessionId++; // cancel previous quiz instance if any
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("lessonPage").classList.remove("hidden");
   document.getElementById("lessonTitle").innerText=subject+" Lessons";
@@ -101,7 +101,8 @@ const lessonsContent = {
   Math:["Addition","Subtraction","Multiplication","Division"],
   Science:["Circulatory","Respiratory","Digestive","Nervous","Skeletal/Muscular"],
   "English Vocabulary":["Animals","Colors","Numbers","Fruits"],
-  "Filipino Vocabulary":["Hayop","Kulay","Numero","Prutas"]
+  "Filipino Vocabulary":["Hayop","Kulay","Numero","Prutas"],
+  "Philippine History":["Pre-colonial Philippines","Spanish Colonization","Philippine Revolution"]
 };
 
 function showLessonContent(subject){
@@ -134,13 +135,15 @@ function generateQuestionPool(subject,lesson){
     questions.push(...generateScienceQuestions(lesson,20));
   } else if(subject==="English Vocabulary" || subject==="Filipino Vocabulary"){
     questions.push(...generateVocabularyQuestions(subject,lesson));
+  } else if(subject==="Philippine History"){
+    questions.push(...generatePhilippineHistoryQuestions(lesson));
   }
   return questions;
 }
 
-// --- Science questions (same as before) ---
+// --- Science + Vocabulary functions (unchanged content) ---
 function generateScienceQuestions(topic,count){
-  const qs=[];
+ const qs=[];
 for(let i=0;i<count;i++){
     let q,a;
     // (same content as before) - keep questions same
@@ -498,19 +501,45 @@ if(lesson==="Prutas"){
   return qs;
 }
 
-// --- Folklore Stories ---
-const folkloreStories = [
-  "Legend of Mariang Makiling",
-  "The Monkey and the Turtle",
-  "Alamat ng Pinya",
-  "Alamat ng Rosas",
-  "Legend of Bathala",
-  "The Clever Rabbit",
-  "Legend of Mayon Volcano",
-  "The Tale of Juan Tamad",
-  "Alamat ng Bahaghari",
-  "The Talking Bird"
-];
+// --- NEW: Philippine History Taglish (3 lessons x 10 questions each) ---
+function generatePhilippineHistoryQuestions(lesson){
+  const qs = [];
+  if(lesson === "Pre-colonial Philippines"){
+    qs.push({q:"Anong tawag sa maliit na community noon na pinamumunuan ng datu?", a:"Barangay", choices:shuffle(["Barangay","Provincia","Lungsod","Bayan"])});
+    qs.push({q:"Ano ang gamit ng baybayin noon?", a:"Pagsusulat", choices:shuffle(["Pagsusulat","Pagtatanim","Pagluluto","Paglalaba"])});
+    qs.push({q:"Sino ang lider ng barangay noon?", a:"Datu", choices:shuffle(["Datu","Prinsipe","Alkalde","Kapitan"])});
+    qs.push({q:"Ano ang tawag sa bahay ng mga Pilipino noon na gawa sa nipa at kawayan?", a:"Bahay Kubo", choices:shuffle(["Bahay Kubo","Mansion","Bahay na bato","Casa"])}); 
+    qs.push({q:"Anong sining ang kilala noon — sayaw, awit, o pintura?", a:"Sayaw at awit", choices:shuffle(["Sayaw at awit","Pintura","Isports","Surgery"])});
+    qs.push({q:"Ano ang tawag sa palitan ng kalakal gamit ang barko o bangka?", a:"Kalakalan", choices:shuffle(["Kalakalan","Pagluluto","Pagtitiis","Pakikipagdigma"])});
+    qs.push({q:"Mayroon bang sistema ng batas at tradisyon noon?", a:"Oo", choices:shuffle(["Oo","Hindi","Siguro","Minsan"])});
+    qs.push({q:"Anong materyales ang kadalasang ginamit sa paggawa ng kagamitan noon?", a:"Kahoy at kawayan", choices:shuffle(["Kahoy at kawayan","Bakal lang","Plastik","Aluminyo"])});
+    qs.push({q:"Anong hayop ang madalas alagaan sa bayan noon para pagkain at trabaho?", a:"Baboy at kalabaw", choices:shuffle(["Baboy at kalabaw","Ibon lang","Isda lang","Tigre"])});
+    qs.push({q:"Bakit mahalaga ang oral tradition (kuwento) noon?", a:"Para maipasa ang kaalaman at alamat", choices:shuffle(["Para maipasa ang kaalaman at alamat","Para magtayo ng paaralan","Para magluto","Walang dahilan"])});
+  } else if(lesson === "Spanish Colonization"){
+    qs.push({q:"Kailan dumating ang mga Espanyol sa Pilipinas (taon)?", a:"1521 (Magellan)", choices:shuffle(["1521 (Magellan)","1600","1400","1800"])});
+    qs.push({q:"Sino ang unang dumating na Europeo na nauugnay sa Pilipinas?", a:"Ferdinand Magellan", choices:shuffle(["Ferdinand Magellan","Christopher Columbus","Vasco da Gama","Magellan's cousin"])});
+    qs.push({q:"Ano ang ipinakilala ng Espanyol sa edukasyon at relihiyon?", a:"Mga simbahan at paaralan", choices:shuffle(["Mga simbahan at paaralan","Fast food","Trains","Internet"])});
+    qs.push({q:"Anong sistema ang nag-organisa ng lupa at buwis noong Kastila?", a:"Encomienda", choices:shuffle(["Encomienda","Democracy","Social Media","Republic"])});
+    qs.push({q:"Ano ang nangyari sa kultura ng mga Pilipino dahil sa Kastila?", a:"Napagsama ang tradisyon at bagong gawi", choices:shuffle(["Napagsama ang tradisyon at bagong gawi","Nawala agad","Walang nabago","Lahat umalis"])});
+    qs.push({q:"Anong wika ang ipinakilala ng Espanyol pero hindi ito naging pangunahing wika sa buong bansa?", a:"Espanyol", choices:shuffle(["Espanyol","Ingles","Tsino","Hapon"])});
+    qs.push({q:"Sino ang isinilang na bayani na sumulat ng Noli Me Tangere noong panahon ng Kastila?", a:"Jose Rizal", choices:shuffle(["Jose Rizal","Andres Bonifacio","Emilio Aguinaldo","Apolinario Mabini"])});
+    qs.push({q:"Bakit may mga pag-aalsa laban sa Kastila?", a:"Dahil sa mataas na buwis at hindi makatarungang sistema", choices:shuffle(["Dahil sa mataas na buwis at hindi makatarungang sistema","Dahil sa sobrang saya","Dahil gustong mag-aral","Walang dahilan"])});
+    qs.push({q:"Ano ang naging impluwensya ng Kastila sa pagkain at relihiyon?", a:"Adobo, lechon at Katolisismo", choices:shuffle(["Adobo, lechon at Katolisismo","Sinigang lang","Shoe making","Baseball lamang"])});
+    qs.push({q:"Paano napasa ang mga bagong salita sa Tagalog mula sa Kastila?", a:"Gamit sa araw-araw na salita", choices:shuffle(["Gamit sa araw-araw na salita","Hindi pumasok","Pagawaan lang","Klasrum lang"])});
+  } else if(lesson === "Philippine Revolution"){
+    qs.push({q:"Sino ang itinuturing na 'Ama ng Katipunan'?", a:"Andres Bonifacio", choices:shuffle(["Andres Bonifacio","Jose Rizal","Emilio Aguinaldo","Marcelo H. del Pilar"])});
+    qs.push({q:"Ano ang Katipunan (Kataas-taasan, Kagalang-galangang Katipunan ng mga Anak ng Bayan)?", a:"Samahan para sa kalayaan", choices:shuffle(["Samahan para sa kalayaan","Paaralan lang","Tindahan","Sports club"])});
+    qs.push({q:"Sino ang nagsabing 'Ang hindi marunong lumingon sa pinanggalingan ay hindi makararating sa paroroonan' — karaniwang iniuugnay sa?", a:"Jose Rizal (kontekstong pambansang pagmamahal)", choices:shuffle(["Jose Rizal (kontekstong pambansang pagmamahal)","Andres Bonifacio","Emilio Aguinaldo","Marcelo H. del Pilar"])});
+    qs.push({q:"Ano ang naging resulta ng pag-aalsa noong 1896 (mga unang yugto)?", a:"Simula ng rebolusyon at pakikipaglaban", choices:shuffle(["Simula ng rebolusyon at pakikipaglaban","Walang nangyari","Naging pista lang","Naging laro"])});
+    qs.push({q:"Sino ang naging unang Pangulo ng Pilipinas na inihayag noong 1899 (short-lived)?", a:"Emilio Aguinaldo", choices:shuffle(["Emilio Aguinaldo","Andres Bonifacio","Jose Rizal","Apolinario Mabini"])});
+    qs.push({q:"Bakit mahalaga si Jose Rizal sa panahon ng rebolusyon kahit hindi siya miyembro ng Katipunan?", a:"Kanyang mga akda ang nagmulat ng damdamin ng bayan", choices:shuffle(["Kanyang mga akda ang nagmulat ng damdamin ng bayan","Dahil mahilig siya sa sayaw","Dahil siya'y sundalo","Walang dahilan"])});
+    qs.push({q:"Ano ang layunin ng Katipunan?", a:"Palayain ang bansa mula sa Kastila", choices:shuffle(["Palayain ang bansa mula sa Kastila","Magtayo ng tindahan","Mag-aral sa ibang bansa","Magtayo ng paaralan lamang"])});
+    qs.push({q:"Saan isinagawa ang sigaw na sumisimbolo sa simula ng armadong pakikibaka (Cry of Pugad Lawin / Balintawak) — anong gawain ang sinasabing ginawa?", a:"Pagsunog ng cedulas (mga papeles) o pag-alis ng mga tanda", choices:shuffle(["Pagsunog ng cedulas (mga papeles) o pag-alis ng mga tanda","Pagtitimpla ng kape","Pagtugtog ng piano","Pagbili ng tinapay"])});
+    qs.push({q:"Ano ang natutunan natin mula sa panahon ng rebolusyon?", a:"Ang tapang at pagkakaisa para sa kalayaan", choices:shuffle(["Ang tapang at pagkakaisa para sa kalayaan","Walang natutunan","Pumunta sa ibang bansa","Maglaro lang"])});
+    qs.push({q:"Bakit mahalaga ituro ang kasaysayan sa mga bata (Taglish answer)?", a:"Para malaman nila kung saan sila nagmula at mahalin ang bayan", choices:shuffle(["Para malaman nila kung saan sila nagmula at mahalin ang bayan","Para lang gumamit ng libro","Para mag-aral ng math","Walang gamit"])});
+  }
+  return qs;
+}
 
 // Quiz
 function startQuiz(subject,lesson){
@@ -521,7 +550,7 @@ function startQuiz(subject,lesson){
   document.getElementById("folkloreContainer").classList.add("hidden");
 
   const pool=generateQuestionPool(subject,lesson);
-  const quizSet=shuffle(pool).slice(0,Math.floor(Math.random()*6)+5); // 5-10 questions
+  const quizSet = (Array.isArray(pool) && pool.length) ? shuffle(pool).slice(0, Math.min(pool.length, Math.floor(Math.random()*6)+5)) : [{q:"No questions available", a:"", choices:["Ok"]}];
   let current=0, score=0;
 
   function showQuestion(){
@@ -539,7 +568,6 @@ function startQuiz(subject,lesson){
         if(choice===quizSet[current].a){btn.classList.add("correct"); score++;}
         else{btn.classList.add("wrong");}
         Array.from(choicesEl.children).forEach(b=>b.disabled=true);
-
         setTimeout(()=>{
           if(mySession !== quizSessionId) return;
           current++;
@@ -571,14 +599,23 @@ function startQuiz(subject,lesson){
 
     localStorage.setItem("users", JSON.stringify(users));
 
-    // --- Show random folklore story ---
+    // --- Show random folklore story for fun ---
     const folkloreContainer=document.getElementById("folkloreContainer");
+    const folkloreStories = [
+      "Legend of Mariang Makiling",
+      "The Monkey and the Turtle",
+      "Alamat ng Pinya",
+      "Alamat ng Rosas",
+      "The Tale of Juan Tamad",
+      "Alamat ng Bahaghari",
+      "The Talking Bird"
+    ];
     folkloreContainer.innerHTML=`<h4>Random Folklore Story:</h4><p>${folkloreStories[Math.floor(Math.random()*folkloreStories.length)]}</p>`;
     folkloreContainer.classList.remove("hidden");
   }
 }
 
-// --- Badge helper ---
+// Badge helper
 function getBadgeLevel(attempt){
   if(attempt===1) return "Bronze Star";
   if(attempt===2) return "Silver Star";
@@ -586,7 +623,7 @@ function getBadgeLevel(attempt){
   return "Diamond Badge";
 }
 
-// --- Shuffle helper ---
+// Shuffle helper
 function shuffle(array){
   for(let i=array.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
@@ -595,14 +632,24 @@ function shuffle(array){
   return array;
 }
 
-// Certificate (show UI)
+// Certificate (show UI) - offline-safe
 function showCertificate(user, lesson, badge){
   const cert = document.getElementById("certificatePage");
   cert.classList.remove("hidden");
   cert.style.display = "block";
-  document.getElementById("certName").innerText = users[user].fullName;
+  document.getElementById("certName").innerText = users[user].fullName || "Student";
   document.getElementById("certLesson").innerText = lesson;
-  document.getElementById("certBadge").innerText = badge;
+  document.getElementById("certBadge").innerText = badge || "";
+
+  // Check online status: if offline, hide download button (no crash)
+  const downloadBtn = document.getElementById("downloadBtn");
+  if(typeof navigator !== "undefined" && navigator.onLine === false){
+    downloadBtn.style.display = "none";
+  } else {
+    downloadBtn.style.display = "inline-block";
+  }
+
+  // Scroll into view
   cert.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
@@ -626,14 +673,22 @@ function openProfile(){
   u.badges.forEach(b=>{let li=document.createElement("li");li.innerText=b;badgesList.appendChild(li);});
 }
 
-// DOWNLOAD Certificate as PNG
+// DOWNLOAD Certificate as PNG (works when online)
+// If offline, we'll gracefully prevent download and keep certificate visible.
 function downloadCertificate(){
+  if(typeof navigator !== "undefined" && navigator.onLine === false){
+    alert("You are offline — certificate preview is available but download is disabled.");
+    return;
+  }
+
   const name = document.getElementById("certName").innerText || "Student";
   const lesson = document.getElementById("certLesson").innerText || "Lesson";
   const badge = document.getElementById("certBadge").innerText || "";
 
   const canvas = document.getElementById("certCanvas");
   const ctx = canvas.getContext("2d");
+
+  // Draw background gradient (landscape)
   ctx.clearRect(0,0,canvas.width,canvas.height);
   const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
   g.addColorStop(0, "#fffaf0");
@@ -641,59 +696,76 @@ function downloadCertificate(){
   ctx.fillStyle = g;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
+  // border
   ctx.strokeStyle = "#f2c94c";
-  ctx.lineWidth = 8;
-  roundRect(ctx, 24, 24, canvas.width-48, canvas.height-48, 28, false, true);
+  ctx.lineWidth = 12;
+  roundRect(ctx, 30, 30, canvas.width-60, canvas.height-60, 30, false, true);
 
-  for(let i=0;i<60;i++){
-    const cx = Math.random()*(canvas.width-100)+50;
-    const cy = Math.random()*(canvas.height-200)+80;
-    const r = Math.random()*6 + 2;
+  // Confetti (soft circles) decorative
+  for(let i=0;i<80;i++){
+    const cx = Math.random()*(canvas.width-140)+70;
+    const cy = Math.random()*(canvas.height-260)+70;
+    const r = Math.random()*7 + 2;
     ctx.beginPath();
     ctx.fillStyle = randomPastel();
     ctx.arc(cx, cy, r, 0, Math.PI*2);
     ctx.fill();
   }
 
-  ctx.fillStyle = "#333";
-  ctx.font = "48px 'Poppins', sans-serif";
+  // Title
+  ctx.fillStyle = "#2b6a86";
+  ctx.font = "52px 'Poppins', sans-serif";
   ctx.textAlign = "center";
   ctx.fillText("Certificate of Completion", canvas.width/2, 160);
+
+  // Motivational script
   ctx.fillStyle = "#2b7a78";
-  ctx.font = "48px 'Great Vibes', cursive";
-  ctx.fillText("Congratulations!", canvas.width/2, 220);
+  ctx.font = "64px 'Great Vibes', cursive";
+  ctx.fillText("You Did Amazing!", canvas.width/2, 240);
 
-  ctx.fillStyle = "#111";
-  ctx.font = "36px 'Poppins', sans-serif";
-  ctx.fillText(name, canvas.width/2, 320);
+  // Student name
+  ctx.fillStyle = "#0b4b6b";
+  ctx.font = "48px 'Poppins', sans-serif";
+  ctx.fillText(name, canvas.width/2, 360);
 
-  ctx.font = "28px 'Poppins', sans-serif";
-  ctx.fillText(`For successfully completing: ${lesson}`, canvas.width/2, 380);
+  // Lesson
+  ctx.font = "30px 'Poppins', sans-serif";
+  ctx.fillText(`For successfully completing: ${lesson}`, canvas.width/2, 420);
 
+  // Badge
   if(badge){
     ctx.fillStyle = "#ff7043";
-    ctx.font = "24px 'Poppins', sans-serif";
-    ctx.fillText(`Badge earned: ${badge}`, canvas.width/2, 430);
+    ctx.font = "26px 'Poppins', sans-serif";
+    ctx.fillText(`Badge earned: ${badge}`, canvas.width/2, 470);
   }
 
+  // Footer
   ctx.fillStyle = "#555";
-  ctx.font = "18px 'Poppins', sans-serif";
-  ctx.fillText("ISIP BATA — Keep learning, keep shining ✨", canvas.width/2, canvas.height - 80);
+  ctx.font = "20px 'Poppins', sans-serif";
+  ctx.fillText("ISIP BATA — Keep learning, keep shining ✨", canvas.width/2, canvas.height - 120);
 
+  // Convert to data URL and download
   const dataURL = canvas.toDataURL("image/png");
   const link = document.createElement("a");
   link.href = dataURL;
   const safeName = name.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
   const safeLesson = lesson.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
   link.download = `${safeName}_${safeLesson}_Certificate.png`;
-  link.click();
+  // try/catch to prevent errors in restrictive offline containers
+  try {
+    link.click();
+  } catch (e) {
+    // fallback: open in new tab for manual save
+    window.open(dataURL, "_blank");
+  }
 }
 
 // small helpers
 function randomPastel(){
   const hues = ["#FFD6A5","#FDFFA5","#BDE0FE","#FBB4B4","#CDB4DB","#B5EAEA","#FFABAB"];
   return hues[Math.floor(Math.random()*hues.length)];
-}A
+}
+
 function roundRect(ctx, x, y, w, h, r, fill, stroke){
   if(typeof stroke==='undefined'){stroke=true;}
   if(typeof r==='undefined'){r=5;}
@@ -701,7 +773,7 @@ function roundRect(ctx, x, y, w, h, r, fill, stroke){
   ctx.beginPath();
   ctx.moveTo(x+r.tl,y);
   ctx.lineTo(x+w-r.tr,y);
-  ctx.quadraticCurveTo(x+w,y,x+w,y+r.tr); 
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r.tr);
   ctx.lineTo(x+w,y+h-r.br);
   ctx.quadraticCurveTo(x+w,y+h,x+w-r.br,y+h);
   ctx.lineTo(x+r.bl,y+h);
@@ -715,6 +787,12 @@ function roundRect(ctx, x, y, w, h, r, fill, stroke){
 
 // Animate card
 function animateCard(el){
-  el.style.transform="scale(0.9)";
-  setTimeout(()=>{el.style.transform="scale(1)";},150);
+  if(!el) return;
+  el.style.transition = "transform 260ms ease, opacity 260ms ease";
+  el.style.transform = "translateY(8px)";
+  el.style.opacity = "0";
+  requestAnimationFrame(()=> {
+    el.style.transform = "translateY(0)";
+    el.style.opacity = "1";
+  });
 }
