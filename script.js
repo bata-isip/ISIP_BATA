@@ -449,22 +449,106 @@ function generateVocabularyQuestions(subject, lesson){
       qs.push({q:"What color is snow?", a:"White", choices:shuffle(["White","Blue","Brown","Black"])});
       qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","White","Red","Green"])});
       qs.push({q:"What color is chocolate?", a:"Brown", choices:shuffle(["Brown","Pink","Blue","Orange"])});
-    }
+      qs.push({q:"What color is a strawberry?", a:"Red", choices:shuffle(["Red","Green","Yellow","Purple"])});
+      qs.push({q:"What color is a pumpkin?", a:"Orange", choices:shuffle(["Orange","Blue","White","Black"])});
+      qs.push({q:"What color is a cucumber?", a:"Green", choices:shuffle(["Green","Red","Yellow","Pink"])});
+      qs.push({q:"What color is a rose?", a:"Red", choices:shuffle(["Red","Blue","Brown","Black"])});
+      qs.push({q:"What color is a blueberry?", a:"Blue", choices:shuffle(["Blue","Green","Red","Yellow"])});
+      qs.push({q:"What color is a lemon slice?", a:"Yellow", choices:shuffle(["Yellow","Orange","Green","Purple"])});
+      qs.push({q:"What color is a cloud?", a:"White", choices:shuffle(["White","Blue","Gray","Black"])});
+      qs.push({q:"What color is a night sky?", a:"Black", choices:shuffle(["Black","Blue","Purple","White"])});
+      qs.push({q:"What color is a pink flamingo?", a:"Pink", choices:shuffle(["Pink","Red","Orange","Yellow"])});
+      qs.push({q:"What color is a rainbow?", a:"Multicolor", choices:shuffle(["Multicolor","Single color","Gray","Black"])});
+      qs.push({q:"What color is an orange fruit?", a:"Orange", choices:shuffle(["Orange","Red","Yellow","Green"])});
+      qs.push({q:"What color is a cherry?", a:"Red", choices:shuffle(["Red","Blue","Green","Yellow"])});
+      qs.push({q:"What color is a lemon peel?", a:"Yellow", choices:shuffle(["Yellow","Green","Orange","White"])});
+      qs.push({q:"What color is a frog?", a:"Green", choices:shuffle(["Green","Brown","Blue","Red"])});
+      qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","White","Gray","Brown"])});
+      qs.push({q:"What color is sand?", a:"Brown", choices:shuffle(["Brown","Yellow","White","Orange"])});
+      qs.push({q:"What color is a tulip?", a:"Red", choices:shuffle(["Red","Pink","Purple","Yellow"])});
+      qs.push({q:"What color is the ocean?", a:"Blue", choices:shuffle(["Blue","Green","Black","White"])});
+      qs.push({q:"What color is a pumpkin?", a:"Orange", choices:shuffle(["Orange","Yellow","Red","Green"])});
+      qs.push({q:"What color is a kiwi inside?", a:"Green", choices:shuffle(["Green","Brown","Yellow","Red"])});
+      qs.push({q:"What color is a cloud at sunset?", a:"Pink", choices:shuffle(["Pink","Red","Orange","Purple"])});
+      qs.push({q:"What color is a sunflower?", a:"Yellow", choices:shuffle(["Yellow","Orange","Red","Brown"])});
+      qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","Gray","White","Blue"])});
+      qs.push({q:"What color is chocolate?", a:"Brown", choices:shuffle(["Brown","Black","Yellow","Orange"])});
+      qs.push({q:"What color is a rose?", a:"Red", choices:shuffle(["Red","Pink","White","Orange"])});
+      qs.push({q:"What color is the sky at noon?", a:"Blue", choices:shuffle(["Blue","White","Gray","Black"])});
+      qs.push({q:"What color is a ripe mango?", a:"Orange", choices:shuffle(["Orange","Yellow","Green","Red"])});
+      qs.push({q:"What color is a watermelon inside?", a:"Red", choices:shuffle(["Red","Green","Yellow","Pink"])});
+      qs.push({q:"What color is a lemon fruit?", a:"Yellow", choices:shuffle(["Yellow","Green","Orange","White"])});
+      qs.push({q:"What color is a blueberry?", a:"Blue", choices:shuffle(["Blue","Red","Purple","Black"])});
+      qs.push({q:"What color is a pink balloon?", a:"Pink", choices:shuffle(["Pink","Red","White","Orange"])});
+      qs.push({q:"What color is a rainbow?", a:"Multicolor", choices:shuffle(["Multicolor","Single color","Gray","Black"])});
+}
+
     if(lesson==="Numbers"){
       qs.push({q:"How many fingers do we have?", a:"10", choices:shuffle(["10","5","20","15"])});
       qs.push({q:"What comes after 2?", a:"3", choices:shuffle(["3","4","1","5"])});
       qs.push({q:"How many days are in a week?", a:"7", choices:shuffle(["7","5","10","6"])});
       qs.push({q:"What number comes before 5?", a:"4", choices:shuffle(["4","3","5","6"])});
       qs.push({q:"How many months are in a year?", a:"12", choices:shuffle(["12","10","11","6"])});
-    }
+      qs.push({q:"How many hours are in a day?", a:"24", choices:shuffle(["24","12","30","7"])});
+    qs.push({q:"How many legs does a spider have?", a:"8", choices:shuffle(["8","6","4","10"])});
+    qs.push({q:"How many wheels does a bicycle have?", a:"2", choices:shuffle(["2","3","4","1"])});
+    qs.push({q:"How many legs does a cat have?", a:"4", choices:shuffle(["4","2","6","3"])});
+    qs.push({q:"How many eyes do we have?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"How many colors are in a rainbow?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"What comes after 9?", a:"10", choices:shuffle(["10","11","9","8"])});
+    qs.push({q:"What comes before 1?", a:"0", choices:shuffle(["0","1","2","-1"])});
+    qs.push({q:"How many continents are there?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"How many oceans are there?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"How many letters are in the English alphabet?", a:"26", choices:shuffle(["26","24","25","27"])});
+    qs.push({q:"How many months have 31 days?", a:"7", choices:shuffle(["7","6","5","8"])});
+    qs.push({q:"How many legs does a dog have?", a:"4", choices:shuffle(["4","2","6","3"])});
+    qs.push({q:"How many wheels does a car have?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"How many players are on a football team?", a:"11", choices:shuffle(["11","10","9","12"])});
+    qs.push({q:"How many seasons are in a year?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"How many planets are in our solar system?", a:"8", choices:shuffle(["8","7","9","10"])});
+    qs.push({q:"How many sides does a triangle have?", a:"3", choices:shuffle(["3","4","5","6"])});
+    qs.push({q:"How many sides does a square have?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"How many wheels does a tricycle have?", a:"3", choices:shuffle(["3","2","4","5"])});
+    qs.push({q:"How many teeth do humans usually have?", a:"32", choices:shuffle(["32","30","28","36"])});
+    qs.push({q:"How many hours in half a day?", a:"12", choices:shuffle(["12","6","24","8"])});
+    qs.push({q:"How many days in February (non-leap year)?", a:"28", choices:shuffle(["28","29","30","27"])});
+    qs.push({q:"How many sides does a pentagon have?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"How many sides does a hexagon have?", a:"6", choices:shuffle(["6","5","4","7"])});
+}
+
     if(lesson==="Fruits"){
       qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
       qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
       qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
       qs.push({q:"Which fruit is small and red?", a:"Strawberry", choices:shuffle(["Strawberry","Apple","Banana","Orange"])});
       qs.push({q:"Which fruit is purple and grows in bunches?", a:"Grapes", choices:shuffle(["Grapes","Plum","Blueberry","Mango"])});
-    }
+     qs.push({q:"Which fruit is long and yellow?", a:"Banana", choices:shuffle(["Banana","Apple","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green on the outside and red inside?", a:"Watermelon", choices:shuffle(["Watermelon","Apple","Grapes","Mango"])});
+    qs.push({q:"Which fruit is round and orange?", a:"Orange", choices:shuffle(["Orange","Mango","Apple","Banana"])});
+    qs.push({q:"Which fruit has a spiky skin and yellow inside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Kiwi"])});
+    qs.push({q:"Which fruit is small and blue?", a:"Blueberry", choices:shuffle(["Blueberry","Grapes","Plum","Apple"])});
+    qs.push({q:"Which fruit is green and often used in salads?", a:"Kiwi", choices:shuffle(["Kiwi","Apple","Banana","Mango"])});
+    qs.push({q:"Which fruit is brown and fuzzy outside, green inside?", a:"Kiwi", choices:shuffle(["Kiwi","Coconut","Avocado","Plum"])});
+    qs.push({q:"Which fruit is red and often used for juice?", a:"Apple", choices:shuffle(["Apple","Cherry","Tomato","Strawberry"])});
+    qs.push({q:"Which fruit is small, round, and red?", a:"Cherry", choices:shuffle(["Cherry","Grape","Strawberry","Apple"])});
+    qs.push({q:"Which fruit is orange and small, often peeled easily?", a:"Mandarin", choices:shuffle(["Mandarin","Orange","Peach","Apricot"])});
+    qs.push({q:"Which fruit is green and sour?", a:"Lime", choices:shuffle(["Lime","Lemon","Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, green outside and orange inside?", a:"Papaya", choices:shuffle(["Papaya","Mango","Pineapple","Banana"])});
+    qs.push({q:"Which fruit is red and has tiny seeds outside?", a:"Strawberry", choices:shuffle(["Strawberry","Raspberry","Cherry","Apple"])});
+    qs.push({q:"Which fruit is purple and sweet?", a:"Plum", choices:shuffle(["Plum","Grape","Blueberry","Mango"])});
+    qs.push({q:"Which fruit is green or purple and grows on vines?", a:"Grapes", choices:shuffle(["Grapes","Plum","Apple","Blueberry"])});
+    qs.push({q:"Which fruit is yellow and curved?", a:"Banana", choices:shuffle(["Banana","Lemon","Mango","Apple"])});
+    qs.push({q:"Which fruit has a hard shell and white inside?", a:"Coconut", choices:shuffle(["Coconut","Pineapple","Papaya","Avocado"])});
+    qs.push({q:"Which fruit is small, orange, and sweet?", a:"Apricot", choices:shuffle(["Apricot","Peach","Mandarin","Mango"])});
+    qs.push({q:"Which fruit is tropical, orange inside, and black seeds?", a:"Papaya", choices:shuffle(["Papaya","Mango","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green, smooth, and creamy inside?", a:"Avocado", choices:shuffle(["Avocado","Kiwi","Cucumber","Papaya"])});
+    qs.push({q:"Which fruit is red, heart-shaped, and juicy?", a:"Strawberry", choices:shuffle(["Strawberry","Cherry","Apple","Tomato"])});
+    qs.push({q:"Which fruit is round, orange or red, fuzzy skin?", a:"Peach", choices:shuffle(["Peach","Apricot","Plum","Mango"])});
+    qs.push({q:"Which fruit is sour and green?", a:"Lime", choices:shuffle(["Lime","Lemon","Green Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, yellow, and spiky outside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Papaya"])});
+    qs.push({q:"Which fruit is tiny, red, and tart?", a:"Raspberry", choices:shuffle(["Raspberry","Cherry","Strawberry","Cranberry"])});       
   }
+    
 // Filipino Vocabulary
 if(subject==="Filipino Vocabulary"){
   if(lesson==="Hayop"){
@@ -478,6 +562,36 @@ if(subject==="Filipino Vocabulary"){
     qs.push({q:"Ano ang 'kalabaw'?", a:"Carabao", choices:shuffle(["Carabao","Dog","Cat","Fish"])});
     qs.push({q:"Ano ang 'baboy'?", a:"Pig", choices:shuffle(["Pig","Cow","Goat","Sheep"])});
     qs.push({q:"Ano ang 'ibon' na hindi lumilipad?", a:"Penguin", choices:shuffle(["Penguin","Duck","Eagle","Ostrich"])});
+    qs.push({q:"Ano ang Tagalog ng 'dog'?", a:"Aso", choices:shuffle(["Aso","Pusa","Ibon","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'cat'?", a:"Pusa", choices:shuffle(["Pusa","Aso","Ibon","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'bird'?", a:"Ibon", choices:shuffle(["Ibon","Aso","Pusa","Baboy"])});
+    qs.push({q:"Ano ang Tagalog ng 'cow'?", a:"Baka", choices:shuffle(["Baka","Aso","Pusa","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'horse'?", a:"Kabayo", choices:shuffle(["Kabayo","Aso","Baka","Pusa"])});
+    qs.push({q:"Ano ang Tagalog ng 'pig'?", a:"Baboy", choices:shuffle(["Baboy","Aso","Baka","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'chicken'?", a:"Manok", choices:shuffle(["Manok","Aso","Pusa","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'duck'?", a:"Itik", choices:shuffle(["Itik","Aso","Pato","Manok"])});
+    qs.push({q:"Ano ang Tagalog ng 'sheep'?", a:"Tupa", choices:shuffle(["Tupa","Aso","Baka","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'goat'?", a:"Kambing", choices:shuffle(["Kambing","Aso","Baka","Tupa"])});
+    qs.push({q:"Ano ang Tagalog ng 'elephant'?", a:"Elepante", choices:shuffle(["Elepante","Aso","Kabayo","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'lion'?", a:"Leon", choices:shuffle(["Leon","Aso","Pusa","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'tiger'?", a:"Tigre", choices:shuffle(["Tigre","Leon","Aso","Pusa"])});
+    qs.push({q:"Ano ang Tagalog ng 'monkey'?", a:"Unggoy", choices:shuffle(["Unggoy","Aso","Pusa","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'rabbit'?", a:"Kuneho", choices:shuffle(["Kuneho","Aso","Pusa","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'bear'?", a:"Oso", choices:shuffle(["Oso","Aso","Leon","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'wolf'?", a:"Lobo", choices:shuffle(["Lobo","Aso","Leon","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'fox'?", a:"Soro", choices:shuffle(["Soro","Lobo","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'frog'?", a:"Palaka", choices:shuffle(["Palaka","Aso","Ibon","Kuneho"])});
+    qs.push({q:"Ano ang Tagalog ng 'snake'?", a:"Ahas", choices:shuffle(["Ahas","Aso","Kabayo","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'whale'?", a:"Balyena", choices:shuffle(["Balyena","Isda","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'dolphin'?", a:"Dolphin", choices:shuffle(["Dolphin","Balyena","Isda","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'shark'?", a:"Pating", choices:shuffle(["Pating","Isda","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'crab'?", a:"Alimango", choices:shuffle(["Alimango","Hipon","Isda","Aso"])});
+    qs.push({q:"Ano ang Tagalog ng 'lobster'?", a:"Lobster", choices:shuffle(["Lobster","Alimango","Hipon","Isda"])});
+    qs.push({q:"Ano ang Tagalog ng 'octopus'?", a:"Pugita", choices:shuffle(["Pugita","Hipon","Isda","Aso"])});
+    qs.push({q:"Ano ang Tagalog ng 'bee'?", a:"Bubuyog", choices:shuffle(["Bubuyog","Langgam","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'ant'?", a:"Langgam", choices:shuffle(["Langgam","Bubuyog","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'butterfly'?", a:"Paruparo", choices:shuffle(["Paruparo","Langgam","Bubuyog","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'fly'?", a:"Langaw", choices:shuffle(["Langaw","Paruparo","Bubuyog","Langgam"])});
   }
 
   if(lesson==="Kulay"){
@@ -487,7 +601,43 @@ if(subject==="Filipino Vocabulary"){
     qs.push({q:"Ano ang kulay ng apoy?", a:"Pula", choices:shuffle(["Pula","Asul","Berde","Kulay-abo"])});
     qs.push({q:"Ano ang kulay ng niyebe?", a:"Puti", choices:shuffle(["Puti","Itim","Berde","Pula"])});
     qs.push({q:"Ano ang kulay ng uling?", a:"Itim", choices:shuffle(["Itim","Puti","Asul","Berde"])});
-    qs.push({q:"Ano ang kulay ng puno?", a:"Kayumanggi", choices:shuffle(["Kayumanggi","Berde","Pula","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng puno?", a:"Kayumanggi", choices:shuffle(["Kayumanggi","Berde","Pula","Dilaw"])});    
+    qs.push({q:"Ano ang kulay ng langit?", a:"Asul", choices:shuffle(["Asul","Pula","Berde","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng lemon?", a:"Dilaw", choices:shuffle(["Dilaw","Lila","Kahel","Itim"])});
+    qs.push({q:"Ano ang kulay ng damo?", a:"Berde", choices:shuffle(["Berde","Rosas","Puti","Kayumanggi"])});
+    qs.push({q:"Ano ang kulay ng mansanas?", a:"Pula", choices:shuffle(["Pula","Asul","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng carrot?", a:"Kahel", choices:shuffle(["Kahel","Pula","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng saging?", a:"Dilaw", choices:shuffle(["Dilaw","Pula","Asul","Berde"])});
+    qs.push({q:"Ano ang kulay ng ubas?", a:"Lila", choices:shuffle(["Lila","Berde","Dilaw","Pula"])});
+    qs.push({q:"Ano ang kulay ng niyebe?", a:"Puti", choices:shuffle(["Puti","Asul","Itim","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng uling?", a:"Itim", choices:shuffle(["Itim","Puti","Asul","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng tsokolate?", a:"Kayumanggi", choices:shuffle(["Kayumanggi","Pula","Berde","Itim"])});
+    qs.push({q:"Alin sa mga ito ang hindi kulay ng bahaghari?", a:"Itim", choices:shuffle(["Itim","Pula","Asul","Dilaw","Kahel","Berde","Lila"])});
+    qs.push({q:"Ano ang unang kulay sa bahaghari?", a:"Pula", choices:shuffle(["Pula","Kahel","Dilaw","Berde"])});
+    qs.push({q:"Ano ang huling kulay sa bahaghari?", a:"Lila", choices:shuffle(["Lila","Asul","Dilaw","Pula"])});
+    qs.push({q:"Ano ang pangalawang kulay sa bahaghari?", a:"Kahel", choices:shuffle(["Kahel","Dilaw","Pula","Berde"])});
+    qs.push({q:"Ano ang pangatlong kulay sa bahaghari?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang pang-apat na kulay sa bahaghari?", a:"Berde", choices:shuffle(["Berde","Dilaw","Asul","Pula"])});
+    qs.push({q:"Ano ang pang-limang kulay sa bahaghari?", a:"Asul", choices:shuffle(["Asul","Berde","Pula","Kahel"])});
+    qs.push({q:"Ano ang pang-anim na kulay sa bahaghari?", a:"Indigo", choices:shuffle(["Indigo","Lila","Asul","Berde"])});
+    qs.push({q:"Ano ang pang-pitong kulay sa bahaghari?", a:"Lila", choices:shuffle(["Lila","Indigo","Pula","Kahel"])});
+    qs.push({q:"Ano ang pagkakasunod-sunod ng kulay sa bahaghari mula sa itaas pababa?", a:"Pula, Kahel, Dilaw, Berde, Asul, Indigo, Lila", choices:shuffle([
+        "Pula, Kahel, Dilaw, Berde, Asul, Indigo, Lila",
+        "Lila, Indigo, Asul, Berde, Dilaw, Kahel, Pula",
+        "Dilaw, Kahel, Pula, Lila, Indigo, Asul, Berde",
+        "Berde, Asul, Indigo, Lila, Pula, Kahel, Dilaw"
+    ])});
+    qs.push({q:"Ano ang kulay ng rosas?", a:"Pula", choices:shuffle(["Pula","Asul","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng sunflower?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang kulay ng dagat?", a:"Asul", choices:shuffle(["Asul","Berde","Puti","Kahel"])});
+    qs.push({q:"Ano ang kulay ng abo?", a:"Gray", choices:shuffle(["Gray","Itim","Puti","Kahel"])});
+    qs.push({q:"Ano ang kulay ng strawberry?", a:"Pula", choices:shuffle(["Pula","Berde","Dilaw","Kahel"])});
+    qs.push({q:"Ano ang kulay ng langit sa dapithapon?", a:"Kahel", choices:shuffle(["Kahel","Pula","Asul","Berde"])});
+    qs.push({q:"Ano ang kulay ng uwak?", a:"Itim", choices:shuffle(["Itim","Pula","Berde","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng saging na hinog?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Berde","Pula"])});
+    qs.push({q:"Ano ang kulay ng talong?", a:"Lila", choices:shuffle(["Lila","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang kulay ng dagat sa umaga?", a:"Asul", choices:shuffle(["Asul","Berde","Kahel","Puti"])});
+    qs.push({q:"Ano ang kulay ng kalangitan tuwing gabi?", a:"Itim", choices:shuffle(["Itim","Asul","Pula","Dilaw"])});
   }
 
   if(lesson==="Numero"){
@@ -496,6 +646,33 @@ if(subject==="Filipino Vocabulary"){
     qs.push({q:"Ilang araw meron sa isang linggo?", a:"7", choices:shuffle(["7","5","8","10"])});
     qs.push({q:"Ano ang bago sa 5?", a:"4", choices:shuffle(["4","3","2","6"])});
     qs.push({q:"Ilang buwan meron sa isang taon?", a:"12", choices:shuffle(["12","10","8","6"])});
+    qs.push({q:"Ilang araw mayroon sa isang linggo?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"Ilang itlog mayroon sa isang dosenang itlog?", a:"12", choices:shuffle(["12","10","11","15"])});
+    qs.push({q:"Ilang mata mayroon ang tao?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang gulong mayroon ang isang bisikleta?", a:"2", choices:shuffle(["2","3","4","1"])});
+    qs.push({q:"Ilang gulong mayroon ang isang kotse?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"Ilang araw mayroon sa buwan ng Pebrero (hindi leap year)?", a:"28", choices:shuffle(["28","29","30","27"])});
+    qs.push({q:"Ilang bituin ang nakikita sa araw-araw sa langit?", a:"Marami", choices:shuffle(["Marami","Isa","Wala","Dalawa"])});
+    qs.push({q:"Ilang kulay mayroon sa bahaghari?", a:"7", choices:shuffle(["7","6","8","5"])});
+    qs.push({q:"Ilang paa mayroon ang gagamba?", a:"8", choices:shuffle(["8","6","4","10"])});
+    qs.push({q:"Ilang sisiw mayroon sa isang manok?", a:"Depende", choices:shuffle(["Depende","5","3","2"])});
+    qs.push({q:"Ilang continents mayroon sa mundo?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"Ilang oceans mayroon sa mundo?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"Ilang letra mayroon sa alpabetong Filipino?", a:"28", choices:shuffle(["28","26","30","24"])});
+    qs.push({q:"Ilang season mayroon sa isang taon?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"Ilang araw ang Sabado at Linggo sa isang linggo?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang mata ang karaniwang nakikita sa cartoon na tao?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang paa ang karaniwang aso?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"Ilang dulo ang mayroon ang tatsulok?", a:"3", choices:shuffle(["3","4","5","6"])});
+    qs.push({q:"Ilang gilid ang mayroon ang parisukat?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"Ilang gulong mayroon ang tricycle?", a:"3", choices:shuffle(["3","2","4","5"])});
+    qs.push({q:"Ilang ngipin mayroon ang karaniwang tao?", a:"32", choices:shuffle(["32","30","28","36"])});
+    qs.push({q:"Ilang oras mayroon sa kalahating araw?", a:"12", choices:shuffle(["12","6","24","8"])});
+    qs.push({q:"Ilang araw mayroon sa isang linggo na hindi weekend?", a:"5", choices:shuffle(["5","2","6","4"])});
+    qs.push({q:"Ilang oras mayroon sa isang buong araw?", a:"24", choices:shuffle(["24","12","30","6"])});
+    qs.push({q:"Ilang taon mayroon sa isang dekada?", a:"10", choices:shuffle(["10","5","12","8"])});
+    qs.push({q:"Ilang araw mayroon sa isang taon (karaniwan)?", a:"365", choices:shuffle(["365","360","366","364"])});
+    qs.push({q:"Ilang paa mayroon ang pusa?", a:"4", choices:shuffle(["4","2","3","5"])});
   }
 
   if(lesson==="Prutas"){
@@ -504,6 +681,36 @@ if(subject==="Filipino Vocabulary"){
     qs.push({q:"Ano ang prutas na kilala sa Pilipinas?", a:"Mangga", choices:shuffle(["Mangga","Mansanas","Pera","Pakwan"])});
     qs.push({q:"Ano ang maliit at pulang prutas?", a:"Strawberry", choices:shuffle(["Strawberry","Ubas","Saging","Mansanas"])});
     qs.push({q:"Ano ang ubas sa English?", a:"Grapes", choices:shuffle(["Grapes","Banana","Mango","Apple"])});
+    qs.push({q:"Alin ang prutas?", a:"Mansanas", choices:shuffle(["Mansanas","Karot","Patatas","Lettuce"])});
+    qs.push({q:"Aling prutas ay dilaw at maasim?", a:"Lemon", choices:shuffle(["Lemon","Saging","Mansanas","Mango"])});
+    qs.push({q:"Aling prutas ay tropikal at kulay kahel sa loob?", a:"Mango", choices:shuffle(["Mango","Mansanas","Strawberry","Ubas"])});
+    qs.push({q:"Aling prutas ang kulay pula at maliit?", a:"Strawberry", choices:shuffle(["Strawberry","Mango","Saging","Lemon"])});
+    qs.push({q:"Aling prutas ang kulay berde sa labas at pula sa loob?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Saging"])});
+    qs.push({q:"Aling prutas ang kulay berde at maliit?", a:"Ubas", choices:shuffle(["Ubas","Pakwan","Mango","Saging"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at pahaba?", a:"Saging", choices:shuffle(["Saging","Lemon","Mango","Mansanas"])});
+    qs.push({q:"Aling prutas ang kulay kahel at matamis?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay lila at maliit?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
+    qs.push({q:"Aling prutas ang may balat na makinis at kulay dilaw?", a:"Lemon", choices:shuffle(["Lemon","Mango","Saging","Kahel na orange"])});
+    qs.push({q:"Aling prutas ang kulay pula sa loob at may itim na buto?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Mango"])});
+    qs.push({q:"Aling prutas ang kulay lila sa labas at berde sa loob?", a:"Sinigang na santol", choices:shuffle(["Sinigang na santol","Mango","Ubas","Mansanas"])});
+    qs.push({q:"Aling prutas ay karaniwang ginagamit sa salad at kulay pula?", a:"Mansanas", choices:shuffle(["Mansanas","Pakwan","Strawberry","Mango"])});
+    qs.push({q:"Aling prutas ang kulay kahel at bilugan?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ang kulay berde at pahaba?", a:"Saging na hilaw", choices:shuffle(["Saging na hilaw","Mango","Pakwan","Lemon"])});
+    qs.push({q:"Aling prutas ay maliit at kulay pula o berde?", a:"Ubas", choices:shuffle(["Ubas","Strawberry","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay pula at bilugan?", a:"Strawberry", choices:shuffle(["Strawberry","Mansanas","Pakwan","Mango"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at matamis?", a:"Saging", choices:shuffle(["Saging","Lemon","Kahel na orange","Mango"])});
+    qs.push({q:"Aling prutas ay ginagamit sa juice at kulay kahel?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay pula at ginagamit sa pie?", a:"Mansanas", choices:shuffle(["Mansanas","Strawberry","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay berde at malasa sa asim?", a:"Lime", choices:shuffle(["Lime","Lemon","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay dilaw sa loob at kahel sa balat?", a:"Mango", choices:shuffle(["Mango","Kahel na orange","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay lila at matamis?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
+    qs.push({q:"Aling prutas ay maliit at kulay pula o berde sa bunch?", a:"Ubas", choices:shuffle(["Ubas","Strawberry","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay kahel at pabilog?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at pahaba?", a:"Saging", choices:shuffle(["Saging","Lemon","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay pula at ginagamit sa jam?", a:"Strawberry", choices:shuffle(["Strawberry","Mansanas","Pakwan","Mango"])});
+    qs.push({q:"Aling prutas ay kulay pula sa loob at may maraming buto?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Mango"])});
+    qs.push({q:"Aling prutas ay kulay berde sa labas at ginagamit sa salad?", a:"Pepino", choices:shuffle(["Pepino","Ubas","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay lila at ginagamit sa wine?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
   }
 }
   return qs;
@@ -741,4 +948,5 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
+
 
