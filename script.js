@@ -675,88 +675,88 @@ function openProfile(){
 
 // DOWNLOAD Certificate as PNG (works when online)
 // If offline, we'll gracefully prevent download and keep certificate visible.
-function downloadCertificate(){
-  if(typeof navigator !== "undefined" && navigator.onLine === false){
-    alert("You are offline — certificate preview is available but download is disabled.");
-    return;
-  }
-
+ function downloadCertificate() {
   const name = document.getElementById("certName").innerText || "Student";
   const lesson = document.getElementById("certLesson").innerText || "Lesson";
-  const badge = document.getElementById("certBadge").innerText || "";
+  const badge = document.getElementById("certBadge")?.innerText || "";
 
   const canvas = document.getElementById("certCanvas");
   const ctx = canvas.getContext("2d");
 
   // Draw background gradient (landscape)
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
   g.addColorStop(0, "#fffaf0");
   g.addColorStop(1, "#f0f7ff");
   ctx.fillStyle = g;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // border
+  // Border
   ctx.strokeStyle = "#f2c94c";
   ctx.lineWidth = 12;
-  roundRect(ctx, 30, 30, canvas.width-60, canvas.height-60, 30, false, true);
+  roundRect(ctx, 30, 30, canvas.width - 60, canvas.height - 60, 30, false, true);
 
-  // Confetti (soft circles) decorative
-  for(let i=0;i<80;i++){
-    const cx = Math.random()*(canvas.width-140)+70;
-    const cy = Math.random()*(canvas.height-260)+70;
-    const r = Math.random()*7 + 2;
+  // Confetti (soft pastel circles)
+  for (let i = 0; i < 80; i++) {
+    const cx = Math.random() * (canvas.width - 140) + 70;
+    const cy = Math.random() * (canvas.height - 260) + 70;
+    const r = Math.random() * 7 + 2;
     ctx.beginPath();
     ctx.fillStyle = randomPastel();
-    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  // Title
+  // Texts
   ctx.fillStyle = "#2b6a86";
   ctx.font = "52px 'Poppins', sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText("Certificate of Completion", canvas.width/2, 160);
+  ctx.fillText("Certificate of Completion", canvas.width / 2, 160);
 
-  // Motivational script
   ctx.fillStyle = "#2b7a78";
   ctx.font = "64px 'Great Vibes', cursive";
-  ctx.fillText("You Did Amazing!", canvas.width/2, 240);
+  ctx.fillText("You Did Amazing!", canvas.width / 2, 240);
 
-  // Student name
   ctx.fillStyle = "#0b4b6b";
   ctx.font = "48px 'Poppins', sans-serif";
-  ctx.fillText(name, canvas.width/2, 360);
+  ctx.fillText(name, canvas.width / 2, 360);
 
-  // Lesson
   ctx.font = "30px 'Poppins', sans-serif";
-  ctx.fillText(`For successfully completing: ${lesson}`, canvas.width/2, 420);
+  ctx.fillText(`For successfully completing: ${lesson}`, canvas.width / 2, 420);
 
-  // Badge
-  if(badge){
+  if (badge) {
     ctx.fillStyle = "#ff7043";
     ctx.font = "26px 'Poppins', sans-serif";
-    ctx.fillText(`Badge earned: ${badge}`, canvas.width/2, 470);
+    ctx.fillText(`Badge earned: ${badge}`, canvas.width / 2, 470);
   }
 
-  // Footer
   ctx.fillStyle = "#555";
   ctx.font = "20px 'Poppins', sans-serif";
-  ctx.fillText("ISIP BATA — Keep learning, keep shining ✨", canvas.width/2, canvas.height - 120);
+  ctx.fillText(
+    "ISIP BATA — Keep learning, keep shining ✨",
+    canvas.width / 2,
+    canvas.height - 120
+  );
 
-  // Convert to data URL and download
-  const dataURL = canvas.toDataURL("image/png");
-  const link = document.createElement("a");
-  link.href = dataURL;
-  const safeName = name.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
-  const safeLesson = lesson.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
-  link.download = `${safeName}_${safeLesson}_Certificate.png`;
-  // try/catch to prevent errors in restrictive offline containers
+  // ✅ Safe behavior
+  if (!navigator.onLine) {
+    // Offline — just preview, no download
+    alert("Offline ka ngayon 🌙. Screenshot mo muna ang certificate mo!");
+    return;
+  }
+
+  // Online — try download safely
   try {
+    const dataURL = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataURL;
+    const safeName = name.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+    const safeLesson = lesson.replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+    link.download = `${safeName}_${safeLesson}_Certificate.png`;
     link.click();
   } catch (e) {
     // fallback: open in new tab for manual save
-    window.open(dataURL, "_blank");
+    window.open(canvas.toDataURL("image/png"), "_blank");
   }
 }
 
@@ -796,3 +796,4 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
