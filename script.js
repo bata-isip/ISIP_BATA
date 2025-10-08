@@ -597,6 +597,37 @@ function getBadgeLevel(attempt){
   return "Diamond Badge";
 }
 
+// Open Sesame
+function openProfile(){
+  quizSessionId++;
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("profilePage").classList.remove("hidden");
+
+  const u = users[currentUser];
+  document.getElementById("profileName").innerText = u.fullName;
+  document.getElementById("profileUsername").innerText = currentUser;
+  document.getElementById("profileLessons").innerText = u.lessonsCompleted;
+  const avg = u.scores.length ? 
+      (u.scores.reduce((a,b)=>a+b,0)/u.scores.length).toFixed(1) : 0;
+  document.getElementById("profileScore").innerText = avg + "%";
+
+  const certList=document.getElementById("certificatesList");
+  certList.innerHTML="";
+  u.certificates.forEach(c=>{
+    const li=document.createElement("li");
+    li.textContent=c;
+    certList.appendChild(li);
+  });
+
+  const badgeList=document.getElementById("badgesList");
+  badgeList.innerHTML="";
+  u.badges.forEach(b=>{
+    const li=document.createElement("li");
+    li.textContent=b;
+    badgeList.appendChild(li);
+  });
+}
+
 // --- Shuffle helper ---
 function shuffle(array){
   for(let i=array.length-1;i>0;i--){
@@ -710,3 +741,4 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
+
