@@ -240,3 +240,36 @@ body::after, body::before {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-25px) scale(1.08); }
 }
+.password-wrapper {
+  position: relative;
+  width: 260px;
+  margin: 10px auto;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding: 12px 42px 12px 14px; /* space on right for icon */
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #e3e7ee;
+  background: #fffef8;
+  height: 44px; /* match username height */
+  box-sizing: border-box;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  height: 70%; /* match input height */
+}
+
