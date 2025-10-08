@@ -101,9 +101,7 @@ const lessonsContent = {
   Math:["Addition","Subtraction","Multiplication","Division"],
   Science:["Circulatory","Respiratory","Digestive","Nervous","Skeletal/Muscular"],
   "English Vocabulary":["Animals","Colors","Numbers","Fruits"],
-  "Filipino Vocabulary":["Hayop","Kulay","Numero","Prutas"],
-  // Added Philippine History lessons
-  "Philippine History":["Pre-Colonial","Spanish Colonization","Philippine Revolution","American Period","Japanese Occupation","Post-War"]
+  "Filipino Vocabulary":["Hayop","Kulay","Numero","Prutas"]
 };
 
 function showLessonContent(subject){
@@ -136,200 +134,6 @@ function generateQuestionPool(subject,lesson){
     questions.push(...generateScienceQuestions(lesson,20));
   } else if(subject==="English Vocabulary" || subject==="Filipino Vocabulary"){
     questions.push(...generateVocabularyQuestions(subject,lesson));
-  } else if(subject === "Philippine History"){
-    // For each history topic, build 30 Qs (simple, age-appropriate)
-    if(lesson === "Pre-Colonial"){
-      questions.push(
-        {q:"What did many early Filipinos use to travel between islands?", a:"Bangka (boat)", choices:shuffle(["Bangka (boat)","Train","Car","Airplane"])},
-        {q:"What did early Filipinos use to make huts and houses?", a:"Nipa and bamboo", choices:shuffle(["Nipa and bamboo","Concrete and steel","Brick and mortar","Glass"])},
-        {q:"What kind of trade did pre-colonial Filipinos do?", a:"Sea trade with neighbors", choices:shuffle(["Sea trade with neighbors","Space trade","Trade only within village","Internet trade"])},
-        {q:"What were leaders of barangays called?", a:"Datu", choices:shuffle(["Datu","Mayor","President","King"])},
-        {q:"Which writing system did some pre-colonial Filipinos use?", a:"Baybayin", choices:shuffle(["Baybayin","Latin alphabet","Cyrillic","Chinese characters"])},
-        {q:"What did early Filipinos often make from shells and bones?", a:"Jewelry", choices:shuffle(["Jewelry","Electronic devices","Books","Glassware"])},
-        {q:"What was a common craft in pre-colonial Philippines?", a:"Weaving", choices:shuffle(["Weaving","Car manufacturing","Computer programming","Metal smelting"])},
-        {q:"What did early Filipinos grow for food?", a:"Rice", choices:shuffle(["Rice","Wheat","Corn only","Potatoes only"])},
-        {q:"Which animal was important for fishing?", a:"Boat with nets", choices:shuffle(["Boat with nets","Camel","Reindeer","Elephant"])},
-        {q:"What did some communities use to protect themselves?", a:"Fortified villages", choices:shuffle(["Fortified villages","Tall skyscrapers","Metal fences only","Castles with moats"])},
-        {q:"What activity was common at the seashore for food?", a:"Gathering shellfish", choices:shuffle(["Gathering shellfish","Mining coal","Skiing","Ice fishing"])},
-        {q:"What were early Filipinos known to be skilled at?", a:"Sailing and navigation", choices:shuffle(["Sailing and navigation","Rocket science","Automobile racing","Ski jumping"])},
-        {q:"What did barangays often base decisions on?", a:"Customs and elders' advice", choices:shuffle(["Customs and elders' advice","Online polls","Newspapers","Television"])},
-        {q:"What was the role of the babaylan in many communities?", a:"Healer and spiritual leader", choices:shuffle(["Healer and spiritual leader","Banker","Pilot","Mechanic"])},
-        {q:"Where did many pre-colonial people get their food?", a:"Sea, farms and forests", choices:shuffle(["Sea, farms and forests","Supermarkets only","Factory farms","Import only"])},
-        {q:"What did early Filipino traders bring from other lands?", a:"Spices and goods", choices:shuffle(["Spices and goods","Computers","Cars","Airplanes"])},
-        {q:"What simple tool helped in farming?", a:"Wooden plow or hoe", choices:shuffle(["Wooden plow or hoe","Tractor","Combine harvester","Robot"])},
-        {q:"Which craft created baskets and mats?", a:"Weaving and rattan craft", choices:shuffle(["Weaving and rattan craft","Glassblowing","Metal forging","Electronics assembly"])},
-        {q:"What element helped villages when raining season came?", a:"Rice terraces and irrigation", choices:shuffle(["Rice terraces and irrigation","Air conditioning","Subways","Dams only"])},
-        {q:"What did trading villages often exchange?", a:"Food, cloth, pottery", choices:shuffle(["Food, cloth, pottery","Movies, apps, songs","Space parts","Automobiles only"])},
-        {q:"Which body of water was important for pre-colonial trade?", a:"The seas around the islands", choices:shuffle(["The seas around the islands","The Amazon River","Atlantic Ocean only","Pacific Ocean only"])},
-        {q:"What is a 'barangay'?", a:"A small community or village", choices:shuffle(["A small community or village","A type of ship","A government building","A festival"])},
-        {q:"Who helped lead and protect the barangay?", a:"Datu", choices:shuffle(["Datu","Teacher","Banker","Doctor"])},
-        {q:"What would early Filipinos often catch for food?", a:"Fish", choices:shuffle(["Fish","Penguins","Polar bears","Kangaroos"])},
-        {q:"What was an important material used for cooking pots?", a:"Clay pottery", choices:shuffle(["Clay pottery","Plastic only","Glass only","Steel only"])},
-        {q:"What did Baybayin represent?", a:"Syllables and sounds", choices:shuffle(["Syllables and sounds","Modern code","Numbers only","Mathematics formulas"])},
-        {q:"What skill helped island travel and trade?", a:"Boat-building", choices:shuffle(["Boat-building","Car-building","Plane-building","Computer-making"])},
-        {q:"Who kept oral stories and histories?", a:"Elders and storytellers", choices:shuffle(["Elders and storytellers","Robots","TV anchors","Shopkeepers"])},
-        {q:"What did barter mean in early trade?", a:"Exchange goods without money", choices:shuffle(["Exchange goods without money","Pay with credit card","Online transfer","Pay with coins only"])}
-      );
-    }
-    else if(lesson === "Spanish Colonization"){
-      questions.push(
-        {q:"When did Spanish colonization of the Philippines begin (approx.)?", a:"1521 (Magellan's visit) / 1565 Spanish settlement", choices:shuffle(["1521 / 1565","1901","1898","1942"])},
-        {q:"Who led the first Spanish expedition to the Philippines?", a:"Ferdinand Magellan", choices:shuffle(["Ferdinand Magellan","Christopher Columbus","Magna Carta","Amerigo Vespucci"])},
-        {q:"What religion spread widely during Spanish rule?", a:"Roman Catholicism", choices:shuffle(["Roman Catholicism","Buddhism","Islam only","Hinduism"])},
-        {q:"What was the Spanish system of forced labor called?", a:"Polo y servicio", choices:shuffle(["Polo y servicio","Encomienda","Feudalism","Indenture only"])},
-        {q:"What crop became important under Spanish rule?", a:"Sugar and tobacco", choices:shuffle(["Sugar and tobacco","Corn only","Potatoes only","Bananas only"])},
-        {q:"What was a Spanish settlement called?", a:"Provincia / Pueblo", choices:shuffle(["Provincia / Pueblo","Township","County","Province as used today only"])},
-        {q:"What structure did Spaniards build in towns?", a:"Church and plaza", choices:shuffle(["Church and plaza","Skyscrapers","Factories","Shopping malls"])},
-        {q:"What is 'Galleon Trade'?", a:"Trade between Manila and Acapulco", choices:shuffle(["Trade between Manila and Acapulco","Trade with China only","Trade with Australia","Space trade"])},
-        {q:"Which Spanish policy affected land ownership?", a:"Encomienda and friar lands", choices:shuffle(["Encomienda and friar lands","Free land to all","Urbanization policy","Industrialization only"])},
-        {q:"Who were the ilustrados?", a:"Educated Filipino reformers", choices:shuffle(["Educated Filipino reformers","Spanish soldiers","American teachers","Japanese officials"])},
-        {q:"Which language became official during Spain's rule?", a:"Spanish (in government and church)", choices:shuffle(["Spanish (in government and church)","English only","Tagalog only","Baybayin only"])},
-        {q:"What were 'friar' lands?", a:"Church-owned lands", choices:shuffle(["Church-owned lands","Public parks","Market stalls","Train stations"])},
-        {q:"Who wrote about reforms and Filipino rights under Spain?", a:"Jose Rizal and other reformers", choices:shuffle(["Jose Rizal and other reformers","Magellan","Washington","Napoleon"])},
-        {q:"What school system did Spain establish?", a:"Religious schools (parochial)", choices:shuffle(["Religious schools (parochial)","Free public modern schools","Universities only in Asia","Online schools"])},
-        {q:"Which family group often ruled local towns under Spain?", a:"Local elite and gobernadorcillos", choices:shuffle(["Local elite and gobernadorcillos","Kings","Presidents","Tribal councils only"])},
-        {q:"Where were many Spanish forts and towns built?", a:"Coastal and central towns", choices:shuffle(["Coastal and central towns","Mountaintops only","Deep forests only","Deserts only"])},
-        {q:"What was a negative effect of colonization?", a:"Loss of land and forced labor", choices:shuffle(["Loss of land and forced labor","Better roads only","No change","Universal wealth"])},
-        {q:"What did Spanish missionaries often build in towns?", a:"Churches and convents", choices:shuffle(["Churches and convents","Factories","Airports","Power plants"])},
-        {q:"Which crop was shipped to Spain and other places?", a:"Sugar", choices:shuffle(["Sugar","Rice","Cheese","Wine only"])},
-        {q:"Which group sometimes resisted Spanish rule?", a:"Local revolts and uprisings", choices:shuffle(["Local revolts and uprisings","No resistance","Alliance with Spain","Foreign invaders only"])},
-        {q:"What event inspired Filipino nationalism under Spain?", a:"The Propaganda Movement and reform writings", choices:shuffle(["The Propaganda Movement and reform writings","Industrial revolution in Europe","Sports","Agriculture only"])},
-        {q:"Who was a Filipino martyr executed by Spanish authorities?", a:"Jose Rizal (executed 1896)", choices:shuffle(["Jose Rizal (executed 1896)","Magellan","Ateneo founder","Washington"])},
-        {q:"What was the role of Spanish government in the islands?", a:"Governor-General ruled the colony", choices:shuffle(["Governor-General ruled the colony","President of Philippines","Prime Minister","King of England"])},
-        {q:"What was often the center of a Spanish town?", a:"Plaza with church and government house", choices:shuffle(["Plaza with church and government house","Shopping mall","Train station","Sports arena"])},
-        {q:"Which groups benefited most under Spanish rule?", a:"Spanish officials and local elites", choices:shuffle(["Spanish officials and local elites","All peasants","Factory workers only","Students only"])},
-        {q:"What kind of legal system did Spain introduce?", a:"Spanish colonial laws and decrees", choices:shuffle(["Spanish colonial laws and decrees","Modern democracy immediately","Sharia law only","None"])},
-        {q:"What is one cultural legacy of Spain in the Philippines?", a:"Catholic festivals and many Spanish loanwords", choices:shuffle(["Catholic festivals and many Spanish loanwords","No changes","Japanese language","American football only"])},
-        {q:"Which year roughly marks the end of major Spanish rule due to the revolution?", a:"1898 (Treaty of Paris / Philippine Revolution events)", choices:shuffle(["1898","1945","1565","1901"])},
-        {q:"What was the Cavite Mutiny (1872) important for?", a:"Sparked Spanish suspicion and repression", choices:shuffle(["Sparked Spanish suspicion and repression","Started American rule","Started Japanese rule","Started trade only"]) }
-      );
-    }
-    else if(lesson === "Philippine Revolution"){
-      questions.push(
-        {q:"When did the Philippine Revolution against Spain begin (officially)?", a:"1896", choices:shuffle(["1896","1521","1941","1901"])},
-        {q:"What was the name of the secret society that started the revolution?", a:"Katipunan (KKK)", choices:shuffle(["Katipunan (KKK)","Ilustrado Club","Galleon Group","Revolutionary Party"])},
-        {q:"Who is called the father of the Philippines' revolution?", a:"Andrés Bonifacio (founder of Katipunan)", choices:shuffle(["Andrés Bonifacio (founder of Katipunan)","Ferdinand Magellan","Jose Rizal only","Emilio Aguinaldo only"])},
-        {q:"Who became the first President of the Philippine Revolutionary Government?", a:"Emilio Aguinaldo", choices:shuffle(["Emilio Aguinaldo","Andrés Bonifacio","Jose Rizal","Antonio Luna"])},
-        {q:"What is the significance of the Cry of Pugad Lawin / Balintawak?", a:"Start of open revolution (shredding of cedulas)", choices:shuffle(["Start of open revolution (shredding of cedulas)","A trade event","A harvest festival","A treaty signing"])},
-        {q:"Who wrote Noli Me Tangere and influenced reformers?", a:"Jose Rizal", choices:shuffle(["Jose Rizal","Andres Bonifacio","Emilio Aguinaldo","Antonio Luna"])},
-        {q:"What did revolutionaries want from Spain?", a:"Independence and reforms", choices:shuffle(["Independence and reforms","More taxes","More trade only","To remain colony"])},
-        {q:"Where was the Declaration of Philippine Independence proclaimed (1898)?", a:"Cavite (June 12, 1898 — Kawit, Cavite)", choices:shuffle(["Kawit, Cavite (June 12, 1898)","Manila","Luzon only","Cebu only"])},
-        {q:"What flag was first waved in the declaration of independence?", a:"The Philippine Flag (designed by Emilio Aguinaldo's group)", choices:shuffle(["The Philippine Flag","Spanish flag","American flag","Japanese flag"])},
-        {q:"Which battle was a major sea victory by Filipino forces?", a:"Battle of Alapan (or other local engagements)", choices:shuffle(["Battle of Alapan","Battle of Trafalgar","Battle of Waterloo","Battle of Midway"])},
-        {q:"Which leader later had conflict with Bonifacio and replaced him?", a:"Emilio Aguinaldo", choices:shuffle(["Emilio Aguinaldo","Jose Rizal","Andres Bonifacio","Apolinario Mabini"])},
-        {q:"What happened to Andres Bonifacio?", a:"He was arrested and executed (controversially)", choices:shuffle(["He was arrested and executed (controversially)","He became president","He went abroad","He lived quietly"])},
-        {q:"Which 1898 event changed colonial rulers in the Philippines?", a:"Spanish-American War and Treaty of Paris", choices:shuffle(["Spanish-American War and Treaty of Paris","World War I","World War II","Seven Years' War"])},
-        {q:"What was the Malolos Republic?", a:"First Philippine Republic established in 1899", choices:shuffle(["First Philippine Republic (Malolos)","Spanish colony reorganized","American state","Japanese puppet state"])},
-        {q:"Who was a famous Filipino general in the revolutionary army?", a:"Antonio Luna", choices:shuffle(["Antonio Luna","Jose Rizal","Magellan","Quezon"])},
-        {q:"Why is June 12 important in Philippine history?", a:"Philippine Independence Day (from Spain, 1898)", choices:shuffle(["Philippine Independence Day (from Spain, 1898)","Start of American rule","Start of World War II","A harvest day"])},
-        {q:"What ended Spanish colonial control in the Philippines?", a:"Treaty of Paris (1898) transferring control to the U.S.", choices:shuffle(["Treaty of Paris (1898)","Malolos Constitution","Japanese attack","Local election"])},
-        {q:"Which was a challenge for revolutionaries after independence declaration?", a:"Recognition and conflict with the U.S.", choices:shuffle(["Recognition and conflict with the U.S.","No problems","Worldwide support","Immediate peace"])},
-        {q:"What role did the Katipunan play?", a:"Organized armed resistance", choices:shuffle(["Organized armed resistance","Trade union only","Religious group","School"])},
-        {q:"Who served as a key adviser to Aguinaldo's government?", a:"Apolinario Mabini", choices:shuffle(["Apolinario Mabini","Antonio Luna","Magellan","Bonifacio"])},
-        {q:"What did the Malolos Constitution aim to create?", a:"A republican government for the Philippines", choices:shuffle(["A republican government for the Philippines","A monarchy","A theocracy","A federation with Spain"])},
-        {q:"Which year did the First Philippine Republic (Malolos) form?", a:"1899", choices:shuffle(["1899","1521","1901","1945"])},
-        {q:"What major problem did the revolution face against the U.S.?", a:"Armed conflict and eventual U.S. occupation", choices:shuffle(["Armed conflict and eventual U.S. occupation","Economic surplus","No resistance","Instant recognition"])},
-        {q:"Which leader later became a controversial figure after the revolution?", a:"Emilio Aguinaldo", choices:shuffle(["Emilio Aguinaldo","Jose Rizal","Magellan","Apolinario Mabini"])},
-        {q:"What was one result of the revolution era?", a:"A move toward Filipino self-rule and later conflict with U.S.", choices:shuffle(["A move toward Filipino self-rule and later conflict with U.S.","Complete independence in 1899 only","Colonization by Japan","Separation into islands only"])},
-        {q:"What was the significance of the Philippine Revolution overall?", a:"It started the modern movement for nationhood", choices:shuffle(["It started the modern movement for nationhood","It ended all wars","It created world peace","It industrialized the islands"])},
-        {q:"What happened to the Malolos Republic?", a:"It struggled due to war with the U.S.", choices:shuffle(["It struggled due to war with the U.S.","It became a stable state","It became colony of Japan","It lasted 100 years"])}
-      );
-    }
-    else if(lesson === "American Period"){
-      questions.push(
-        {q:"When did American rule begin in the Philippines (approx.)?", a:"1898–1901 period following Spanish-American War", choices:shuffle(["1898–1901","1521","1941","1945"])},
-        {q:"What language was introduced widely during the American period?", a:"English", choices:shuffle(["English","Spanish only","Japanese","Baybayin only"])},
-        {q:"What system did Americans introduce for education?", a:"Public school system with English instruction", choices:shuffle(["Public school system with English instruction","No schools","Only religious schools","Online schools"])},
-        {q:"Which event marked the resistance against U.S. occupation?", a:"Philippine-American War", choices:shuffle(["Philippine-American War","World War II","Spanish-American War only","Revolution only"])},
-        {q:"Which civic structure was installed by Americans?", a:"Civil government and local elections", choices:shuffle(["Civil government and local elections","Monarchy","No government","Only military rule forever"])},
-        {q:"What improvements did Americans build in the islands?", a:"Roads, public health, and schools", choices:shuffle(["Roads, public health, and schools","Skyscrapers only","Spaceports","Malls only"])},
-        {q:"What system replaced some Spanish institutions?", a:"Civil institutions and public education", choices:shuffle(["Civil institutions and public education","More friar lands","Feudalism again","No change"])},
-        {q:"Who were the first Filipino senators under American setup?", a:"Filipino political leaders in early assemblies", choices:shuffle(["Filipino political leaders in early assemblies","Spanish nobles","American-only senators","Japanese officials"])},
-        {q:"What law promised more autonomy over time?", a:"Philippine Autonomy Acts (Jones Act 1916)", choices:shuffle(["Jones Act (1916)","Treaty of Paris","Galleon Act","None"])},
-        {q:"What led to increased Filipino political participation?", a:"Elections and local government reforms", choices:shuffle(["Elections and local government reforms","No participation","Forced labor only","No voting rights"])},
-        {q:"Which health measure helped Filipinos during American rule?", a:"Public health campaigns and hospitals", choices:shuffle(["Public health campaigns and hospitals","No hospitals","Only magic remedies","Factories"])},
-        {q:"What economic change happened under the Americans?", a:"More commercial agriculture and trade", choices:shuffle(["More commercial agriculture and trade","Complete industrialization","No change","Only fishing economy"])},
-        {q:"Which year did the U.S. promise future independence (Tydings–McDuffie Act)?", a:"1934 (Tydings–McDuffie Act set path to commonwealth)", choices:shuffle(["1934","1898","1946","1901"])},
-        {q:"What was the Commonwealth period?", a:"Transitional self-government (1935–1946)", choices:shuffle(["Transitional self-government (1935–1946)","Colonial Spain period","Japanese puppet state","Immediate independence"])},
-        {q:"Which president led the Commonwealth?", a:"Manuel L. Quezon", choices:shuffle(["Manuel L. Quezon","Jose Rizal","Andres Bonifacio","Emilio Aguinaldo"])},
-        {q:"What was a cultural influence of Americans?", a:"English language, public education, and popular culture", choices:shuffle(["English language, public education, and popular culture","Only Spanish songs","Only Baybayin writing","No cultural exchange"])},
-        {q:"Which war disrupted American-era plans for independence?", a:"World War II (Japanese invasion)", choices:shuffle(["World War II (Japanese invasion)","Spanish-American War again","Cold War only","No war"])},
-        {q:"What did Americans build to help trade?", a:"Ports and transport infrastructure", choices:shuffle(["Ports and transport infrastructure","Only castles","Only temples","Only farms"])},
-        {q:"How did Americans change local government?", a:"Introduced municipal and provincial government structures", choices:shuffle(["Introduced municipal and provincial government structures","No local officials","Only tribal leaders","Only national governors"])},
-        {q:"What was one legacy of the American period?", a:"Use of English in government and education", choices:shuffle(["Use of English in government and education","Spanish only","Japanese only","No language change"])},
-        {q:"What happened to Filipino soldiers during American period?", a:"Some served with U.S. forces and later with Commonwealth army", choices:shuffle(["Some served with U.S. forces and later with Commonwealth army","No soldiers","Only pirates","Only knights"])},
-        {q:"What was a major public health action under Americans?", a:"Campaigns vs. smallpox and cholera", choices:shuffle(["Campaigns vs. smallpox and cholera","No health actions","Only magic cures","Only traditional healing"])},
-        {q:"Why did Filipino leaders negotiate with the U.S.?", a:"To gain eventual independence and self-government", choices:shuffle(["To gain eventual independence and self-government","To be colonized by another country","To ban education","To remain isolated"])},
-        {q:"What was the economic relationship with the U.S. like?", a:"Closer trade and investment ties", choices:shuffle(["Closer trade and investment ties","Complete isolation","Only barter","Only local trade"])},
-        {q:"What did the Philippine Scouts refer to?", a:"Filipino soldiers serving under U.S. Army", choices:shuffle(["Filipino soldiers serving under U.S. Army","A group of farmers","A folklore group","A shipping fleet"])},
-        {q:"Which act created the Commonwealth government?", a:"Tydings–McDuffie Act and subsequent acts leading to the 1935 Constitution", choices:shuffle(["Tydings–McDuffie Act and 1935 Constitution","Jones Act only","Treaty of Paris only","No act"])},
-        {q:"What was a major challenge during American rule?", a:"Local resistance from the Philippine-American War and adjustment to new rule", choices:shuffle(["Local resistance from the Philippine-American War and adjustment to new rule","No challenges","Only prosperity","Only sports development"])},
-        {q:"Which year did full independence from U.S. occur (after WWII)?", a:"1946", choices:shuffle(["1946","1935","1898","1941"])}
-      );
-    }
-    else if(lesson === "Japanese Occupation"){
-      questions.push(
-        {q:"When did the Japanese occupy the Philippines during WWII?", a:"1941–1945", choices:shuffle(["1941–1945","1898","1901","1935"])},
-        {q:"What major event began Japanese occupation?", a:"Attack on Pearl Harbor and invasion of the Philippines (1941)", choices:shuffle(["Attack on Pearl Harbor and invasion (1941)","Spanish arrival (1521)","American landing (1898)","Korean War"])},
-        {q:"What did the Japanese occupation cause?", a:"Hardship, shortages, and violence", choices:shuffle(["Hardship, shortages, and violence","Abundant food","Immediate prosperity","No change"])},
-        {q:"Who led guerilla resistance against the Japanese?", a:"Filipino guerillas and Allied soldiers", choices:shuffle(["Filipino guerillas and Allied soldiers","Only Japanese forces","Only Americans","Only Spanish colonists"])},
-        {q:"What was the Bataan Death March?", a:"Forced march of Filipino and American POWs with many deaths", choices:shuffle(["Forced march of Filipino and American POWs with many deaths","A festival","A trade route","A parade"])},
-        {q:"What happened to many towns during the war?", a:"Destruction and battles in towns and countryside", choices:shuffle(["Destruction and battles in towns and countryside","No change","Only growth","Only peace"])},
-        {q:"Who helped liberate the Philippines from Japan?", a:"Allied forces led by the U.S.", choices:shuffle(["Allied forces led by the U.S.","Spain","Only local police","Only civilians"])},
-        {q:"Which general led the liberation of the Philippines?", a:"General Douglas MacArthur (returned to the Philippines)", choices:shuffle(["Douglas MacArthur","Ferdinand Marcos","Jose Rizal","Andres Bonifacio"])},
-        {q:"What year did MacArthur return to the Philippines?", a:"1944", choices:shuffle(["1944","1898","1901","1941"])},
-        {q:"What happened to the Jewish and other minorities during WWII globally?", a:"Persecution in many areas (context of WWII)", choices:shuffle(["Persecution in many areas (context of WWII)","No persecution","Only prosperity","No change"])},
-        {q:"What was one aftermath of Japanese occupation?", a:"Widespread destruction and need for rebuilding", choices:shuffle(["Widespread destruction and need for rebuilding","Immediate wealth","No damage","Only cultural change"])},
-        {q:"What resistance organization worked in the Philippines?", a:"Multiple guerrilla groups across the islands", choices:shuffle(["Multiple guerrilla groups across the islands","One single group only","No groups","Only foreign groups"])},
-        {q:"Which city saw heavy fighting and later liberation (1945)?", a:"Manila", choices:shuffle(["Manila","Cebu only","Davao only","Baguio only"])},
-        {q:"What happened to many civilians during the occupation?", a:"Suffered food shortages and violence", choices:shuffle(["Suffered food shortages and violence","Lived normally","Became wealthy","Travelled abroad easily"])},
-        {q:"What is a remembrance about the war today?", a:"Memorials and stories honoring those who suffered", choices:shuffle(["Memorials and stories honoring those who suffered","No remembrance","Only parties","Only celebrations"])},
-        {q:"Which year marks the end of WWII in the Philippines?", a:"1945", choices:shuffle(["1945","1941","1901","1898"])},
-        {q:"What was a wartime experience Filipino families faced?", a:"Evacuation, hiding, and shortages", choices:shuffle(["Evacuation, hiding, and shortages","Luxury travel","Higher wages","No changes"])},
-        {q:"What was done after liberation to help the country?", a:"Reconstruction and return to civilian rule", choices:shuffle(["Reconstruction and return to civilian rule","Immediate independence without damage","No reconstruction","Only economic collapse"])},
-        {q:"What was the role of Filipino guerrillas?", a:"Support liberation and resist occupation", choices:shuffle(["Support liberation and resist occupation","Collaborate only","No role","Only farming"])},
-        {q:"What atrocity during the occupation is widely remembered?", a:"Bataan Death March and civilian massacres like Manila 1945", choices:shuffle(["Bataan Death March and Manila massacres","Only sports events","Only trade fairs","No atrocities"])},
-        {q:"How did WWII affect cities in the Philippines?", a:"Many cities were heavily damaged and needed rebuilding", choices:shuffle(["Many cities were heavily damaged and needed rebuilding","Cities thrived","No damage","Better infrastructure only"])},
-        {q:"What was one challenge after WWII?", a:"Homelessness, destroyed infrastructure, and economic recovery", choices:shuffle(["Homelessness, destroyed infrastructure, and economic recovery","No challenges","Only foreign aid","Immediate industrialization"])},
-        {q:"What else influenced post-war Philippines from WWII?", a:"Stronger ties with the U.S. and move toward independence", choices:shuffle(["Stronger ties with the U.S. and move toward independence","Closer ties with Spain","Isolation","Only local politics"])},
-        {q:"What is one way we remember WWII in the Philippines?", a:"Museums, memorials, and education", choices:shuffle(["Museums, memorials, and education","No remembering","Annual trade fair only","TV shows only"])},
-        {q:"Who suffered many losses during the occupation?", a:"Filipino civilians and soldiers", choices:shuffle(["Filipino civilians and soldiers","Only visitors","Only animals","No one"])},
-        {q:"What international event ended WWII and affected the Philippines?", a:"Allied victory in 1945", choices:shuffle(["Allied victory in 1945","Spanish victory","American Civil War","Cold War only"])},
-        {q:"What did the Philippines regain after WWII?", a:"Path to full independence (1946)", choices:shuffle(["Path to full independence (1946)","Return to Spain","Remain Japanese colony","No change"])}
-      );
-    }
-    else if(lesson === "Post-War"){
-      questions.push(
-        {q:"When did the Philippines gain full independence after WWII?", a:"July 4, 1946", choices:shuffle(["July 4, 1946","June 12, 1898","December 30, 1935","May 1, 1950"])},
-        {q:"What was a major task after the war?", a:"Reconstruction and rebuilding cities and economy", choices:shuffle(["Reconstruction and rebuilding cities and economy","Starting space program","No tasks","Only celebrations"])},
-        {q:"What government system was restored after WWII?", a:"Republic with elected leaders", choices:shuffle(["Republic with elected leaders","Monarchy","Japanese rule","Spanish rule"])},
-        {q:"Which international ally helped in rebuilding?", a:"United States provided aid and assistance", choices:shuffle(["United States provided aid and assistance","Spain","Japan only","No allies"])},
-        {q:"What social issue was important post-war?", a:"Resettlement of refugees and rebuilding families", choices:shuffle(["Resettlement of refugees and rebuilding families","Only industrialization","Only education","No social issues"])},
-        {q:"What became important for development post-war?", a:"Infrastructure, schools, and health services", choices:shuffle(["Infrastructure, schools, and health services","Only banks","Only sports","No services"])},
-        {q:"Which constitution guided post-war Philippines?", a:"The 1935 Constitution (amended) and later the 1943/1946 arrangements", choices:shuffle(["The 1935 Constitution (amended) and later 1946 arrangements","No constitution","Only foreign laws","Only local customs"])},
-        {q:"Who was a major post-war president (early period)?", a:"Manuel Roxas (first president of independent Third Republic)", choices:shuffle(["Manuel Roxas","Jose Rizal","Andres Bonifacio","Emilio Aguinaldo"])},
-        {q:"What economic activity was prioritized post-war?", a:"Agriculture recovery and trade", choices:shuffle(["Agriculture recovery and trade","Only industry","Only services","Space exploration"])},
-        {q:"What was an important step towards stability after war?", a:"Rebuilding government institutions and economy", choices:shuffle(["Rebuilding government institutions and economy","No steps","Only festivals","Only sports teams"])},
-        {q:"What international organization did the Philippines join after WWII?", a:"United Nations (founding member in 1945)", choices:shuffle(["United Nations (1945)","NATO","Warsaw Pact","ASEAN only later"])},
-        {q:"What challenge did veterans face post-war?", a:"Reintegration, wounds, and need for benefits", choices:shuffle(["Reintegration, wounds, and need for benefits","No challenges","Immediate riches","Only jobs"])},
-        {q:"What changed in city planning post-war?", a:"Reconstruction with improved roads and services", choices:shuffle(["Reconstruction with improved roads and services","No change","Only more markets","Only parks"])},
-        {q:"What cultural change followed the war?", a:"Blending of local, American, and other influences", choices:shuffle(["Blending of local, American, and other influences","Only Spanish culture","Only Japanese culture","No blend"])},
-        {q:"What was a major foreign policy after independence?", a:"Diplomacy with allies and rebuilding ties", choices:shuffle(["Diplomacy with allies and rebuilding ties","Isolation","Only local trade","No policy"])},
-        {q:"What social program helped many families after war?", a:"Land reform and housing projects (attempts)", choices:shuffle(["Land reform and housing projects (attempts)","Only entertainment","Only sports","No programs"])},
-        {q:"Which year did Philippine independence day later change to June 12?","a":"1962 (officially moved later)","choices":shuffle(["1962","1946","1898","1950"])},
-        {q:"What was a continuing issue after independence?", a:"Economic recovery and political stability", choices:shuffle(["Economic recovery and political stability","No issues","Only tourism","Only technology"])},
-        {q:"What infrastructure improved in the post-war era?", a:"Roads, ports, and public buildings", choices:shuffle(["Roads, ports, and public buildings","Only palaces","Only forts","No improvements"])},
-        {q:"How did education change in post-war period?", a:"Expansion of public education and universities", choices:shuffle(["Expansion of public education and universities","No schools","Only private tutors","Only trade schools"])},
-        {q:"What regional body did the Philippines later help form (1967)?", a:"ASEAN (1967) later — the Philippines was a founding member", choices:shuffle(["ASEAN (1967) later — founding member","EU","AU","UN only"])},
-        {q:"What remained a major post-war economic sector?", a:"Agriculture and growing manufacturing", choices:shuffle(["Agriculture and growing manufacturing","Only IT","Only mining","No sector"])},
-        {q:"Which problem required land and social policies post-war?", a:"Land ownership and redistribution", choices:shuffle(["Land ownership and redistribution","Only taxes","Only education","No problem"])},
-        {q:"What role did women play post-war?", a:"Participated in rebuilding, education and workforce", choices:shuffle(["Participated in rebuilding, education and workforce","No role","Only domestic role","Only political role"])},
-        {q:"What international relationship remained important after independence?", a:"Strong ties with the United States", choices:shuffle(["Strong ties with the United States","Only Spain","Only Japan","No ties"])},
-        {q:"What did cultural life in the Philippines include post-war?", a:"Music, film, and literature revival", choices:shuffle(["Music, film, and literature revival","Only ancient arts","Only imported culture","No culture"])},
-        {q:"What long-term task started in post-war years?", a:"Continued nation-building and economic development", choices:shuffle(["Continued nation-building and economic development","Immediate utopia","No tasks","Only festivals"])}
-      );
-    }
-    // Ensure we return at least an array; caller will shuffle & slice 5-10
   }
   return questions;
 }
@@ -337,8 +141,9 @@ function generateQuestionPool(subject,lesson){
 // --- Science questions (same as before) ---
 function generateScienceQuestions(topic,count){
   const qs=[];
-  for(let i=0;i<count;i++){
+for(let i=0;i<count;i++){
     let q,a;
+    // (same content as before) - keep questions same
     if(topic==="Circulatory"){q=`What organ pumps blood throughout the body?`; a="Heart"; qs.push({q,a,choices:shuffle([a,"Liver","Lungs","Brain","Kidney"])});}
     if(topic==="Circulatory"){q=`Which vessels carry blood away from the heart?`; a="Arteries"; qs.push({q,a,choices:shuffle([a,"Veins","Capillaries","Nerves","Tendons"])});}
     if(topic==="Circulatory"){q=`Which vessels bring blood back to the heart?`; a="Veins"; qs.push({q,a,choices:shuffle([a,"Arteries","Capillaries","Bronchi","Trachea"])});}
@@ -418,52 +223,276 @@ function generateVocabularyQuestions(subject, lesson){
         qs.push({q:"What is a 'rabbit'?", a:"A small animal with long ears", choices:shuffle(["A small animal with long ears","A vehicle","A color","A building"])});
         qs.push({q:"What is a 'horse'?", a:"An animal used for riding", choices:shuffle(["An animal used for riding","A type of food","A tree","A chair"])});
         qs.push({q:"What is a 'sheep'?", a:"An animal that gives wool", choices:shuffle(["An animal that gives wool","A fruit","A car","A mountain"])});
-        qs.push({q:"What is a 'goat'?", a:"An animal with horns", choices:shuffle(["An animal with horns","A type of flower","A building","A planet"])});
+      qs.push({q:"What is a 'goat'?", a:"An animal with horns", choices:shuffle(["An animal with horns","A type of flower","A building","A planet"])});
         qs.push({q:"What is a 'duck'?", a:"A bird that swims", choices:shuffle(["A bird that swims","A type of fruit","A car","A chair"])});
         qs.push({q:"What is a 'chicken'?", a:"A bird that lays eggs", choices:shuffle(["A bird that lays eggs","A type of tree","A vehicle","A fruit"])});
         qs.push({q:"What is a 'bear'?", a:"A large wild animal", choices:shuffle(["A large wild animal","A small insect","A color","A building"])});
         qs.push({q:"What is a 'wolf'?", a:"A wild animal that lives in packs", choices:shuffle(["A wild animal that lives in packs","A tree","A chair","A planet"])});
-        qs.push({q:"What is a 'fox'?", a:"A small wild animal with a bushy tail", choices:shuffle(["A small wild animal with a bushy tail","A type of fish","A color","A flower"])});
-        qs.push({q:"What is a 'frog'?", a:"An animal that can jump and croak", choices:shuffle(["An animal that can jump and croak","A vehicle","A fruit","A chair"])});
+      qs.push({q:"What is a 'fox'?", a:"A small wild animal with a bushy tail", choices:shuffle(["A small wild animal with a bushy tail","A type of fish","A color","A flower"])});
+      qs.push({q:"What is a 'frog'?", a:"An animal that can jump and croak", choices:shuffle(["An animal that can jump and croak","A vehicle","A fruit","A chair"])});
         qs.push({q:"What is a 'snake'?", a:"A legless reptile", choices:shuffle(["A legless reptile","A bird","A flower","A car"])});
         qs.push({q:"What is a 'penguin'?", a:"A bird that cannot fly", choices:shuffle(["A bird that cannot fly","A fish","A mammal","A vehicle"])});
-        qs.push({q:"What is a 'koala'?", a:"A tree-dwelling animal", choices:shuffle(["A tree-dwelling animal","A type of bird","A fruit","A flower"])});
-        qs.push({q:"What is a 'kangaroo'?", a:"An animal that hops", choices:shuffle(["An animal that hops","A small fish","A bird","A tree"])});
-        qs.push({q:"What is a 'panda'?", a:"A bear that eats bamboo", choices:shuffle(["A bear that eats bamboo","A type of cat","A fish","A flower"])});
-        qs.push({q:"What is a 'whale'?", a:"A large sea mammal", choices:shuffle(["A large sea mammal","A type of bird","A reptile","A tree"])});
-        qs.push({q:"What is a 'dolphin'?", a:"A smart marine animal", choices:shuffle(["A smart marine animal","A land animal","A bird","A vegetable"])});
-        qs.push({q:"What is a 'shark'?", a:"A predator fish", choices:shuffle(["A predator fish","A mammal","A bird","A tree"])});
-        qs.push({q:"What is a 'crab'?", a:"A crustacean that walks sideways", choices:shuffle(["A crustacean that walks sideways","A bird","A mammal","A vegetable"])});
-        qs.push({q:"What is a 'lobster'?", a:"A sea animal with claws", choices:shuffle(["A sea animal with claws","A type of bird","A mammal","A tree"])});
-        qs.push({q:"What is an 'octopus'?", a:"A sea animal with eight arms", choices:shuffle(["A sea animal with eight arms","A fish","A bird","A reptile"])});
+    qs.push({q:"What is a 'koala'?", a:"A tree-dwelling animal", choices:shuffle(["A tree-dwelling animal","A type of bird","A fruit","A flower"])});
+  qs.push({q:"What is a 'kangaroo'?", a:"An animal that hops", choices:shuffle(["An animal that hops","A small fish","A bird","A tree"])});
+  qs.push({q:"What is a 'panda'?", a:"A bear that eats bamboo", choices:shuffle(["A bear that eats bamboo","A type of cat","A fish","A flower"])});
+ qs.push({q:"What is a 'whale'?", a:"A large sea mammal", choices:shuffle(["A large sea mammal","A type of bird","A reptile","A tree"])});
+  qs.push({q:"What is a 'dolphin'?", a:"A smart marine animal", choices:shuffle(["A smart marine animal","A land animal","A bird","A vegetable"])});
+  qs.push({q:"What is a 'shark'?", a:"A predator fish", choices:shuffle(["A predator fish","A mammal","A bird","A tree"])});
+    qs.push({q:"What is a 'crab'?", a:"A crustacean that walks sideways", choices:shuffle(["A crustacean that walks sideways","A bird","A mammal","A vegetable"])});
+  qs.push({q:"What is a 'lobster'?", a:"A sea animal with claws", choices:shuffle(["A sea animal with claws","A type of bird","A mammal","A tree"])});
+qs.push({q:"What is a 'octopus'?", a:"A sea animal with eight arms", choices:shuffle(["A sea animal with eight arms","A fish","A bird","A reptile"])});
     }
-    // Additional vocabulary branches (Colors, Numbers, Fruits, and Filipino ones)...
-    if(lesson==="Colors"){
-      qs.push({q:"What color is the sky?", a:"Blue", choices:shuffle(["Blue","Red","Green","Yellow"])});
-      qs.push({q:"What color is a lemon?", a:"Yellow", choices:shuffle(["Yellow","Purple","Orange","Black"])});
-      qs.push({q:"What color is grass?", a:"Green", choices:shuffle(["Green","Pink","White","Brown"])});
-      qs.push({q:"What color is an apple?", a:"Red", choices:shuffle(["Red","Blue","White","Gray"])});
-      qs.push({q:"What color is a carrot?", a:"Orange", choices:shuffle(["Orange","Purple","Green","Black"])});
-      qs.push({q:"What color is a banana?", a:"Yellow", choices:shuffle(["Yellow","Red","Blue","Pink"])});
-      qs.push({q:"What color is a grape?", a:"Purple", choices:shuffle(["Purple","Green","Red","Orange"])});
-      qs.push({q:"What color is snow?", a:"White", choices:shuffle(["White","Blue","Brown","Black"])});
-      qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","White","Red","Green"])});
-      qs.push({q:"What color is chocolate?", a:"Brown", choices:shuffle(["Brown","Pink","Blue","Orange"])});
-    }
-    if(lesson==="Numbers"){
-      qs.push({q:"How many fingers do we have?", a:"10", choices:shuffle(["10","5","20","15"])});
-      qs.push({q:"What comes after 2?", a:"3", choices:shuffle(["3","4","1","5"])});
-      qs.push({q:"How many days are in a week?", a:"7", choices:shuffle(["7","5","10","6"])});
-      qs.push({q:"What number comes before 5?", a:"4", choices:shuffle(["4","3","5","6"])});
-      qs.push({q:"How many months are in a year?", a:"12", choices:shuffle(["12","10","11","6"])});
-    }
+    
+if(lesson==="Colors"){
+    qs.push({q:"What color is the sky?", a:"Blue", choices:shuffle(["Blue","Red","Green","Yellow"])});
+    qs.push({q:"What color is a lemon?", a:"Yellow", choices:shuffle(["Yellow","Purple","Orange","Black"])});
+    qs.push({q:"What color is grass?", a:"Green", choices:shuffle(["Green","Pink","White","Brown"])});
+    qs.push({q:"What color is an apple?", a:"Red", choices:shuffle(["Red","Blue","White","Gray"])});
+    qs.push({q:"What color is a carrot?", a:"Orange", choices:shuffle(["Orange","Purple","Green","Black"])});
+    qs.push({q:"What color is a banana?", a:"Yellow", choices:shuffle(["Yellow","Red","Blue","Pink"])});
+    qs.push({q:"What color is a grape?", a:"Purple", choices:shuffle(["Purple","Green","Red","Orange"])});
+    qs.push({q:"What color is snow?", a:"White", choices:shuffle(["White","Blue","Brown","Black"])});
+    qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","White","Red","Green"])});
+    qs.push({q:"What color is chocolate?", a:"Brown", choices:shuffle(["Brown","Pink","Blue","Orange"])});
+    qs.push({q:"What color is a strawberry?", a:"Red", choices:shuffle(["Red","Green","Yellow","Purple"])});
+    qs.push({q:"What color is a pumpkin?", a:"Orange", choices:shuffle(["Orange","Blue","White","Black"])});
+    qs.push({q:"What color is a cucumber?", a:"Green", choices:shuffle(["Green","Red","Yellow","Pink"])});
+    qs.push({q:"What color is a rose?", a:"Red", choices:shuffle(["Red","Blue","Brown","Black"])});
+    qs.push({q:"What color is a blueberry?", a:"Blue", choices:shuffle(["Blue","Green","Red","Yellow"])});
+    qs.push({q:"What color is a lemon slice?", a:"Yellow", choices:shuffle(["Yellow","Orange","Green","Purple"])});
+    qs.push({q:"What color is a cloud?", a:"White", choices:shuffle(["White","Blue","Gray","Black"])});
+    qs.push({q:"What color is a night sky?", a:"Black", choices:shuffle(["Black","Blue","Purple","White"])});
+    qs.push({q:"What color is a pink flamingo?", a:"Pink", choices:shuffle(["Pink","Red","Orange","Yellow"])});
+    qs.push({q:"What color is a rainbow?", a:"Multicolor", choices:shuffle(["Multicolor","Single color","Gray","Black"])});
+    qs.push({q:"What color is an orange fruit?", a:"Orange", choices:shuffle(["Orange","Red","Yellow","Green"])});
+    qs.push({q:"What color is a cherry?", a:"Red", choices:shuffle(["Red","Blue","Green","Yellow"])});
+    qs.push({q:"What color is a lemon peel?", a:"Yellow", choices:shuffle(["Yellow","Green","Orange","White"])});
+    qs.push({q:"What color is a frog?", a:"Green", choices:shuffle(["Green","Brown","Blue","Red"])});
+    qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","White","Gray","Brown"])});
+    qs.push({q:"What color is sand?", a:"Brown", choices:shuffle(["Brown","Yellow","White","Orange"])});
+    qs.push({q:"What color is a tulip?", a:"Red", choices:shuffle(["Red","Pink","Purple","Yellow"])});
+    qs.push({q:"What color is the ocean?", a:"Blue", choices:shuffle(["Blue","Green","Black","White"])});
+    qs.push({q:"What color is a pumpkin?", a:"Orange", choices:shuffle(["Orange","Yellow","Red","Green"])});
+    qs.push({q:"What color is a kiwi inside?", a:"Green", choices:shuffle(["Green","Brown","Yellow","Red"])});
+    qs.push({q:"What color is a cloud at sunset?", a:"Pink", choices:shuffle(["Pink","Red","Orange","Purple"])});
+    qs.push({q:"What color is a sunflower?", a:"Yellow", choices:shuffle(["Yellow","Orange","Red","Brown"])});
+    qs.push({q:"What color is coal?", a:"Black", choices:shuffle(["Black","Gray","White","Blue"])});
+    qs.push({q:"What color is chocolate?", a:"Brown", choices:shuffle(["Brown","Black","Yellow","Orange"])});
+    qs.push({q:"What color is a rose?", a:"Red", choices:shuffle(["Red","Pink","White","Orange"])});
+    qs.push({q:"What color is the sky at noon?", a:"Blue", choices:shuffle(["Blue","White","Gray","Black"])});
+    qs.push({q:"What color is a ripe mango?", a:"Orange", choices:shuffle(["Orange","Yellow","Green","Red"])});
+    qs.push({q:"What color is a watermelon inside?", a:"Red", choices:shuffle(["Red","Green","Yellow","Pink"])});
+    qs.push({q:"What color is a lemon fruit?", a:"Yellow", choices:shuffle(["Yellow","Green","Orange","White"])});
+    qs.push({q:"What color is a blueberry?", a:"Blue", choices:shuffle(["Blue","Red","Purple","Black"])});
+    qs.push({q:"What color is a pink balloon?", a:"Pink", choices:shuffle(["Pink","Red","White","Orange"])});
+    qs.push({q:"What color is a rainbow?", a:"Multicolor", choices:shuffle(["Multicolor","Single color","Gray","Black"])});
+}
+
+if(lesson==="Numbers"){
+    qs.push({q:"How many fingers do we have?", a:"10", choices:shuffle(["10","5","20","15"])});
+    qs.push({q:"What comes after 2?", a:"3", choices:shuffle(["3","4","1","5"])});
+    qs.push({q:"How many days are in a week?", a:"7", choices:shuffle(["7","5","10","6"])});
+    qs.push({q:"What number comes before 5?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"How many months are in a year?", a:"12", choices:shuffle(["12","10","11","6"])});
+    qs.push({q:"How many hours are in a day?", a:"24", choices:shuffle(["24","12","30","7"])});
+    qs.push({q:"How many legs does a spider have?", a:"8", choices:shuffle(["8","6","4","10"])});
+    qs.push({q:"How many wheels does a bicycle have?", a:"2", choices:shuffle(["2","3","4","1"])});
+    qs.push({q:"How many legs does a cat have?", a:"4", choices:shuffle(["4","2","6","3"])});
+    qs.push({q:"How many eyes do we have?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"How many colors are in a rainbow?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"What comes after 9?", a:"10", choices:shuffle(["10","11","9","8"])});
+    qs.push({q:"What comes before 1?", a:"0", choices:shuffle(["0","1","2","-1"])});
+    qs.push({q:"How many continents are there?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"How many oceans are there?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"How many letters are in the English alphabet?", a:"26", choices:shuffle(["26","24","25","27"])});
+    qs.push({q:"How many months have 31 days?", a:"7", choices:shuffle(["7","6","5","8"])});
+    qs.push({q:"How many legs does a dog have?", a:"4", choices:shuffle(["4","2","6","3"])});
+    qs.push({q:"How many wheels does a car have?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"How many players are on a football team?", a:"11", choices:shuffle(["11","10","9","12"])});
+    qs.push({q:"How many seasons are in a year?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"How many planets are in our solar system?", a:"8", choices:shuffle(["8","7","9","10"])});
+    qs.push({q:"How many sides does a triangle have?", a:"3", choices:shuffle(["3","4","5","6"])});
+    qs.push({q:"How many sides does a square have?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"How many wheels does a tricycle have?", a:"3", choices:shuffle(["3","2","4","5"])});
+    qs.push({q:"How many teeth do humans usually have?", a:"32", choices:shuffle(["32","30","28","36"])});
+    qs.push({q:"How many hours in half a day?", a:"12", choices:shuffle(["12","6","24","8"])});
+    qs.push({q:"How many days in February (non-leap year)?", a:"28", choices:shuffle(["28","29","30","27"])});
+    qs.push({q:"How many sides does a pentagon have?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"How many sides does a hexagon have?", a:"6", choices:shuffle(["6","5","4","7"])});
+}
     if(lesson==="Fruits"){
-      qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
-      qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
-      qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
-      qs.push({q:"Which fruit is small and red?", a:"Strawberry", choices:shuffle(["Strawberry","Apple","Banana","Orange"])});
-      qs.push({q:"Which fruit is purple and grows in bunches?", a:"Grapes", choices:shuffle(["Grapes","Plum","Blueberry","Mango"])});
-    }
+    qs.push({q:"Which is a fruit?", a:"Apple", choices:shuffle(["Apple","Carrot","Potato","Lettuce"])});
+    qs.push({q:"Which is yellow and sour?", a:"Lemon", choices:shuffle(["Lemon","Banana","Apple","Mango"])});
+    qs.push({q:"Which fruit is tropical and orange inside?", a:"Mango", choices:shuffle(["Mango","Apple","Strawberry","Grapes"])});
+    qs.push({q:"Which fruit is small and red?", a:"Strawberry", choices:shuffle(["Strawberry","Apple","Banana","Orange"])});
+    qs.push({q:"Which fruit is purple and grows in bunches?", a:"Grapes", choices:shuffle(["Grapes","Plum","Blueberry","Mango"])});
+    qs.push({q:"Which fruit is long and yellow?", a:"Banana", choices:shuffle(["Banana","Apple","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green on the outside and red inside?", a:"Watermelon", choices:shuffle(["Watermelon","Apple","Grapes","Mango"])});
+    qs.push({q:"Which fruit is round and orange?", a:"Orange", choices:shuffle(["Orange","Mango","Apple","Banana"])});
+    qs.push({q:"Which fruit has a spiky skin and yellow inside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Kiwi"])});
+    qs.push({q:"Which fruit is small and blue?", a:"Blueberry", choices:shuffle(["Blueberry","Grapes","Plum","Apple"])});
+    qs.push({q:"Which fruit is green and often used in salads?", a:"Kiwi", choices:shuffle(["Kiwi","Apple","Banana","Mango"])});
+    qs.push({q:"Which fruit is brown and fuzzy outside, green inside?", a:"Kiwi", choices:shuffle(["Kiwi","Coconut","Avocado","Plum"])});
+    qs.push({q:"Which fruit is red and often used for juice?", a:"Apple", choices:shuffle(["Apple","Cherry","Tomato","Strawberry"])});
+    qs.push({q:"Which fruit is small, round, and red?", a:"Cherry", choices:shuffle(["Cherry","Grape","Strawberry","Apple"])});
+    qs.push({q:"Which fruit is orange and small, often peeled easily?", a:"Mandarin", choices:shuffle(["Mandarin","Orange","Peach","Apricot"])});
+    qs.push({q:"Which fruit is green and sour?", a:"Lime", choices:shuffle(["Lime","Lemon","Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, green outside and orange inside?", a:"Papaya", choices:shuffle(["Papaya","Mango","Pineapple","Banana"])});
+    qs.push({q:"Which fruit is red and has tiny seeds outside?", a:"Strawberry", choices:shuffle(["Strawberry","Raspberry","Cherry","Apple"])});
+    qs.push({q:"Which fruit is purple and sweet?", a:"Plum", choices:shuffle(["Plum","Grape","Blueberry","Mango"])});
+    qs.push({q:"Which fruit is green or purple and grows on vines?", a:"Grapes", choices:shuffle(["Grapes","Plum","Apple","Blueberry"])});
+    qs.push({q:"Which fruit is yellow and curved?", a:"Banana", choices:shuffle(["Banana","Lemon","Mango","Apple"])});
+    qs.push({q:"Which fruit has a hard shell and white inside?", a:"Coconut", choices:shuffle(["Coconut","Pineapple","Papaya","Avocado"])});
+    qs.push({q:"Which fruit is small, orange, and sweet?", a:"Apricot", choices:shuffle(["Apricot","Peach","Mandarin","Mango"])});
+    qs.push({q:"Which fruit is tropical, orange inside, and black seeds?", a:"Papaya", choices:shuffle(["Papaya","Mango","Orange","Pineapple"])});
+    qs.push({q:"Which fruit is green, smooth, and creamy inside?", a:"Avocado", choices:shuffle(["Avocado","Kiwi","Cucumber","Papaya"])});
+    qs.push({q:"Which fruit is red, heart-shaped, and juicy?", a:"Strawberry", choices:shuffle(["Strawberry","Cherry","Apple","Tomato"])});
+    qs.push({q:"Which fruit is round, orange or red, fuzzy skin?", a:"Peach", choices:shuffle(["Peach","Apricot","Plum","Mango"])});
+    qs.push({q:"Which fruit is sour and green?", a:"Lime", choices:shuffle(["Lime","Lemon","Green Apple","Kiwi"])});
+    qs.push({q:"Which fruit is tropical, yellow, and spiky outside?", a:"Pineapple", choices:shuffle(["Pineapple","Mango","Banana","Papaya"])});
+    qs.push({q:"Which fruit is tiny, red, and tart?", a:"Raspberry", choices:shuffle(["Raspberry","Cherry","Strawberry","Cranberry"])});
+}
+  }
+
+  // Filipino Vocabulary
+  if(subject==="Filipino Vocabulary"){
+if(lesson==="Hayop"){
+    qs.push({q:"Ano ang Tagalog ng 'dog'?", a:"Aso", choices:shuffle(["Aso","Pusa","Ibon","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'cat'?", a:"Pusa", choices:shuffle(["Pusa","Aso","Ibon","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'bird'?", a:"Ibon", choices:shuffle(["Ibon","Aso","Pusa","Baboy"])});
+    qs.push({q:"Ano ang Tagalog ng 'cow'?", a:"Baka", choices:shuffle(["Baka","Aso","Pusa","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'horse'?", a:"Kabayo", choices:shuffle(["Kabayo","Aso","Baka","Pusa"])});
+    qs.push({q:"Ano ang Tagalog ng 'pig'?", a:"Baboy", choices:shuffle(["Baboy","Aso","Baka","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'chicken'?", a:"Manok", choices:shuffle(["Manok","Aso","Pusa","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'duck'?", a:"Itik", choices:shuffle(["Itik","Aso","Pato","Manok"])});
+    qs.push({q:"Ano ang Tagalog ng 'sheep'?", a:"Tupa", choices:shuffle(["Tupa","Aso","Baka","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'goat'?", a:"Kambing", choices:shuffle(["Kambing","Aso","Baka","Tupa"])});
+    qs.push({q:"Ano ang Tagalog ng 'elephant'?", a:"Elepante", choices:shuffle(["Elepante","Aso","Kabayo","Baka"])});
+    qs.push({q:"Ano ang Tagalog ng 'lion'?", a:"Leon", choices:shuffle(["Leon","Aso","Pusa","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'tiger'?", a:"Tigre", choices:shuffle(["Tigre","Leon","Aso","Pusa"])});
+    qs.push({q:"Ano ang Tagalog ng 'monkey'?", a:"Unggoy", choices:shuffle(["Unggoy","Aso","Pusa","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'rabbit'?", a:"Kuneho", choices:shuffle(["Kuneho","Aso","Pusa","Kabayo"])});
+    qs.push({q:"Ano ang Tagalog ng 'bear'?", a:"Oso", choices:shuffle(["Oso","Aso","Leon","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'wolf'?", a:"Lobo", choices:shuffle(["Lobo","Aso","Leon","Tigre"])});
+    qs.push({q:"Ano ang Tagalog ng 'fox'?", a:"Soro", choices:shuffle(["Soro","Lobo","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'frog'?", a:"Palaka", choices:shuffle(["Palaka","Aso","Ibon","Kuneho"])});
+    qs.push({q:"Ano ang Tagalog ng 'snake'?", a:"Ahas", choices:shuffle(["Ahas","Aso","Kabayo","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'whale'?", a:"Balyena", choices:shuffle(["Balyena","Isda","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'dolphin'?", a:"Dolphin", choices:shuffle(["Dolphin","Balyena","Isda","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'shark'?", a:"Pating", choices:shuffle(["Pating","Isda","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'crab'?", a:"Alimango", choices:shuffle(["Alimango","Hipon","Isda","Aso"])});
+    qs.push({q:"Ano ang Tagalog ng 'lobster'?", a:"Lobster", choices:shuffle(["Lobster","Alimango","Hipon","Isda"])});
+    qs.push({q:"Ano ang Tagalog ng 'octopus'?", a:"Pugita", choices:shuffle(["Pugita","Hipon","Isda","Aso"])});
+    qs.push({q:"Ano ang Tagalog ng 'bee'?", a:"Bubuyog", choices:shuffle(["Bubuyog","Langgam","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'ant'?", a:"Langgam", choices:shuffle(["Langgam","Bubuyog","Aso","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'butterfly'?", a:"Paruparo", choices:shuffle(["Paruparo","Langgam","Bubuyog","Ibon"])});
+    qs.push({q:"Ano ang Tagalog ng 'fly'?", a:"Langaw", choices:shuffle(["Langaw","Paruparo","Bubuyog","Langgam"])});
+}
+
+if(lesson==="Kulay"){
+    qs.push({q:"Ano ang kulay ng langit?", a:"Asul", choices:shuffle(["Asul","Pula","Berde","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng lemon?", a:"Dilaw", choices:shuffle(["Dilaw","Lila","Kahel","Itim"])});
+    qs.push({q:"Ano ang kulay ng damo?", a:"Berde", choices:shuffle(["Berde","Rosas","Puti","Kayumanggi"])});
+    qs.push({q:"Ano ang kulay ng mansanas?", a:"Pula", choices:shuffle(["Pula","Asul","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng carrot?", a:"Kahel", choices:shuffle(["Kahel","Pula","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng saging?", a:"Dilaw", choices:shuffle(["Dilaw","Pula","Asul","Berde"])});
+    qs.push({q:"Ano ang kulay ng ubas?", a:"Lila", choices:shuffle(["Lila","Berde","Dilaw","Pula"])});
+    qs.push({q:"Ano ang kulay ng niyebe?", a:"Puti", choices:shuffle(["Puti","Asul","Itim","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng uling?", a:"Itim", choices:shuffle(["Itim","Puti","Asul","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng tsokolate?", a:"Kayumanggi", choices:shuffle(["Kayumanggi","Pula","Berde","Itim"])});
+    qs.push({q:"Alin sa mga ito ang hindi kulay ng bahaghari?", a:"Itim", choices:shuffle(["Itim","Pula","Asul","Dilaw","Kahel","Berde","Lila"])});
+    qs.push({q:"Ano ang unang kulay sa bahaghari?", a:"Pula", choices:shuffle(["Pula","Kahel","Dilaw","Berde"])});
+    qs.push({q:"Ano ang huling kulay sa bahaghari?", a:"Lila", choices:shuffle(["Lila","Asul","Dilaw","Pula"])});
+    qs.push({q:"Ano ang pangalawang kulay sa bahaghari?", a:"Kahel", choices:shuffle(["Kahel","Dilaw","Pula","Berde"])});
+    qs.push({q:"Ano ang pangatlong kulay sa bahaghari?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang pang-apat na kulay sa bahaghari?", a:"Berde", choices:shuffle(["Berde","Dilaw","Asul","Pula"])});
+    qs.push({q:"Ano ang pang-limang kulay sa bahaghari?", a:"Asul", choices:shuffle(["Asul","Berde","Pula","Kahel"])});
+    qs.push({q:"Ano ang pang-anim na kulay sa bahaghari?", a:"Indigo", choices:shuffle(["Indigo","Lila","Asul","Berde"])});
+    qs.push({q:"Ano ang pang-pitong kulay sa bahaghari?", a:"Lila", choices:shuffle(["Lila","Indigo","Pula","Kahel"])});
+    qs.push({q:"Ano ang pagkakasunod-sunod ng kulay sa bahaghari mula sa itaas pababa?", a:"Pula, Kahel, Dilaw, Berde, Asul, Indigo, Lila", choices:shuffle([
+        "Pula, Kahel, Dilaw, Berde, Asul, Indigo, Lila",
+        "Lila, Indigo, Asul, Berde, Dilaw, Kahel, Pula",
+        "Dilaw, Kahel, Pula, Lila, Indigo, Asul, Berde",
+        "Berde, Asul, Indigo, Lila, Pula, Kahel, Dilaw"
+    ])});
+    qs.push({q:"Ano ang kulay ng rosas?", a:"Pula", choices:shuffle(["Pula","Asul","Dilaw","Berde"])});
+    qs.push({q:"Ano ang kulay ng sunflower?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang kulay ng dagat?", a:"Asul", choices:shuffle(["Asul","Berde","Puti","Kahel"])});
+    qs.push({q:"Ano ang kulay ng abo?", a:"Gray", choices:shuffle(["Gray","Itim","Puti","Kahel"])});
+    qs.push({q:"Ano ang kulay ng strawberry?", a:"Pula", choices:shuffle(["Pula","Berde","Dilaw","Kahel"])});
+    qs.push({q:"Ano ang kulay ng langit sa dapithapon?", a:"Kahel", choices:shuffle(["Kahel","Pula","Asul","Berde"])});
+    qs.push({q:"Ano ang kulay ng uwak?", a:"Itim", choices:shuffle(["Itim","Pula","Berde","Dilaw"])});
+    qs.push({q:"Ano ang kulay ng saging na hinog?", a:"Dilaw", choices:shuffle(["Dilaw","Kahel","Berde","Pula"])});
+    qs.push({q:"Ano ang kulay ng talong?", a:"Lila", choices:shuffle(["Lila","Kahel","Pula","Berde"])});
+    qs.push({q:"Ano ang kulay ng dagat sa umaga?", a:"Asul", choices:shuffle(["Asul","Berde","Kahel","Puti"])});
+    qs.push({q:"Ano ang kulay ng kalangitan tuwing gabi?", a:"Itim", choices:shuffle(["Itim","Asul","Pula","Dilaw"])});
+}
+
+if(lesson==="Numero"){
+    qs.push({q:"Ilan ang daliri sa isang kamay?", a:"5", choices:shuffle(["5","10","4","6"])});
+    qs.push({q:"Ilan ang paa ng tao?", a:"2", choices:shuffle(["2","4","3","1"])});
+    qs.push({q:"Ilang buwan mayroon sa isang taon?", a:"12", choices:shuffle(["12","10","7","6"])});
+    qs.push({q:"Ilang araw mayroon sa isang linggo?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"Ilang itlog mayroon sa isang dosenang itlog?", a:"12", choices:shuffle(["12","10","11","15"])});
+    qs.push({q:"Ilang mata mayroon ang tao?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang gulong mayroon ang isang bisikleta?", a:"2", choices:shuffle(["2","3","4","1"])});
+    qs.push({q:"Ilang gulong mayroon ang isang kotse?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"Ilang araw mayroon sa buwan ng Pebrero (hindi leap year)?", a:"28", choices:shuffle(["28","29","30","27"])});
+    qs.push({q:"Ilang bituin ang nakikita sa araw-araw sa langit?", a:"Marami", choices:shuffle(["Marami","Isa","Wala","Dalawa"])});
+    qs.push({q:"Ilang kulay mayroon sa bahaghari?", a:"7", choices:shuffle(["7","6","8","5"])});
+    qs.push({q:"Ilang paa mayroon ang gagamba?", a:"8", choices:shuffle(["8","6","4","10"])});
+    qs.push({q:"Ilang sisiw mayroon sa isang manok?", a:"Depende", choices:shuffle(["Depende","5","3","2"])});
+    qs.push({q:"Ilang continents mayroon sa mundo?", a:"7", choices:shuffle(["7","5","6","8"])});
+    qs.push({q:"Ilang oceans mayroon sa mundo?", a:"5", choices:shuffle(["5","4","6","3"])});
+    qs.push({q:"Ilang letra mayroon sa alpabetong Filipino?", a:"28", choices:shuffle(["28","26","30","24"])});
+    qs.push({q:"Ilang season mayroon sa isang taon?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"Ilang araw ang Sabado at Linggo sa isang linggo?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang mata ang karaniwang nakikita sa cartoon na tao?", a:"2", choices:shuffle(["2","1","3","4"])});
+    qs.push({q:"Ilang paa ang karaniwang aso?", a:"4", choices:shuffle(["4","2","3","5"])});
+    qs.push({q:"Ilang dulo ang mayroon ang tatsulok?", a:"3", choices:shuffle(["3","4","5","6"])});
+    qs.push({q:"Ilang gilid ang mayroon ang parisukat?", a:"4", choices:shuffle(["4","3","5","6"])});
+    qs.push({q:"Ilang gulong mayroon ang tricycle?", a:"3", choices:shuffle(["3","2","4","5"])});
+    qs.push({q:"Ilang ngipin mayroon ang karaniwang tao?", a:"32", choices:shuffle(["32","30","28","36"])});
+    qs.push({q:"Ilang oras mayroon sa kalahating araw?", a:"12", choices:shuffle(["12","6","24","8"])});
+    qs.push({q:"Ilang araw mayroon sa isang linggo na hindi weekend?", a:"5", choices:shuffle(["5","2","6","4"])});
+    qs.push({q:"Ilang oras mayroon sa isang buong araw?", a:"24", choices:shuffle(["24","12","30","6"])});
+    qs.push({q:"Ilang taon mayroon sa isang dekada?", a:"10", choices:shuffle(["10","5","12","8"])});
+    qs.push({q:"Ilang araw mayroon sa isang taon (karaniwan)?", a:"365", choices:shuffle(["365","360","366","364"])});
+    qs.push({q:"Ilang paa mayroon ang pusa?", a:"4", choices:shuffle(["4","2","3","5"])});
+}
+
+if(lesson==="Prutas"){
+    qs.push({q:"Alin ang prutas?", a:"Mansanas", choices:shuffle(["Mansanas","Karot","Patatas","Lettuce"])});
+    qs.push({q:"Aling prutas ay dilaw at maasim?", a:"Lemon", choices:shuffle(["Lemon","Saging","Mansanas","Mango"])});
+    qs.push({q:"Aling prutas ay tropikal at kulay kahel sa loob?", a:"Mango", choices:shuffle(["Mango","Mansanas","Strawberry","Ubas"])});
+    qs.push({q:"Aling prutas ang kulay pula at maliit?", a:"Strawberry", choices:shuffle(["Strawberry","Mango","Saging","Lemon"])});
+    qs.push({q:"Aling prutas ang kulay berde sa labas at pula sa loob?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Saging"])});
+    qs.push({q:"Aling prutas ang kulay berde at maliit?", a:"Ubas", choices:shuffle(["Ubas","Pakwan","Mango","Saging"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at pahaba?", a:"Saging", choices:shuffle(["Saging","Lemon","Mango","Mansanas"])});
+    qs.push({q:"Aling prutas ang kulay kahel at matamis?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay lila at maliit?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
+    qs.push({q:"Aling prutas ang may balat na makinis at kulay dilaw?", a:"Lemon", choices:shuffle(["Lemon","Mango","Saging","Kahel na orange"])});
+    qs.push({q:"Aling prutas ang kulay pula sa loob at may itim na buto?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Mango"])});
+    qs.push({q:"Aling prutas ang kulay lila sa labas at berde sa loob?", a:"Sinigang na santol", choices:shuffle(["Sinigang na santol","Mango","Ubas","Mansanas"])});
+    qs.push({q:"Aling prutas ay karaniwang ginagamit sa salad at kulay pula?", a:"Mansanas", choices:shuffle(["Mansanas","Pakwan","Strawberry","Mango"])});
+    qs.push({q:"Aling prutas ang kulay kahel at bilugan?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ang kulay berde at pahaba?", a:"Saging na hilaw", choices:shuffle(["Saging na hilaw","Mango","Pakwan","Lemon"])});
+    qs.push({q:"Aling prutas ay maliit at kulay pula o berde?", a:"Ubas", choices:shuffle(["Ubas","Strawberry","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay pula at bilugan?", a:"Strawberry", choices:shuffle(["Strawberry","Mansanas","Pakwan","Mango"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at matamis?", a:"Saging", choices:shuffle(["Saging","Lemon","Kahel na orange","Mango"])});
+    qs.push({q:"Aling prutas ay ginagamit sa juice at kulay kahel?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay pula at ginagamit sa pie?", a:"Mansanas", choices:shuffle(["Mansanas","Strawberry","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay berde at malasa sa asim?", a:"Lime", choices:shuffle(["Lime","Lemon","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay dilaw sa loob at kahel sa balat?", a:"Mango", choices:shuffle(["Mango","Kahel na orange","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay lila at matamis?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
+    qs.push({q:"Aling prutas ay maliit at kulay pula o berde sa bunch?", a:"Ubas", choices:shuffle(["Ubas","Strawberry","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay kahel at pabilog?", a:"Kahel na orange", choices:shuffle(["Kahel na orange","Mango","Lemon","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay dilaw at pahaba?", a:"Saging", choices:shuffle(["Saging","Lemon","Mango","Pakwan"])});
+    qs.push({q:"Aling prutas ay kulay pula at ginagamit sa jam?", a:"Strawberry", choices:shuffle(["Strawberry","Mansanas","Pakwan","Mango"])});
+    qs.push({q:"Aling prutas ay kulay pula sa loob at may maraming buto?", a:"Pakwan", choices:shuffle(["Pakwan","Mansanas","Lemon","Mango"])});
+    qs.push({q:"Aling prutas ay kulay berde sa labas at ginagamit sa salad?", a:"Pepino", choices:shuffle(["Pepino","Ubas","Mango","Lemon"])});
+    qs.push({q:"Aling prutas ay kulay lila at ginagamit sa wine?", a:"Ubas", choices:shuffle(["Ubas","Mango","Strawberry","Pakwan"])});
+}
   }
 
   return qs;
@@ -490,6 +519,7 @@ function startQuiz(subject,lesson){
   const quizContainer=document.getElementById("quizContainer");
   quizContainer.innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
+
   const pool=generateQuestionPool(subject,lesson);
   const quizSet=shuffle(pool).slice(0,Math.floor(Math.random()*6)+5); // 5-10 questions
   let current=0, score=0;
@@ -565,37 +595,6 @@ function shuffle(array){
   return array;
 }
 
-// open sesame
-function openProfile(){
-  quizSessionId++;
-  document.getElementById("homePage").classList.add("hidden");
-  document.getElementById("profilePage").classList.remove("hidden");
-
-  const u = users[currentUser];
-  document.getElementById("profileName").innerText = u.fullName;
-  document.getElementById("profileUsername").innerText = currentUser;
-  document.getElementById("profileLessons").innerText = u.lessonsCompleted;
-  const avg = u.scores.length ? 
-      (u.scores.reduce((a,b)=>a+b,0)/u.scores.length).toFixed(1) : 0;
-  document.getElementById("profileScore").innerText = avg + "%";
-
-  const certList=document.getElementById("certificatesList");
-  certList.innerHTML="";
-  u.certificates.forEach(c=>{
-    const li=document.createElement("li");
-    li.textContent=c;
-    certList.appendChild(li);
-  });
-
-  const badgeList=document.getElementById("badgesList");
-  badgeList.innerHTML="";
-  u.badges.forEach(b=>{
-    const li=document.createElement("li");
-    li.textContent=b;
-    badgeList.appendChild(li);
-  });
-}
-
 // Certificate (show UI)
 function showCertificate(user, lesson, badge){
   const cert = document.getElementById("certificatePage");
@@ -607,23 +606,42 @@ function showCertificate(user, lesson, badge){
   cert.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
-// Download certificate (render to canvas & download)
+// Profile
+function openProfile(){
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("profilePage").classList.remove("hidden");
+  const u=users[currentUser];
+  document.getElementById("profileName").innerText=u.fullName;
+  document.getElementById("profileUsername").innerText=currentUser;
+  document.getElementById("profileLessons").innerText=u.lessonsCompleted;
+  const avg=u.scores.length?Math.round(u.scores.reduce((a,b)=>a+b)/u.scores.length):0;
+  document.getElementById("profileScore").innerText=avg;
+
+  const certList=document.getElementById("certificatesList");
+  certList.innerHTML="";
+  u.certificates.forEach(c=>{let li=document.createElement("li");li.innerText=c;certList.appendChild(li);});
+
+  const badgesList=document.getElementById("badgesList");
+  badgesList.innerHTML="";
+  u.badges.forEach(b=>{let li=document.createElement("li");li.innerText=b;badgesList.appendChild(li);});
+}
+
+// DOWNLOAD Certificate as PNG
 function downloadCertificate(){
   const name = document.getElementById("certName").innerText || "Student";
   const lesson = document.getElementById("certLesson").innerText || "Lesson";
   const badge = document.getElementById("certBadge").innerText || "";
+
   const canvas = document.getElementById("certCanvas");
   const ctx = canvas.getContext("2d");
-
-  // clear
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // background
-  ctx.fillStyle = "#fffdf8";
+  const g = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+  g.addColorStop(0, "#fffaf0");
+  g.addColorStop(1, "#f0f7ff");
+  ctx.fillStyle = g;
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
-  // border & dots
-  ctx.strokeStyle = "#e6eefb";
+  ctx.strokeStyle = "#f2c94c";
   ctx.lineWidth = 8;
   roundRect(ctx, 24, 24, canvas.width-48, canvas.height-48, 28, false, true);
 
@@ -675,7 +693,7 @@ function downloadCertificate(){
 function randomPastel(){
   const hues = ["#FFD6A5","#FDFFA5","#BDE0FE","#FBB4B4","#CDB4DB","#B5EAEA","#FFABAB"];
   return hues[Math.floor(Math.random()*hues.length)];
-}
+}A
 function roundRect(ctx, x, y, w, h, r, fill, stroke){
   if(typeof stroke==='undefined'){stroke=true;}
   if(typeof r==='undefined'){r=5;}
@@ -683,7 +701,7 @@ function roundRect(ctx, x, y, w, h, r, fill, stroke){
   ctx.beginPath();
   ctx.moveTo(x+r.tl,y);
   ctx.lineTo(x+w-r.tr,y);
-  ctx.quadraticCurveTo(x+w,y,x+w,y+r.tr);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r.tr); 
   ctx.lineTo(x+w,y+h-r.br);
   ctx.quadraticCurveTo(x+w,y+h,x+w-r.br,y+h);
   ctx.lineTo(x+r.bl,y+h);
@@ -700,6 +718,3 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
-
-
-
