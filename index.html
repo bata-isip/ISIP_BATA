@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ISIP BATA</title>
 
-  <!-- Fonts (motivational font for certificate + Poppins for UI) -->
+  <!-- Fonts: will fallback gracefully when offline -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
@@ -16,6 +16,7 @@
 </head>
 <body>
   <div id="app">
+    
 <!-- Login/Register -->
 <div id="authPage">
   <h1 class="brand">ISIP BATA</h1>
@@ -44,7 +45,7 @@
     <p class="switch">Already have an account? <span onclick="showLogin()">Login</span></p>
   </div>
 </div>
-
+	  
     <!-- Home Page -->
     <div id="homePage" class="hidden page">
       <h1>Welcome, <span id="studentName"></span>!</h1>
@@ -52,8 +53,9 @@
       <div class="subjects">
         <button class="subject-btn math" onclick="openSubject('Math')">Math</button>
         <button class="subject-btn science" onclick="openSubject('Science')">Science</button>
-	<button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocabulary</button>
-	<button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocabulary</button>
+        <button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
+        <button class="subject-btn vocab" onclick="openSubject('English Vocabulary')">English Vocab</button>
+        <button class="subject-btn vocab" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
       </div>
       <div class="controls">
         <button onclick="openProfile()">📊 My Profile</button>
@@ -67,10 +69,8 @@
       <div id="lessonContent" class="card"></div>
       <div id="quizContainer" class="card quiz"></div>
 
-      <div id="folkloreContainer" class="card hidden">
-        <h3>Folklore Story:</h3>
-        <p id="folkloreText"></p>
-      </div>
+      <div id="folkloreContainer" class="card hidden"></div>
+
       <div class="controls">
         <button onclick="goHome()">Back</button>
       </div>
@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <!-- Certificate Page -->
+    <!-- Certificate Page (landscape preview) -->
     <div id="certificatePage" class="hidden page card certificate-card">
       <h2 class="congrats">Certificate of Completion</h2>
       <p class="sub">This certificate is proudly awarded to</p>
@@ -100,19 +100,21 @@
       <p class="sub">For successfully completing the lesson:</p>
       <h4 id="certLesson" class="cert-lesson"></h4>
       <p id="certBadge" class="cert-badge"></p>
+      <p class="motiv">You Did Amazing, Future Hero of the Nation! 🌟</p>
+
       <div class="controls">
-        <button class="primary" onclick="downloadCertificate()">Download Certificate (PNG)</button>
+        <button id="downloadBtn" class="primary" onclick="downloadCertificate()">Download Certificate (PNG)</button>
         <button onclick="goHome()">Back to Home</button>
       </div>
     </div>
 
-    <!-- hidden canvas for rendering certificate PNG -->
-    <canvas id="certCanvas" width="1200" height="850" class="hidden"></canvas>
+    <!-- hidden canvas for rendering certificate PNG (landscape) -->
+    <canvas id="certCanvas" width="1400" height="900" class="hidden"></canvas>
   </div>
 
   <script src="script.js"></script>
   <script>
-    // for offline support
+    // for offline support - service worker (unchanged)
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("service-worker.js")
