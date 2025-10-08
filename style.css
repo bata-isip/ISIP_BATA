@@ -275,4 +275,14 @@ body::after, body::before {
   height: 70%; /* match input height */
 }
 
+#homePage .controls {
+  position: relative;
+  z-index: 1;
+}
+
+#homePage button {
+  pointer-events: auto;
+}
+
+
 
