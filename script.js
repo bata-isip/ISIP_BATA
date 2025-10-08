@@ -490,10 +490,6 @@ function startQuiz(subject,lesson){
   const quizContainer=document.getElementById("quizContainer");
   quizContainer.innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
-  currentTopic = topic;
-  document.getElementById("lessonsPage").classList.add("hidden");
-  document.getElementById("quizPage").classList.remove("hidden");
-  loadQuestions(topic);
   const pool=generateQuestionPool(subject,lesson);
   const quizSet=shuffle(pool).slice(0,Math.floor(Math.random()*6)+5); // 5-10 questions
   let current=0, score=0;
@@ -704,5 +700,6 @@ function animateCard(el){
   el.style.transform="scale(0.9)";
   setTimeout(()=>{el.style.transform="scale(1)";},150);
 }
+
 
 
