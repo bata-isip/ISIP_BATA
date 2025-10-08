@@ -90,8 +90,6 @@ button:active{ transform: translateY(2px); }
 .science{ background: linear-gradient(90deg,#7ee7b8,#27ae60); }
 .english { background: linear-gradient(90deg,#FFD6A5,#FDFFA5); }
 .filipino { background: linear-gradient(90deg,#BDE0FE,#7CC6FE); }
-/* Added history subject style */
-.history { background: linear-gradient(90deg,#bfa5ff,#7f7fd5); }
 
 .lesson-btn{ display:block; width:100%; text-align:left; padding:10px 12px; border-radius:10px; background:#f6fbff; border:1px dashed #e6eefb; margin:8px 0; cursor:pointer; }
 
@@ -242,63 +240,3 @@ body::after, body::before {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-25px) scale(1.08); }
 }
-.password-wrapper {
-  position: relative;
-  width: 260px;
-  margin: 10px auto;
-}
-
-.password-wrapper input {
-  width: 100%;
-  padding: 12px 42px 12px 14px; /* space on right for icon */
-  font-size: 16px;
-  border-radius: 10px;
-  border: 1px solid #e3e7ee;
-  background: #fffef8;
-  height: 44px; /* match username height */
-  box-sizing: border-box;
-}
-
-.eye-btn {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 0;
-  height: 70%; /* match input height */
-}
-
-body::before,
-body::after {
-  pointer-events: none !important;
-  z-index: 0 !important;
-}
-
-#homePage {
-  position: relative;
-  z-index: 2;
-}
-
-#lessonsPage {
-  position: relative;
-  z-index: 3;
-}
-
-.lesson-btn {
-  pointer-events: auto;
-  position: relative;
-  z-index: 3;
-}
-
-
-
-
-
-
