@@ -285,13 +285,17 @@ body::after, body::before {
 }
 #authPage {
   position: relative;
-  z-index: 5; /* iangat para clickable */
+  z-index: 10; /* iangat para clickable */
 }
 
 #authPage button,
 #authPage input {
   pointer-events: auto;
 }
+body * {
+  pointer-events: auto !important;
+}
+
 
 
 
