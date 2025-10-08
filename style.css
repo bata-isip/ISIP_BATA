@@ -86,9 +86,22 @@ button:active{ transform: translateY(2px); }
 /* subjects */
 .subjects{ display:flex; justify-content:center; gap:12px; margin:18px 0; flex-wrap:wrap; }
 .subject-btn{ padding:14px 22px; font-size:18px; border-radius:14px; cursor:pointer; color:white; border:none; box-shadow:0 6px 12px rgba(0,0,0,0.06); }
-.math{ background: linear-gradient(90deg,#ff8a8a,#ff6b6b); }
-.science{ background: linear-gradient(90deg,#7ee7b8,#27ae60); }
-
+.math{
+  background: linear-gradient(90deg,#ff8a8a,#ff6b6b);
+}
+.science{
+  background: linear-gradient(90deg,#7ee7b8,#27ae60);
+}
+.history{
+  background: linear-gradient(90deg,#ffd89b,#ffb86b);
+  color:#4a2f00;
+}
+.english{
+  background: linear-gradient(90deg,#a5c9ff,#5ea0ff);
+}
+.filipino{
+  background: linear-gradient(90deg,#fda4af,#f87171);
+}
 .lesson-btn{ display:block; width:100%; text-align:left; padding:10px 12px; border-radius:10px; background:#f6fbff; border:1px dashed #e6eefb; margin:8px 0; cursor:pointer; }
 
 /* Quiz */
@@ -131,20 +144,5 @@ button:active{ transform: translateY(2px); }
 /* small helpers */
 .remember{ display:block; margin-top:8px; color:var(--muted); font-size:14px; }
 
-.eye-btn {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 0;
-  height: 70%; /* match input height */
-}
 
 
