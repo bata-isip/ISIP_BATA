@@ -23,6 +23,33 @@ body {
   text-align: center;
   padding: 20px;
 }
+/* 🌈 Floating colorful pastel circles */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 223, 186, 0.8) 30px, transparent 70px),
+    radial-gradient(circle at 85% 25%, rgba(186, 225, 255, 0.8) 35px, transparent 70px),
+    radial-gradient(circle at 25% 85%, rgba(255, 200, 221, 0.8) 30px, transparent 70px),
+    radial-gradient(circle at 80% 75%, rgba(200, 255, 200, 0.8) 35px, transparent 70px),
+    radial-gradient(circle at 45% 55%, rgba(255, 255, 200, 0.7) 40px, transparent 80px);
+  background-repeat: no-repeat;
+  animation: floatShapes 45s ease-in-out infinite alternate;
+}
+
+/* ✨ Floating animation */
+@keyframes floatShapes {
+  0% { transform: translateY(0px) translateX(0px) scale(1); }
+  50% { transform: translateY(25px) translateX(15px) scale(1.05); }
+  100% { transform: translateY(-20px) translateX(-10px) scale(1); }
+}
+
 
 /* Brand */
 .brand{
@@ -144,21 +171,6 @@ button:active{ transform: translateY(2px); }
 /* small helpers */
 .remember{ display:block; margin-top:8px; color:var(--muted); font-size:14px; }
 
-.eye-btn {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  padding: 0;
-  height: 70%; /* match input height */
-}
 
 
 
