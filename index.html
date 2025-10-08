@@ -16,46 +16,42 @@
 </head>
 <body>
   <div id="app">
-    
-<!-- Login/Register -->
-<div id="authPage">
-  <h1 class="brand">ISIP BATA</h1>
+    <!-- Login/Register -->
+    <div id="authPage">
+      <h1 class="brand">ISIP BATA</h1>
 
-  <div id="loginForm" class="card">
-    <h2>Login</h2>
-    <input type="text" id="loginUsername" placeholder="Username" autocomplete="username">
+      <div id="loginForm" class="card">
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username" autocomplete="username">
+        <div class="password-field">
+          <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
+          <button type="button" class="icon-btn" onclick="togglePassword()">👁️</button>
+        </div>
+        <label class="remember"><input type="checkbox" id="rememberMe"> Remember Me</label>
+        <button class="primary" onclick="login()">Login</button>
+        <p class="switch">Don't have an account yet? <span onclick="showRegister()">Register</span></p>
+      </div>
 
-    <!-- Updated password input with embedded eye icon -->
-    <div class="password-wrapper">
-      <input type="password" id="loginPassword" placeholder="Password" autocomplete="current-password">
-      <button type="button" class="eye-btn" onclick="togglePassword()">👁️</button>
+      <div id="registerForm" class="card hidden">
+        <h2>Register</h2>
+        <input type="text" id="regFullName" placeholder="Full Name">
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="password" id="regPassword" placeholder="Password">
+        <button class="primary" onclick="register()">Register</button>
+        <p class="switch">Already have an account? <span onclick="showLogin()">Login</span></p>
+      </div>
     </div>
 
-    <label class="remember"><input type="checkbox" id="rememberMe"> Remember Me</label>
-    <button class="primary" onclick="login()">Login</button>
-    <p class="switch">Don't have an account yet? <span onclick="showRegister()">Register</span></p>
-  </div>
-
-  <div id="registerForm" class="card hidden">
-    <h2>Register</h2>
-    <input type="text" id="regFullName" placeholder="Full Name">
-    <input type="text" id="regUsername" placeholder="Username">
-    <input type="password" id="regPassword" placeholder="Password">
-    <button class="primary" onclick="register()">Register</button>
-    <p class="switch">Already have an account? <span onclick="showLogin()">Login</span></p>
-  </div>
-</div>
-	  
     <!-- Home Page -->
     <div id="homePage" class="hidden page">
       <h1>Welcome, <span id="studentName"></span>!</h1>
       <p class="tagline">Your offline Filipino learning companion — lessons, quizzes, folklore, and fun!</p>
       <div class="subjects">
-<button class="subject-btn math" onclick="openSubject('Math')">Math</button>
-<button class="subject-btn science" onclick="openSubject('Science')">Science</button>
-<button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
-<button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocab</button>
-<button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
+        <button class="subject-btn math" onclick="openSubject('Math')">Math</button>
+        <button class="subject-btn science" onclick="openSubject('Science')">Science</button>
+        <button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
+        <button class="subject-btn vocab" onclick="openSubject('English Vocabulary')">English Vocab</button>
+        <button class="subject-btn vocab" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
       </div>
       <div class="controls">
         <button onclick="openProfile()">📊 My Profile</button>
@@ -139,6 +135,3 @@
   </script>
 </body>
 </html>
-
-
-
