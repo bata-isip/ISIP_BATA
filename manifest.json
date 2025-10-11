@@ -1,5 +1,5 @@
 {
-  "name": "IECEP BATA",
+  "name": "ISIP BATA",
   "short_name": "BATA",
   "start_url": "index.html",
   "display": "standalone",
@@ -17,4 +17,5 @@
       "type": "image/png"
     }
   ]
+
 }
