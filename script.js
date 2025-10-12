@@ -1,4 +1,4 @@
-// script.js - final offline-ready + Philippine History Taglish + landscape cert
+// script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
 
@@ -141,7 +141,7 @@ function generateQuestionPool(subject,lesson){
   return questions;
 }
 
-// --- Science + Vocabulary functions (unchanged content) ---
+//
 function generateScienceQuestions(topic,count){
  const qs=[];
 for(let i=0;i<count;i++){
@@ -541,6 +541,16 @@ function generatePhilippineHistoryQuestions(lesson){
   return qs;
 }
 
+// Sound effects
+const sfx = {
+  correct: new Audio("sounds/correct.mp3"),
+  wrong: new Audio("sounds/wrong.mp3"),
+  bronze: new Audio("sounds/bronze.mp3"),
+  silver: new Audio("sounds/silver.mp3"),
+  gold: new Audio("sounds/gold.mp3"),
+  diamond: new Audio("sounds/diamond.mp3")
+};
+
 // Quiz
 function startQuiz(subject,lesson){
   quizSessionId++;
@@ -565,8 +575,16 @@ function startQuiz(subject,lesson){
       btn.innerText=choice;
       btn.onclick=()=>{
         if(mySession !== quizSessionId) return;
-        if(choice===quizSet[current].a){btn.classList.add("correct"); score++;}
-        else{btn.classList.add("wrong");}
+        if (choice === quizSet[current].a) {
+        btn.classList.add("correct");
+        score++;
+        sfx.correct.currentTime = 0;
+        sfx.correct.play();
+        } else {
+        btn.classList.add("wrong");
+        sfx.wrong.currentTime = 0;
+        sfx.wrong.play();
+        }
         Array.from(choicesEl.children).forEach(b=>b.disabled=true);
         setTimeout(()=>{
           if(mySession !== quizSessionId) return;
@@ -590,12 +608,23 @@ function startQuiz(subject,lesson){
     users[currentUser].lessonsCompleted++;
     users[currentUser].scores.push(score);
 
-    if(percent>=65){
-      let badge = getBadgeLevel(users[currentUser].completions[lesson]);
-      users[currentUser].badges.push(`${lesson}: ${badge}`);
-      users[currentUser].certificates.push(`${lesson} - ${badge}`);
-      showCertificate(currentUser, lesson, badge);
-    }
+if (percent >= 65) {
+  let badge = getBadgeLevel(users[currentUser].completions[lesson]);
+  users[currentUser].badges.push(`${lesson}: ${badge}`);
+  users[currentUser].certificates.push(`${lesson} - ${badge}`);
+  showCertificate(currentUser, lesson, badge);
+
+  // 🏅 Play badge sound
+  if (badge.toLowerCase().includes("diamond")) {
+    sfx.diamond.play();
+  } else if (badge.toLowerCase().includes("gold")) {
+    sfx.gold.play();
+  } else if (badge.toLowerCase().includes("silver")) {
+    sfx.silver.play();
+  } else {
+    sfx.bronze.play();
+  }
+}
 
     localStorage.setItem("users", JSON.stringify(users));
 
@@ -796,4 +825,5 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
 
