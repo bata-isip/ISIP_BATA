@@ -1,3 +1,37 @@
+// ==== ESP32 BLUETOOTH SETUP ====
+let bleDevice, bleServer, txCharacteristic, rxCharacteristic;
+
+async function connectESP32() {
+  try {
+    const device = await navigator.bluetooth.requestDevice({
+      acceptAllDevices: true,
+      optionalServices: [0xFFE0] // Custom service
+    });
+    bleDevice = device;
+    bleServer = await device.gatt.connect();
+    const service = await bleServer.getPrimaryService(0xFFE0);
+    txCharacteristic = await service.getCharacteristic(0xFFE1);
+    rxCharacteristic = await service.getCharacteristic(0xFFE2);
+
+    await rxCharacteristic.startNotifications();
+    rxCharacteristic.addEventListener("characteristicvaluechanged", e => {
+      const value = new TextDecoder().decode(e.target.value).trim();
+      handleButtonPress(value);
+    });
+
+    alert("ESP32 connected!");
+  } catch (error) {
+    console.error(error);
+    alert("Failed to connect to ESP32: " + error);
+  }
+}
+
+function sendToESP32(msg) {
+  if (txCharacteristic) {
+    txCharacteristic.writeValue(new TextEncoder().encode(msg));
+  }
+}
+
 // script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
@@ -575,16 +609,19 @@ function startQuiz(subject,lesson){
       btn.innerText=choice;
       btn.onclick=()=>{
         if(mySession !== quizSessionId) return;
-        if (choice === quizSet[current].a) {
-        btn.classList.add("correct");
-        score++;
-        sfx.correct.currentTime = 0;
-        sfx.correct.play();
-        } else {
-        btn.classList.add("wrong");
-        sfx.wrong.currentTime = 0;
-        sfx.wrong.play();
-        }
+if (choice === quizSet[current].a) {
+  btn.classList.add("correct");
+  score++;
+  sfx.correct.currentTime = 0;
+  sfx.correct.play();
+  sendToESP32("CORRECT"); // Light green LED
+} else {
+  btn.classList.add("wrong");
+  sfx.wrong.currentTime = 0;
+  sfx.wrong.play();
+  sendToESP32("WRONG"); // Light red LED
+}
+
         Array.from(choicesEl.children).forEach(b=>b.disabled=true);
         setTimeout(()=>{
           if(mySession !== quizSessionId) return;
@@ -596,6 +633,29 @@ function startQuiz(subject,lesson){
       choicesEl.appendChild(btn);
     });
   }
+
+  function handleButtonPress(value) {
+  // Handles A-D choices or BACK
+  const choicesEl = document.querySelector(".choices");
+  if (!choicesEl) return;
+
+  const btns = Array.from(choicesEl.children);
+  if (value === "BACK") {
+    // Go home
+    document.getElementById("quizContainer").classList.add("hidden");
+    document.getElementById("homeContainer").classList.remove("hidden");
+    sendToESP32("RESET");
+    return;
+  }
+
+  const map = { "A": 0, "B": 1, "C": 2, "D": 3 };
+  const i = map[value];
+  if (i === undefined || i >= btns.length) return;
+
+  const btn = btns[i];
+  btn.click(); // Simulate the click!
+}
+
   showQuestion();
 
   function finishQuiz(){
@@ -825,5 +885,6 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
 
 
