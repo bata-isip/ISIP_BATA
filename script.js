@@ -26,11 +26,65 @@ async function connectESP32() {
   }
 }
 
+// ---- Bluetooth Serial Hybrid Support (BLE + Android WebView bridge) ----
+// Fallback for Bluetooth Classic when running inside an Android WebView wrapper that
+// exposes a JavaScript interface `Android` with methods:
+//   Android.sendData(str) -> sends ASCII string to ESP32 over classic SPP
+// sendToESP32(msg) will try BLE first, then Android bridge.
 function sendToESP32(msg) {
-  if (txCharacteristic) {
-    txCharacteristic.writeValue(new TextEncoder().encode(msg));
+  // prefer BLE if available
+  if (typeof txCharacteristic !== "undefined" && txCharacteristic) {
+    try {
+      txCharacteristic.writeValue(new TextEncoder().encode(msg));
+      return;
+    } catch (e) {
+      console.warn("BLE write failed, will try Android bridge:", e);
+    }
   }
+  // Android WebView bridge fallback (for Bluetooth Classic / SPP)
+  try {
+    if (window.Android && typeof window.Android.sendData === "function") {
+      window.Android.sendData(msg);
+      return;
+    }
+  } catch (e) {
+    console.warn("Android bridge send failed:", e);
+  }
+  console.warn("No available transport to ESP32. Use BLE or wrap in an Android WebView with a Bluetooth bridge.");
 }
+
+// Called by Android native wrapper when data arrives from the ESP32 (Bluetooth Classic).
+// Example from Android side: webView.evaluateJavascript("window.onAndroidData('A')", null);
+window.onAndroidData = function(data) {
+  try {
+    const s = (data||"").toString().trim();
+    if (!s) return;
+    // If multiple bytes, handle one at a time
+    for (let ch of s) {
+      if (ch === '\n' || ch === '\r') continue;
+      // 'C' and 'W' are feedback codes; A-D are button presses
+      if (ch === 'C' || ch === 'W') {
+        // Try to call existing feedback handlers if present
+        if (typeof handleEspFeedback === "function") {
+          handleEspFeedback(ch);
+        } else {
+          // try to toggle UI indicators if any (non-destructive)
+          const evt = new CustomEvent('esp-feedback', { detail: ch });
+          window.dispatchEvent(evt);
+        }
+      } else {
+        // Forward choice presses (A-D, BACK)
+        if (typeof handleButtonPress === "function") {
+          handleButtonPress(ch);
+        } else {
+          console.log("Received from ESP32:", ch);
+        }
+      }
+    }
+  } catch (e) {
+    console.error("onAndroidData error:", e);
+  }
+};
 
 // script.js
 let currentUser = null;
@@ -882,6 +936,7 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
 
 
 
