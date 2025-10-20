@@ -57,6 +57,15 @@
       <div class="controls">
         <button onclick="openProfile()">📊 My Profile</button>
         <button onclick="logout()">Logout</button>
+        <button onclick="connectBLE()">🔗 Connect ESP32</button>
+<!-- 🌀 Connecting Modal -->
+<div id="bleModal" class="hidden">
+  <div class="modal-content">
+    <p>🔍 Connecting to ESP32...</p>
+    <div class="loader"></div>
+  </div>
+</div>
+
       </div>
     </div>
 
@@ -140,6 +149,7 @@
   </script>
 </body>
 </html>
+
 
 
 
