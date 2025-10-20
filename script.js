@@ -1,91 +1,3 @@
-// ==== ESP32 BLUETOOTH SETUP ====
-let bleDevice, bleServer, txCharacteristic, rxCharacteristic;
-
-async function connectESP32() {
-  try {
-    const device = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: [0xFFE0] // Custom service
-    });
-    bleDevice = device;
-    bleServer = await device.gatt.connect();
-    const service = await bleServer.getPrimaryService(0xFFE0);
-    txCharacteristic = await service.getCharacteristic(0xFFE1);
-    rxCharacteristic = await service.getCharacteristic(0xFFE2);
-
-    await rxCharacteristic.startNotifications();
-    rxCharacteristic.addEventListener("characteristicvaluechanged", e => {
-      const value = new TextDecoder().decode(e.target.value).trim();
-      handleButtonPress(value);
-    });
-
-    alert("ESP32 connected!");
-  } catch (error) {
-    console.error(error);
-    alert("Failed to connect to ESP32: " + error);
-  }
-}
-
-// ---- Bluetooth Serial Hybrid Support (BLE + Android WebView bridge) ----
-// Fallback for Bluetooth Classic when running inside an Android WebView wrapper that
-// exposes a JavaScript interface `Android` with methods:
-//   Android.sendData(str) -> sends ASCII string to ESP32 over classic SPP
-// sendToESP32(msg) will try BLE first, then Android bridge.
-function sendToESP32(msg) {
-  // prefer BLE if available
-  if (typeof txCharacteristic !== "undefined" && txCharacteristic) {
-    try {
-      txCharacteristic.writeValue(new TextEncoder().encode(msg));
-      return;
-    } catch (e) {
-      console.warn("BLE write failed, will try Android bridge:", e);
-    }
-  }
-  // Android WebView bridge fallback (for Bluetooth Classic / SPP)
-  try {
-    if (window.Android && typeof window.Android.sendData === "function") {
-      window.Android.sendData(msg);
-      return;
-    }
-  } catch (e) {
-    console.warn("Android bridge send failed:", e);
-  }
-  console.warn("No available transport to ESP32. Use BLE or wrap in an Android WebView with a Bluetooth bridge.");
-}
-
-// Called by Android native wrapper when data arrives from the ESP32 (Bluetooth Classic).
-// Example from Android side: webView.evaluateJavascript("window.onAndroidData('A')", null);
-window.onAndroidData = function(data) {
-  try {
-    const s = (data||"").toString().trim();
-    if (!s) return;
-    // If multiple bytes, handle one at a time
-    for (let ch of s) {
-      if (ch === '\n' || ch === '\r') continue;
-      // 'C' and 'W' are feedback codes; A-D are button presses
-      if (ch === 'C' || ch === 'W') {
-        // Try to call existing feedback handlers if present
-        if (typeof handleEspFeedback === "function") {
-          handleEspFeedback(ch);
-        } else {
-          // try to toggle UI indicators if any (non-destructive)
-          const evt = new CustomEvent('esp-feedback', { detail: ch });
-          window.dispatchEvent(evt);
-        }
-      } else {
-        // Forward choice presses (A-D, BACK)
-        if (typeof handleButtonPress === "function") {
-          handleButtonPress(ch);
-        } else {
-          console.log("Received from ESP32:", ch);
-        }
-      }
-    }
-  } catch (e) {
-    console.error("onAndroidData error:", e);
-  }
-};
-
 // script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
@@ -936,6 +848,144 @@ function animateCard(el){
     el.style.opacity = "1";
   });
 }
+
+/* ==============================
+   🧠 BLE CONNECTION SYSTEM
+   ============================== */
+let bleDevice = null;
+let bleServer = null;
+let bleService = null;
+let bleTX = null;
+let bleRX = null;
+
+const BLE_SERVICE = "12345678-1234-1234-1234-1234567890ab";
+const BLE_TX = "abcd5678-1234-1234-1234-1234567890ab";
+const BLE_RX = "abcd1234-1234-1234-1234-1234567890ab";
+
+function showBLEModal(show) {
+  document.getElementById("bleModal").classList.toggle("hidden", !show);
+}
+
+async function connectBLE() {
+  try {
+    if (!("bluetooth" in navigator)) {
+      alert("❌ Bluetooth not supported on this device.");
+      return;
+    }
+
+    showBLEModal(true);
+
+    bleDevice = await navigator.bluetooth.requestDevice({
+      filters: [{ name: "ISIP_BATA_ESP32" }],
+      optionalServices: [BLE_SERVICE]
+    });
+
+    bleDevice.addEventListener("gattserverdisconnected", onDisconnected);
+    bleServer = await bleDevice.gatt.connect();
+    localStorage.setItem("lastBLEDeviceId", bleDevice.id);
+
+    bleService = await bleServer.getPrimaryService(BLE_SERVICE);
+    bleTX = await bleService.getCharacteristic(BLE_TX);
+    bleRX = await bleService.getCharacteristic(BLE_RX);
+
+    await bleTX.startNotifications();
+    bleTX.addEventListener("characteristicvaluechanged", handleBLEMessage);
+
+    showBLEModal(false);
+    alert("✅ Connected to ESP32 successfully!");
+  } catch (error) {
+    showBLEModal(false);
+    alert("⚠️ Connection failed: " + error);
+  }
+}
+
+function onDisconnected() {
+  alert("❌ ESP32 disconnected.");
+}
+
+function handleBLEMessage(event) {
+  const msg = new TextDecoder().decode(event.target.value);
+  console.log("📩 From ESP32:", msg);
+  if (msg.startsWith("btn")) {
+    const num = parseInt(msg.replace("btn", ""));
+    document.querySelectorAll("#quizContainer button")[num - 1]?.click();
+  } else if (msg === "back") {
+    goHome();
+  }
+}
+
+async function sendToESP32(message) {
+  if (bleRX && bleServer?.connected) {
+    const data = new TextEncoder().encode(message);
+    await bleRX.writeValue(data);
+  }
+}
+
+/* ==============================
+   ⚙️ AUTO CONNECT AFTER LOGIN
+   ============================== */
+async function tryReconnectBLE() {
+  if (!("bluetooth" in navigator)) return;
+  const savedId = localStorage.getItem("lastBLEDeviceId");
+  if (savedId) {
+    try {
+      const devices = await navigator.bluetooth.getDevices();
+      const device = devices.find(d => d.id === savedId);
+      if (device) {
+        bleDevice = device;
+        bleServer = await bleDevice.gatt.connect();
+        bleService = await bleServer.getPrimaryService(BLE_SERVICE);
+        bleTX = await bleService.getCharacteristic(BLE_TX);
+        bleRX = await bleService.getCharacteristic(BLE_RX);
+        await bleTX.startNotifications();
+        bleTX.addEventListener("characteristicvaluechanged", handleBLEMessage);
+        console.log("✅ Auto-reconnected to ESP32!");
+      }
+    } catch (e) {
+      console.warn("Auto-reconnect failed:", e);
+    }
+  }
+}
+
+/* ==============================
+   🔗 MODIFY LOGIN FUNCTION
+   ============================== */
+const originalLogin = login;
+login = async function() {
+  const username = document.getElementById("loginUsername").value;
+  const password = document.getElementById("loginPassword").value;
+
+  if (users[username] && users[username].password === password) {
+    currentUser = username;
+    if (document.getElementById("rememberMe").checked) {
+      localStorage.setItem("rememberedUser", username);
+    } else {
+      localStorage.removeItem("rememberedUser");
+    }
+
+    document.getElementById("authPage").classList.add("hidden");
+    document.getElementById("homePage").classList.remove("hidden");
+    document.getElementById("studentName").innerText = users[username].fullName;
+
+    // 🧲 Auto-connect to ESP32 after login
+    if ("bluetooth" in navigator) {
+      showBLEModal(true);
+      setTimeout(async () => {
+        await tryReconnectBLE();
+        if (!bleServer || !bleServer.connected) {
+          await connectBLE();
+        }
+        showBLEModal(false);
+      }, 1000);
+    } else {
+      alert("Bluetooth not supported on this device.");
+    }
+  } else {
+    alert("Invalid credentials");
+  }
+}
+
+
 
 
 
