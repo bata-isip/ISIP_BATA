@@ -1,7 +1,3 @@
-if (!('bluetooth' in navigator)) {
-  alert("❌ Web Bluetooth is not supported on this device or WebView.");
-}
-
 // script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
@@ -952,15 +948,63 @@ function animateCard(el){
   });
 }
 
-async function sendToESP32(message) {
-  if (!bleCharacteristic) return;
+window.addEventListener("load", async () => {
+  if (!navigator.bluetooth || !navigator.bluetooth.getDevices) return;
+  const devices = await navigator.bluetooth.getDevices();
+  for (const device of devices) {
+    if (device.name === "ISIP_BATA_Controller") {
+      try {
+        const server = await device.gatt.connect();
+        const service = await server.getPrimaryService("12345678-1234-1234-1234-1234567890ab");
+        bleCharacteristic = await service.getCharacteristic("87654321-4321-4321-4321-0987654321ba");
+        await bleCharacteristic.startNotifications();
+        bleCharacteristic.addEventListener("characteristicvaluechanged", handleBLEInput);
+        const btn = document.getElementById("connectESPBtn");
+        btn.innerText = "🟢 ESP32 Connected";
+        btn.style.backgroundColor = "#28a745";
+        break;
+      } catch (e) {
+        console.warn("Auto-connect failed", e);
+      }
+    }
+  }
+});
+
+async function connectESP32() {
+  const btn = document.getElementById("connectESPBtn");
+
+  if (!navigator.bluetooth) {
+    alert("⚠️ Bluetooth not supported on this browser or device.");
+    return;
+  }
+
   try {
-    const data = new TextEncoder().encode(message);
-    await bleCharacteristic.writeValue(data);
-  } catch (e) {
-    console.warn("BLE send failed:", e);
+    btn.disabled = true;
+    btn.innerText = "⏳ Connecting...";
+    
+    const device = await navigator.bluetooth.requestDevice({
+      filters: [{ name: "ISIP_BATA_Controller" }],
+      optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
+    });
+
+    const server = await device.gatt.connect();
+    const service = await server.getPrimaryService("12345678-1234-1234-1234-1234567890ab");
+    bleCharacteristic = await service.getCharacteristic("87654321-4321-4321-4321-0987654321ba");
+
+    await bleCharacteristic.startNotifications();
+    bleCharacteristic.addEventListener("characteristicvaluechanged", handleBLEInput);
+
+    alert("✅ ESP32 successfully connected!");
+    btn.innerText = "🟢 ESP32 Connected";
+    btn.style.backgroundColor = "#28a745";
+  } catch (err) {
+    alert("❌ Connection failed: " + err.message);
+    btn.innerText = "🔌 Connect ESP32";
+  } finally {
+    btn.disabled = false;
   }
 }
+
 
 
 
