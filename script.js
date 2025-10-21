@@ -551,55 +551,154 @@ const sfx = {
   diamond: new Audio("sounds/diamond.mp3")
 };
 
-// Quiz
-function startQuiz(subject,lesson){
+let bleDevice, bleCharacteristic;
+
+// Connect to ESP32 BLE
+async function connectESP32() {
+  try {
+    bleDevice = await navigator.bluetooth.requestDevice({
+      filters: [{ name: "ISIP_BATA_Controller" }],
+      optionalServices: ["12345678-1234-1234-1234-1234567890ab"]
+    });
+
+    const server = await bleDevice.gatt.connect();
+    const service = await server.getPrimaryService("12345678-1234-1234-1234-1234567890ab");
+    bleCharacteristic = await service.getCharacteristic("87654321-4321-4321-4321-0987654321ba");
+
+    bleCharacteristic.startNotifications();
+    bleCharacteristic.addEventListener("characteristicvaluechanged", handleBLEInput);
+    alert("✅ ESP32 Connected!");
+  } catch (err) {
+    alert("⚠️ Connection failed: " + err);
+  }
+}
+
+// Read button commands from ESP32
+function handleBLEInput(event) {
+  const val = new TextDecoder().decode(event.target.value);
+  if (val === "U") moveHighlight(-1);
+  if (val === "D") moveHighlight(1);
+  if (val === "S") selectHighlighted();
+}
+
+// Control LEDs from app
+async function setLED(correct) {
+  if (!bleCharacteristic) return;
+  const data = new TextEncoder().encode(correct ? "G" : "R");
+  await bleCharacteristic.writeValue(data);
+}
+
+// === QUIZ LOGIC with ESP32 BLE CONTROL ===
+function startQuiz(subject, lesson) {
   quizSessionId++;
   const mySession = quizSessionId;
-  const quizContainer=document.getElementById("quizContainer");
+  const quizContainer = document.getElementById("quizContainer");
   quizContainer.innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
 
-  const pool=generateQuestionPool(subject,lesson);
-  const quizSet = (Array.isArray(pool) && pool.length) ? shuffle(pool).slice(0, Math.min(pool.length, Math.floor(Math.random()*6)+5)) : [{q:"No questions available", a:"", choices:["Ok"]}];
-  let current=0, score=0;
+  const pool = generateQuestionPool(subject, lesson);
+  const quizSet = (Array.isArray(pool) && pool.length)
+    ? shuffle(pool).slice(0, Math.min(pool.length, Math.floor(Math.random() * 6) + 5))
+    : [{ q: "No questions available", a: "", choices: ["Ok"] }];
 
-  function showQuestion(){
-    if(mySession !== quizSessionId) return;
-    quizContainer.innerHTML=`<h4>Q${current+1}: ${quizSet[current].q}</h4>`;
-    const choicesEl=document.createElement("div");
+  let current = 0,
+    score = 0,
+    selectedIndex = 0;
+
+  function showQuestion() {
+    if (mySession !== quizSessionId) return;
+    quizContainer.innerHTML = `<h4>Q${current + 1}: ${quizSet[current].q}</h4>`;
+    const choicesEl = document.createElement("div");
     choicesEl.className = "choices";
     quizContainer.appendChild(choicesEl);
 
-    quizSet[current].choices.forEach(choice=>{
-      const btn=document.createElement("button");
-      btn.innerText=choice;
-      btn.onclick=()=>{
-        if(mySession !== quizSessionId) return;
-        if (choice === quizSet[current].a) {
-  btn.classList.add("correct");
-  score++;
-  sfx.correct.currentTime = 0;
-  sfx.correct.play();
-  sendToESP32("CORRECT"); // Light green LED
-} else {
-  btn.classList.add("wrong");
-  sfx.wrong.currentTime = 0;
-  sfx.wrong.play();
-  sendToESP32("WRONG"); // Light red LED
-}
-        Array.from(choicesEl.children).forEach(b=>b.disabled=true);
-        setTimeout(()=>{
-          if(mySession !== quizSessionId) return;
-          current++;
-          if(current<quizSet.length){showQuestion();}
-          else{finishQuiz();}
-        },700);
-      };
+    quizSet[current].choices.forEach((choice, i) => {
+      const btn = document.createElement("button");
+      btn.innerText = choice;
+      btn.classList.add("quiz-choice");
+      if (i === 0) btn.classList.add("highlighted");
+      btn.onclick = () => handleAnswer(i, choice);
       choicesEl.appendChild(btn);
     });
-  }
-  showQuestion();
 
+    selectedIndex = 0;
+  }
+
+  // Move highlight up/down via ESP32
+  function moveHighlight(dir) {
+    const buttons = document.querySelectorAll(".quiz-choice");
+    if (!buttons.length) return;
+    buttons[selectedIndex].classList.remove("highlighted");
+    selectedIndex = (selectedIndex + dir + buttons.length) % buttons.length;
+    buttons[selectedIndex].classList.add("highlighted");
+  }
+
+  // Select highlighted button
+  function selectHighlighted() {
+    const buttons = document.querySelectorAll(".quiz-choice");
+    if (!buttons.length) return;
+    buttons[selectedIndex].click();
+  }
+
+  // Handle answer check
+  function handleAnswer(index, choice) {
+    const buttons = document.querySelectorAll(".quiz-choice");
+    if (choice === quizSet[current].a) {
+      buttons[index].classList.add("correct");
+      score++;
+      sfx.correct.currentTime = 0;
+      sfx.correct.play();
+      sendToESP32("CORRECT"); // 🟢 Light green LED
+    } else {
+      buttons[index].classList.add("wrong");
+      sfx.wrong.currentTime = 0;
+      sfx.wrong.play();
+      sendToESP32("WRONG"); // 🔴 Light red LED
+    }
+
+    Array.from(buttons).forEach(b => (b.disabled = true));
+
+    setTimeout(() => {
+      current++;
+      if (current < quizSet.length) showQuestion();
+      else finishQuiz();
+    }, 700);
+  }
+
+  // Finish quiz and show certificate
+  function finishQuiz() {
+    alert(`You scored ${score} out of ${quizSet.length}`);
+    const percent = (score / quizSet.length) * 100;
+
+    if (!users[currentUser].completions[lesson]) users[currentUser].completions[lesson] = 0;
+    users[currentUser].completions[lesson]++;
+    users[currentUser].lessonsCompleted++;
+    users[currentUser].scores.push(score);
+
+    if (percent >= 65) {
+      let badge = getBadgeLevel(users[currentUser].completions[lesson]);
+      users[currentUser].badges.push(`${lesson}: ${badge}`);
+      users[currentUser].certificates.push(`${lesson} - ${badge}`);
+      showCertificate(currentUser, lesson, badge);
+    }
+
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
+  // Listen for ESP32 BLE button input
+  if (bleCharacteristic) {
+    bleCharacteristic.removeEventListener("characteristicvaluechanged", handleBLEInput);
+    bleCharacteristic.addEventListener("characteristicvaluechanged", handleBLEInput);
+  }
+
+  function handleBLEInput(event) {
+    const val = new TextDecoder().decode(event.target.value);
+    if (val === "U") moveHighlight(-1);
+    if (val === "D") moveHighlight(1);
+    if (val === "S") selectHighlighted();
+  }
+
+  showQuestion();
   function finishQuiz(){
     if(mySession !== quizSessionId) return;
     alert(`You scored ${score} out of ${quizSet.length}`);
@@ -849,139 +948,13 @@ function animateCard(el){
   });
 }
 
-/* ==============================
-   🧠 BLE CONNECTION SYSTEM
-   ============================== */
-let bleDevice = null;
-let bleServer = null;
-let bleService = null;
-let bleTX = null;
-let bleRX = null;
-
-const BLE_SERVICE = "12345678-1234-1234-1234-1234567890ab";
-const BLE_TX = "abcd5678-1234-1234-1234-1234567890ab";
-const BLE_RX = "abcd1234-1234-1234-1234-1234567890ab";
-
-function showBLEModal(show) {
-  document.getElementById("bleModal").classList.toggle("hidden", !show);
-}
-
-async function connectBLE() {
-  try {
-    if (!("bluetooth" in navigator)) {
-      alert("❌ Bluetooth not supported on this device.");
-      return;
-    }
-
-    showBLEModal(true);
-
-    bleDevice = await navigator.bluetooth.requestDevice({
-      filters: [{ name: "ISIP_BATA_ESP32" }],
-      optionalServices: [BLE_SERVICE]
-    });
-
-    bleDevice.addEventListener("gattserverdisconnected", onDisconnected);
-    bleServer = await bleDevice.gatt.connect();
-    localStorage.setItem("lastBLEDeviceId", bleDevice.id);
-
-    bleService = await bleServer.getPrimaryService(BLE_SERVICE);
-    bleTX = await bleService.getCharacteristic(BLE_TX);
-    bleRX = await bleService.getCharacteristic(BLE_RX);
-
-    await bleTX.startNotifications();
-    bleTX.addEventListener("characteristicvaluechanged", handleBLEMessage);
-
-    showBLEModal(false);
-    alert("✅ Connected to ESP32 successfully!");
-  } catch (error) {
-    showBLEModal(false);
-    alert("⚠️ Connection failed: " + error);
-  }
-}
-
-function onDisconnected() {
-  alert("❌ ESP32 disconnected.");
-}
-
-function handleBLEMessage(event) {
-  const msg = new TextDecoder().decode(event.target.value);
-  console.log("📩 From ESP32:", msg);
-  if (msg.startsWith("btn")) {
-    const num = parseInt(msg.replace("btn", ""));
-    document.querySelectorAll("#quizContainer button")[num - 1]?.click();
-  } else if (msg === "back") {
-    goHome();
-  }
-}
-
 async function sendToESP32(message) {
-  if (bleRX && bleServer?.connected) {
+  if (!bleCharacteristic) return;
+  try {
     const data = new TextEncoder().encode(message);
-    await bleRX.writeValue(data);
-  }
-}
-
-/* ==============================
-   ⚙️ AUTO CONNECT AFTER LOGIN
-   ============================== */
-async function tryReconnectBLE() {
-  if (!("bluetooth" in navigator)) return;
-  const savedId = localStorage.getItem("lastBLEDeviceId");
-  if (savedId) {
-    try {
-      const devices = await navigator.bluetooth.getDevices();
-      const device = devices.find(d => d.id === savedId);
-      if (device) {
-        bleDevice = device;
-        bleServer = await bleDevice.gatt.connect();
-        bleService = await bleServer.getPrimaryService(BLE_SERVICE);
-        bleTX = await bleService.getCharacteristic(BLE_TX);
-        bleRX = await bleService.getCharacteristic(BLE_RX);
-        await bleTX.startNotifications();
-        bleTX.addEventListener("characteristicvaluechanged", handleBLEMessage);
-        console.log("✅ Auto-reconnected to ESP32!");
-      }
-    } catch (e) {
-      console.warn("Auto-reconnect failed:", e);
-    }
-  }
-}
-
-/* ==============================
-   🔗 MODIFY LOGIN FUNCTION
-   ============================== */
-const originalLogin = login;
-login = async function() {
-  const username = document.getElementById("loginUsername").value;
-  const password = document.getElementById("loginPassword").value;
-
-  if (users[username] && users[username].password === password) {
-    currentUser = username;
-    if (document.getElementById("rememberMe").checked) {
-      localStorage.setItem("rememberedUser", username);
-    } else {
-      localStorage.removeItem("rememberedUser");
-    }
-
-    document.getElementById("authPage").classList.add("hidden");
-    document.getElementById("homePage").classList.remove("hidden");
-    document.getElementById("studentName").innerText = users[username].fullName;
-
-    // 🧲 Auto-connect to ESP32 after login
-    if ("bluetooth" in navigator) {
-      showBLEModal(true);
-      setTimeout(async () => {
-        await tryReconnectBLE();
-        if (!bleServer || !bleServer.connected) {
-          await connectBLE();
-        }
-        showBLEModal(false);
-      }, 1000);
-    } else {
-      alert("Bluetooth not supported on this device.");
-    }
-  } else {
-    alert("Invalid credentials");
+    await bleCharacteristic.writeValue(data);
+  } catch (e) {
+    console.warn("BLE send failed:", e);
   }
 }
 
