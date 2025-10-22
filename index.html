@@ -47,16 +47,25 @@
       <h1>Welcome, <span id="studentName"></span>!</h1>
       <p class="tagline">Your offline Filipino learning companion — lessons, quizzes, folklore, and fun!</p>
       <div class="subjects">
-        <button class="subject-btn math" onclick="openSubject('Math')">Math</button>
-        <button class="subject-btn science" onclick="openSubject('Science')">Science</button>
-        <button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
-        <button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocab</button>
-        <button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
+<button class="subject-btn math" onclick="openSubject('Math')">Math</button>
+<button class="subject-btn science" onclick="openSubject('Science')">Science</button>
+<button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
+<button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocab</button>
+<button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
 
       </div>
       <div class="controls">
         <button onclick="openProfile()">📊 My Profile</button>
         <button onclick="logout()">Logout</button>
+        <button onclick="connectBLE()">🔗 Connect ESP32</button>
+<!-- 🌀 Connecting Modal -->
+<div id="bleModal" class="hidden">
+  <div class="modal-content">
+    <p>🔍 Connecting to ESP32...</p>
+    <div class="loader"></div>
+  </div>
+</div>
+
       </div>
     </div>
 
@@ -120,6 +129,10 @@
       });
     }
 
+    <button onclick="connectESP32()">🔗 Connect ESP32</button>
+
+<button onclick="connectESP32()">🔗 Connect ESP32</button>
+      
     // If user remembered earlier
     (function tryRemember() {
       const rem = localStorage.getItem("rememberedUser");
