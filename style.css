@@ -34,10 +34,10 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(circle at 15% 20%, rgba(255, 223, 186, 0.8) 30px, transparent 70px),
-    radial-gradient(circle at 85% 25%, rgba(186, 225, 255, 0.8) 35px, transparent 70px),
-    radial-gradient(circle at 25% 85%, rgba(255, 200, 221, 0.8) 30px, transparent 70px),
-    radial-gradient(circle at 80% 75%, rgba(200, 255, 200, 0.8) 35px, transparent 70px),
+    radial-gradient(circle at 15% 20%, rgba(255, 223, 186, 0.😎 30px, transparent 70px),
+    radial-gradient(circle at 85% 25%, rgba(186, 225, 255, 0.😎 35px, transparent 70px),
+    radial-gradient(circle at 25% 85%, rgba(255, 200, 221, 0.😎 30px, transparent 70px),
+    radial-gradient(circle at 80% 75%, rgba(200, 255, 200, 0.😎 35px, transparent 70px),
     radial-gradient(circle at 45% 55%, rgba(255, 255, 200, 0.7) 40px, transparent 80px);
   background-repeat: no-repeat;
   animation: floatShapes 45s ease-in-out infinite alternate;
@@ -217,28 +217,3 @@ button:active{ transform: translateY(2px); }
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-#connectESPBtn {
-  background-color: #2b6cb0;
-  color: white;
-  font-weight: 600;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 20px;
-  margin: 12px 0;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-#connectESPBtn:hover {
-  background-color: #244a84;
-  transform: scale(1.05);
-}
-
-
-
-
-
-
-
