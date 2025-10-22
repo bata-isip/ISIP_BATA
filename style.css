@@ -1,4 +1,4 @@
-/* style.css - Kid-friendly pastel theme + clean layout (landscape cert preview) */
+/* style.css - Kid-friendly pastel theme + clean layout */
 
 :root{
   --bg1: #fffaf0;
@@ -23,7 +23,6 @@ body {
   text-align: center;
   padding: 20px;
 }
-
 /* 🌈 Floating colorful pastel circles */
 body::before {
   content: "";
@@ -51,6 +50,7 @@ body::before {
   100% { transform: translateY(-20px) translateX(-10px) scale(1); }
 }
 
+
 /* Brand */
 .brand{
   font-weight:700;
@@ -71,7 +71,7 @@ body::before {
 }
 
 /* pages */
-.page{ padding: 8px; max-width: 960px; margin: 8px auto; transition: all 260ms ease; }
+.page{ padding: 8px; max-width: 920px; margin: 8px auto; transition: all 260ms ease; }
 
 /* Inputs & Buttons */
 input[type="text"], input[type="password"]{
@@ -113,17 +113,26 @@ button:active{ transform: translateY(2px); }
 /* subjects */
 .subjects{ display:flex; justify-content:center; gap:12px; margin:18px 0; flex-wrap:wrap; }
 .subject-btn{ padding:14px 22px; font-size:18px; border-radius:14px; cursor:pointer; color:white; border:none; box-shadow:0 6px 12px rgba(0,0,0,0.06); }
-.math{ background: linear-gradient(90deg,#ffc6c6,#ff9b9b); }
-.science{ background: linear-gradient(90deg,#b2f5ea,#6ee7b7); }
-.history{ background: linear-gradient(90deg,#ffe6b3,#ffd18b); color:#4a2f00; }
-.english{ background: linear-gradient(90deg,#bcd9ff,#a5c9ff); }
-.filipino{ background: linear-gradient(90deg,#ffb7b7,#ffa6a6); }
-
-/* lesson buttons */
+.math{
+  background: linear-gradient(90deg,#ff8a8a,#ff6b6b);
+}
+.science{
+  background: linear-gradient(90deg,#7ee7b8,#27ae60);
+}
+.history{
+  background: linear-gradient(90deg,#ffd89b,#ffb86b);
+  color:#4a2f00;
+}
+.english{
+  background: linear-gradient(90deg,#a5c9ff,#5ea0ff);
+}
+.filipino{
+  background: linear-gradient(90deg,#fda4af,#f87171);
+}
 .lesson-btn{ display:block; width:100%; text-align:left; padding:10px 12px; border-radius:10px; background:#f6fbff; border:1px dashed #e6eefb; margin:8px 0; cursor:pointer; }
 
 /* Quiz */
-.quiz{ min-height:140px; max-width:880px; text-align:left; }
+.quiz{ min-height:140px; max-width:720px; text-align:left; }
 .quiz h4{ margin:8px 0; font-size:18px; color:#1f2937; }
 .choices{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; justify-content:flex-start; }
 .choices button{ flex: 1 1 45%; padding:10px; background:#fff; border:1px solid #e9f0ff; border-radius:10px; cursor:pointer; }
@@ -133,39 +142,19 @@ button:active{ transform: translateY(2px); }
 /* Profile */
 #profilePage ul{ list-style:none; padding:0; text-align:left; max-width:520px; margin:0 auto; }
 
-/* Certificate in-app (landscape card look) */
+/* Certificate in-app */
 .certificate-card{
-  max-width:920px;
+  max-width:760px;
   padding:26px;
   border-radius:16px;
   background: linear-gradient(180deg,#ffffff,#fffdf8);
   box-shadow: 0 12px 28px rgba(43,106,143,0.08);
   border: 3px solid rgba(255, 216, 120, 0.18);
-  text-align:center;
 }
 .congrats{ font-family: 'Poppins', sans-serif; color:#2b6a86; }
 .cert-name{ font-family: 'Great Vibes', cursive; font-size:42px; color:#0b4b6b; margin:6px 0; }
 .cert-lesson{ font-size:20px; color:#11506b; margin:6px 0; }
 .cert-badge{ display:block; margin-top:10px; background:#fff3d6; padding:6px 10px; border-radius:8px; color:#a05a2b; border:1px solid #ffecb8; font-weight:600; }
-.motiv{ margin-top:12px; color:#2b6a86; font-weight:600; }
-
-/* Confetti decorative pseudo-elements (in-app only) */
-.certificate-card::before,
-.certificate-card::after{
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 160px;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.14;
-  background-image: radial-gradient(circle at 10% 10%, rgba(255,200,200,0.9) 6px, transparent 12px),
-                    radial-gradient(circle at 60% 30%, rgba(200,255,200,0.9) 6px, transparent 12px),
-                    radial-gradient(circle at 40% 70%, rgba(200,225,255,0.9) 6px, transparent 12px);
-  border-radius: 12px;
-}
-.certificate-card::before { transform: translate(-60px,-40px) rotate(-10deg); }
-.certificate-card::after { transform: translate(60px,40px) rotate(8deg); }
 
 /* Animations */
 .hidden{ display:none !important; }
@@ -173,12 +162,58 @@ button:active{ transform: translateY(2px); }
 @keyframes fadeIn{ from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform:none;} }
 
 /* responsive */
-@media (max-width:900px){
+@media (max-width:600px){
   .choices button{ flex: 1 1 100%; }
   input{ width:90%; max-width:320px; }
   .card{ width: 92%; }
-  .certificate-card{ max-width:95%; padding:18px; }
 }
 
 /* small helpers */
 .remember{ display:block; margin-top:8px; color:var(--muted); font-size:14px; }
+
+/* ==========================
+   🌀 BLE CONNECTING MODAL
+   ========================== */
+#bleModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#bleModal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Loader animation (cute spinner) */
+.loader {
+  border: 5px solid #eee;
+  border-top: 5px solid #4da6ff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 15px auto 0;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
