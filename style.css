@@ -23,7 +23,8 @@ body {
   text-align: center;
   padding: 20px;
 }
-/* 🌈 Floating colorful pastel circles */
+
+/* 🌈 Floating pastel shapes */
 body::before {
   content: "";
   position: fixed;
@@ -43,13 +44,11 @@ body::before {
   animation: floatShapes 45s ease-in-out infinite alternate;
 }
 
-/* ✨ Floating animation */
 @keyframes floatShapes {
   0% { transform: translateY(0px) translateX(0px) scale(1); }
   50% { transform: translateY(25px) translateX(15px) scale(1.05); }
   100% { transform: translateY(-20px) translateX(-10px) scale(1); }
 }
-
 
 /* Brand */
 .brand{
@@ -70,7 +69,6 @@ body::before {
   margin: 10px auto;
 }
 
-/* pages */
 .page{ padding: 8px; max-width: 920px; margin: 8px auto; transition: all 260ms ease; }
 
 /* Inputs & Buttons */
@@ -113,22 +111,11 @@ button:active{ transform: translateY(2px); }
 /* subjects */
 .subjects{ display:flex; justify-content:center; gap:12px; margin:18px 0; flex-wrap:wrap; }
 .subject-btn{ padding:14px 22px; font-size:18px; border-radius:14px; cursor:pointer; color:white; border:none; box-shadow:0 6px 12px rgba(0,0,0,0.06); }
-.math{
-  background: linear-gradient(90deg,#ff8a8a,#ff6b6b);
-}
-.science{
-  background: linear-gradient(90deg,#7ee7b8,#27ae60);
-}
-.history{
-  background: linear-gradient(90deg,#ffd89b,#ffb86b);
-  color:#4a2f00;
-}
-.english{
-  background: linear-gradient(90deg,#a5c9ff,#5ea0ff);
-}
-.filipino{
-  background: linear-gradient(90deg,#fda4af,#f87171);
-}
+.math{ background: linear-gradient(90deg,#ff8a8a,#ff6b6b); }
+.science{ background: linear-gradient(90deg,#7ee7b8,#27ae60); }
+.history{ background: linear-gradient(90deg,#ffd89b,#ffb86b); color:#4a2f00; }
+.english{ background: linear-gradient(90deg,#a5c9ff,#5ea0ff); }
+.filipino{ background: linear-gradient(90deg,#fda4af,#f87171); }
 .lesson-btn{ display:block; width:100%; text-align:left; padding:10px 12px; border-radius:10px; background:#f6fbff; border:1px dashed #e6eefb; margin:8px 0; cursor:pointer; }
 
 /* Quiz */
@@ -142,7 +129,7 @@ button:active{ transform: translateY(2px); }
 /* Profile */
 #profilePage ul{ list-style:none; padding:0; text-align:left; max-width:520px; margin:0 auto; }
 
-/* Certificate in-app */
+/* Certificate */
 .certificate-card{
   max-width:760px;
   padding:26px;
@@ -156,7 +143,6 @@ button:active{ transform: translateY(2px); }
 .cert-lesson{ font-size:20px; color:#11506b; margin:6px 0; }
 .cert-badge{ display:block; margin-top:10px; background:#fff3d6; padding:6px 10px; border-radius:8px; color:#a05a2b; border:1px solid #ffecb8; font-weight:600; }
 
-/* Animations */
 .hidden{ display:none !important; }
 .fade-enter{ animation: fadeIn 320ms ease both; }
 @keyframes fadeIn{ from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform:none;} }
@@ -168,7 +154,6 @@ button:active{ transform: translateY(2px); }
   .card{ width: 92%; }
 }
 
-/* small helpers */
 .remember{ display:block; margin-top:8px; color:var(--muted); font-size:14px; }
 
 /* ==========================
@@ -187,9 +172,7 @@ button:active{ transform: translateY(2px); }
   z-index: 9999;
 }
 
-#bleModal.hidden {
-  display: none;
-}
+#bleModal.hidden { display: none; }
 
 .modal-content {
   background: white;
@@ -202,7 +185,6 @@ button:active{ transform: translateY(2px); }
   color: #333;
 }
 
-/* Loader animation (cute spinner) */
 .loader {
   border: 5px solid #eee;
   border-top: 5px solid #4da6ff;
@@ -216,4 +198,14 @@ button:active{ transform: translateY(2px); }
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* ==========================
+   💡 Highlighted Button
+   ========================== */
+button.highlighted {
+  background-color: #4f92ff !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(79,146,255,0.8);
+  transform: scale(1.05);
 }
