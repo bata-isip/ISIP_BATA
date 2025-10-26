@@ -8,9 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ISIP BATA</title>
 
-  <!-- Fonts: will fallback gracefully when offline -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
 </head>
@@ -46,26 +45,27 @@
     <div id="homePage" class="hidden page">
       <h1>Welcome, <span id="studentName"></span>!</h1>
       <p class="tagline">Your offline Filipino learning companion — lessons, quizzes, folklore, and fun!</p>
-      <div class="subjects">
-<button class="subject-btn math" onclick="openSubject('Math')">Math</button>
-<button class="subject-btn science" onclick="openSubject('Science')">Science</button>
-<button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
-<button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocab</button>
-<button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
 
+      <div class="subjects">
+        <button class="subject-btn math" onclick="openSubject('Math')">Math</button>
+        <button class="subject-btn science" onclick="openSubject('Science')">Science</button>
+        <button class="subject-btn history" onclick="openSubject('Philippine History')">Philippine History</button>
+        <button class="subject-btn english" onclick="openSubject('English Vocabulary')">English Vocab</button>
+        <button class="subject-btn filipino" onclick="openSubject('Filipino Vocabulary')">Filipino Vocab</button>
       </div>
+
       <div class="controls">
         <button onclick="openProfile()">📊 My Profile</button>
         <button onclick="logout()">Logout</button>
         <button onclick="connectBLE()">🔗 Connect ESP32</button>
-<!-- 🌀 Connecting Modal -->
-<div id="bleModal" class="hidden">
-  <div class="modal-content">
-    <p>🔍 Connecting to ESP32...</p>
-    <div class="loader"></div>
-  </div>
-</div>
+      </div>
 
+      <!-- BLE Connecting Modal -->
+      <div id="bleModal" class="hidden">
+        <div class="modal-content">
+          <p>🔍 Connecting to ESP32...</p>
+          <div class="loader"></div>
+        </div>
       </div>
     </div>
 
@@ -74,9 +74,7 @@
       <h2 id="lessonTitle"></h2>
       <div id="lessonContent" class="card"></div>
       <div id="quizContainer" class="card quiz"></div>
-
       <div id="folkloreContainer" class="card hidden"></div>
-
       <div class="controls">
         <button onclick="goHome()">Back</button>
       </div>
@@ -98,7 +96,7 @@
       </div>
     </div>
 
-    <!-- Certificate Page (landscape preview) -->
+    <!-- Certificate Page -->
     <div id="certificatePage" class="hidden page card certificate-card">
       <h2 class="congrats">Certificate of Completion</h2>
       <p class="sub">This certificate is proudly awarded to</p>
@@ -114,13 +112,13 @@
       </div>
     </div>
 
-    <!-- hidden canvas for rendering certificate PNG (landscape) -->
+    <!-- Hidden canvas for certificate -->
     <canvas id="certCanvas" width="1400" height="900" class="hidden"></canvas>
   </div>
 
   <script src="script.js"></script>
   <script>
-    // for offline support - service worker (unchanged)
+    // Offline support - Service Worker
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("service-worker.js")
@@ -129,11 +127,7 @@
       });
     }
 
-    <button onclick="connectESP32()">🔗 Connect ESP32</button>
-
-<button onclick="connectESP32()">🔗 Connect ESP32</button>
-      
-    // If user remembered earlier
+    // Auto-login if remembered
     (function tryRemember() {
       const rem = localStorage.getItem("rememberedUser");
       if (rem) {
