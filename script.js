@@ -1,20 +1,20 @@
 // script.js
 let currentUser = null;
 let users = JSON.parse(localStorage.getItem("users")) || {};
-
-// session id to cancel previous quizzes when switching lessons/pages
 let quizSessionId = 0;
+
+// === Navigation highlight variables ===
+let highlightIndex = 0;
+let visibleButtons = [];
 
 // Registration/Login
 function showRegister(){
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.remove("hidden");
-  animateCard(document.getElementById("registerForm"));
 }
 function showLogin(){
   document.getElementById("registerForm").classList.add("hidden");
   document.getElementById("loginForm").classList.remove("hidden");
-  animateCard(document.getElementById("loginForm"));
 }
 function togglePassword(){
   const pwd=document.getElementById("loginPassword");
@@ -60,6 +60,7 @@ function login(){
     document.getElementById("authPage").classList.add("hidden");
     document.getElementById("homePage").classList.remove("hidden");
     document.getElementById("studentName").innerText=users[username].fullName;
+    resetHighlight(); // reset highlight when entering home
   } else {
     alert("Invalid credentials");
   }
@@ -77,13 +78,14 @@ function logout(){
 
 // Subjects
 function openSubject(subject){
-  quizSessionId++; // cancel previous quiz instance if any
+  quizSessionId++;
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("lessonPage").classList.remove("hidden");
   document.getElementById("lessonTitle").innerText=subject+" Lessons";
   showLessonContent(subject);
   document.getElementById("quizContainer").innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
+  resetHighlight();
 }
 
 function goHome(){
@@ -94,9 +96,10 @@ function goHome(){
   document.getElementById("homePage").classList.remove("hidden");
   document.getElementById("quizContainer").innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
+  resetHighlight();
 }
 
-// Lessons per subject
+// === LESSON DATA (unchanged, truncated for brevity) ===
 const lessonsContent = {
   Math:["Addition","Subtraction","Multiplication","Division"],
   Science:["Circulatory","Respiratory","Digestive","Nervous","Skeletal/Muscular"],
@@ -105,6 +108,7 @@ const lessonsContent = {
   "Philippine History":["Pre-colonial Philippines","Spanish Colonization","Philippine Revolution"]
 };
 
+// Function to show lessons
 function showLessonContent(subject){
   const container=document.getElementById("lessonContent");
   container.innerHTML="<h3>Lessons:</h3>";
@@ -115,6 +119,108 @@ function showLessonContent(subject){
     btn.onclick=()=>startQuiz(subject,lesson);
     container.appendChild(btn);
   });
+  resetHighlight();
+}
+
+// === Navigation Highlight System ===
+function updateVisibleButtons(){
+  visibleButtons = Array.from(document.querySelectorAll("button:not(.hidden)")).filter(btn=>{
+    return btn.offsetParent !== null;
+  });
+}
+
+function highlightButton(index){
+  updateVisibleButtons();
+  visibleButtons.forEach(btn => btn.classList.remove("highlighted"));
+  if(visibleButtons.length > 0){
+    highlightIndex = Math.max(0, Math.min(index, visibleButtons.length - 1));
+    visibleButtons[highlightIndex].classList.add("highlighted");
+  }
+}
+
+function resetHighlight(){
+  setTimeout(() => {
+    updateVisibleButtons();
+    highlightIndex = 0;
+    if(visibleButtons.length > 0){
+      visibleButtons.forEach(btn => btn.classList.remove("highlighted"));
+      visibleButtons[0].classList.add("highlighted");
+    }
+  }, 300);
+}
+
+function moveHighlight(direction){
+  if(visibleButtons.length === 0) return;
+  const current = visibleButtons[highlightIndex];
+  const currentRect = current.getBoundingClientRect();
+
+  // Compute distances for nearest buttons
+  let targetIndex = highlightIndex;
+  let minDist = Infinity;
+  visibleButtons.forEach((btn, i) => {
+    if (i === highlightIndex) return;
+    const rect = btn.getBoundingClientRect();
+    const dx = rect.left - currentRect.left;
+    const dy = rect.top - currentRect.top;
+    if(direction === "UP" && dy < 0 && Math.abs(dx) < rect.width){
+      if(Math.abs(dy) < minDist){ minDist = Math.abs(dy); targetIndex = i; }
+    }
+    if(direction === "DOWN" && dy > 0 && Math.abs(dx) < rect.width){
+      if(Math.abs(dy) < minDist){ minDist = Math.abs(dy); targetIndex = i; }
+    }
+    if(direction === "LEFT" && dx < 0 && Math.abs(dy) < rect.height){
+      if(Math.abs(dx) < minDist){ minDist = Math.abs(dx); targetIndex = i; }
+    }
+    if(direction === "RIGHT" && dx > 0 && Math.abs(dy) < rect.height){
+      if(Math.abs(dx) < minDist){ minDist = Math.abs(dx); targetIndex = i; }
+    }
+  });
+  highlightButton(targetIndex);
+}
+
+function selectButton(){
+  if(visibleButtons.length === 0) return;
+  visibleButtons[highlightIndex].click();
+}
+
+// === BLE (ESP32) CONTROL ===
+let bleDevice = null;
+let bleCharacteristic = null;
+
+async function connectBLE(){
+  try {
+    document.getElementById("bleModal").classList.remove("hidden");
+    const device = await navigator.bluetooth.requestDevice({
+      filters: [{ namePrefix: "ESP32" }],
+      optionalServices: [0xFFE0]
+    });
+    bleDevice = device;
+    const server = await bleDevice.gatt.connect();
+    const service = await server.getPrimaryService(0xFFE0);
+    bleCharacteristic = await service.getCharacteristic(0xFFE1);
+
+    await bleCharacteristic.startNotifications();
+    bleCharacteristic.addEventListener("characteristicvaluechanged", handleBLEInput);
+
+    alert("✅ ESP32 Connected Successfully!");
+  } catch (error) {
+    alert("⚠️ BLE Connection failed: " + error);
+  } finally {
+    document.getElementById("bleModal").classList.add("hidden");
+  }
+}
+
+function handleBLEInput(event){
+  const value = new TextDecoder().decode(event.target.value).trim().toUpperCase();
+  console.log("Received:", value);
+  switch(value){
+    case "UP": moveHighlight("UP"); break;
+    case "DOWN": moveHighlight("DOWN"); break;
+    case "LEFT": moveHighlight("LEFT"); break;
+    case "RIGHT": moveHighlight("RIGHT"); break;
+    case "SELECT": selectButton(); break;
+    default: console.log("Unknown input:", value);
+  }
 }
 
 // Question Pools
@@ -984,3 +1090,13 @@ login = async function() {
     alert("Invalid credentials");
   }
 }
+
+// For development preview (keyboard test)
+// ===================================
+document.addEventListener("keydown", (e)=>{
+  if(e.key==="ArrowUp") moveHighlight("UP");
+  if(e.key==="ArrowDown") moveHighlight("DOWN");
+  if(e.key==="ArrowLeft") moveHighlight("LEFT");
+  if(e.key==="ArrowRight") moveHighlight("RIGHT");
+  if(e.key==="Enter") selectButton();
+});
