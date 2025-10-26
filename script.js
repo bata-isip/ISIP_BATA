@@ -140,10 +140,14 @@ function highlightButton(index){
 
 function resetHighlight(){
   setTimeout(() => {
+    // Only apply highlights when NOT on login/register
+    const authPage = document.getElementById("authPage");
+    if (!authPage.classList.contains("hidden")) return;
+
     updateVisibleButtons();
     highlightIndex = 0;
-    if(visibleButtons.length > 0){
-      visibleButtons.forEach(btn => btn.classList.remove("highlighted"));
+    visibleButtons.forEach(btn => btn.classList.remove("highlighted"));
+    if (visibleButtons.length > 0) {
       visibleButtons[0].classList.add("highlighted");
     }
   }, 300);
@@ -1100,3 +1104,4 @@ document.addEventListener("keydown", (e)=>{
   if(e.key==="ArrowRight") moveHighlight("RIGHT");
   if(e.key==="Enter") selectButton();
 });
+
