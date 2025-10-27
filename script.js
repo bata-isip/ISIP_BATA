@@ -849,6 +849,82 @@ function animateCard(el){
   });
 }
 
+// ----------------------
+// Remote navigation module
+// ----------------------
+let navItems = [];          // NodeList/Array of visible buttons
+let currentNavIndex = -1;   // -1 = nothing focused
+
+function getVisibleButtons() {
+  // find the visible .page element(s) and return visible buttons inside them
+  const visiblePages = Array.from(document.querySelectorAll('.page'))
+    .filter(p => !p.classList.contains('hidden') && p.offsetParent !== null);
+  const buttons = [];
+  visiblePages.forEach(p => {
+    p.querySelectorAll('button').forEach(b => {
+      // skip elements explicitly hidden
+      if (b.offsetParent !== null && !b.classList.contains('hidden')) buttons.push(b);
+    });
+  });
+  return buttons;
+}
+
+function initNavigator() {
+  navItems = getVisibleButtons();
+  // if nothing found, try fallbacks (global visible buttons)
+  if (!navItems.length) {
+    navItems = Array.from(document.querySelectorAll('button')).filter(b => b.offsetParent !== null && !b.classList.contains('hidden'));
+  }
+  // default focus to first button if any
+  if (navItems.length) {
+    setNavIndex(0);
+  } else {
+    clearNavFocus();
+  }
+}
+
+function clearNavFocus() {
+  document.querySelectorAll('.nav-focused').forEach(el => el.classList.remove('nav-focused'));
+  currentNavIndex = -1;
+}
+
+function setNavIndex(i) {
+  // clamp and update classes
+  if (!navItems || !navItems.length) { clearNavFocus(); return; }
+  if (i < 0) i = 0;
+  if (i >= navItems.length) i = navItems.length - 1;
+  // remove old
+  document.querySelectorAll('.nav-focused').forEach(el => el.classList.remove('nav-focused'));
+  currentNavIndex = i;
+  const el = navItems[currentNavIndex];
+  if (el) {
+    el.classList.add('nav-focused');
+    // try to scroll into view if offscreen
+    el.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'});
+  }
+}
+
+function moveNav(prevNext) {
+  if (!navItems || !navItems.length) {
+    initNavigator();
+    return;
+  }
+  // prevNext: -1 => previous, +1 => next
+  let next = currentNavIndex;
+  if (next < 0) next = 0;
+  next += prevNext;
+  // wrap around
+  if (next < 0) next = navItems.length - 1;
+  if (next >= navItems.length) next = 0;
+  setNavIndex(next);
+}
+
+function pressSelect() {
+  if (currentNavIndex >= 0 && navItems[currentNavIndex]) {
+    navItems[currentNavIndex].click();
+  }
+}
+
 /* ==============================
    🧠 BLE CONNECTION SYSTEM
    ============================== */
@@ -904,13 +980,25 @@ function onDisconnected() {
 }
 
 function handleBLEMessage(event) {
-  const msg = new TextDecoder().decode(event.target.value);
+  const msg = new TextDecoder().decode(event.target.value).trim();
   console.log("📩 From ESP32:", msg);
-  if (msg.startsWith("btn")) {
-    const num = parseInt(msg.replace("btn", ""));
-    document.querySelectorAll("#quizContainer button")[num - 1]?.click();
-  } else if (msg === "back") {
+
+  // Normalize to uppercase
+  const M = msg.toUpperCase();
+
+  if (M === "UP" || M === "LEFT") {
+    // previous
+    moveNav(-1);
+  } else if (M === "DOWN" || M === "RIGHT") {
+    // next
+    moveNav(+1);
+  } else if (M === "SELECT") {
+    pressSelect();
+  } else if (M === "BACK") {
+    // still useful to keep existing behavior
     goHome();
+  } else {
+    console.log("Unknown NAV command:", M);
   }
 }
 
@@ -984,3 +1072,4 @@ login = async function() {
     alert("Invalid credentials");
   }
 }
+
