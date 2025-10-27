@@ -10,11 +10,13 @@ function showRegister(){
   document.getElementById("loginForm").classList.add("hidden");
   document.getElementById("registerForm").classList.remove("hidden");
   animateCard(document.getElementById("registerForm"));
+  setTimeout(initNavigator, 60);
 }
 function showLogin(){
   document.getElementById("registerForm").classList.add("hidden");
   document.getElementById("loginForm").classList.remove("hidden");
   animateCard(document.getElementById("loginForm"));
+  setTimeout(initNavigator, 60);
 }
 function togglePassword(){
   const pwd=document.getElementById("loginPassword");
@@ -63,6 +65,7 @@ function login(){
   } else {
     alert("Invalid credentials");
   }
+  setTimeout(initNavigator, 60);
 }
 
 function logout(){
@@ -73,6 +76,7 @@ function logout(){
   document.getElementById("loginPassword").value="";
   document.getElementById("rememberMe").checked=false;
   quizSessionId++;
+  setTimeout(initNavigator, 60);
 }
 
 // Subjects
@@ -84,6 +88,7 @@ function openSubject(subject){
   showLessonContent(subject);
   document.getElementById("quizContainer").innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
+  setTimeout(initNavigator, 60);
 }
 
 function goHome(){
@@ -94,6 +99,7 @@ function goHome(){
   document.getElementById("homePage").classList.remove("hidden");
   document.getElementById("quizContainer").innerHTML = "";
   document.getElementById("folkloreContainer").classList.add("hidden");
+  setTimeout(initNavigator, 60);
 }
 
 // Lessons per subject
@@ -115,6 +121,7 @@ function showLessonContent(subject){
     btn.onclick=()=>startQuiz(subject,lesson);
     container.appendChild(btn);
   });
+  setTimeout(initNavigator, 60);
 }
 
 // Question Pools
@@ -664,7 +671,9 @@ function handleButtonPress(value) {
     ];
     folkloreContainer.innerHTML=`<h4>Random Folklore Story:</h4><p>${folkloreStories[Math.floor(Math.random()*folkloreStories.length)]}</p>`;
     folkloreContainer.classList.remove("hidden");
+    setTimeout(initNavigator, 60);
   }
+  setTimeout(initNavigator, 60);
 }
 
 // Badge helper
@@ -1072,4 +1081,5 @@ login = async function() {
     alert("Invalid credentials");
   }
 }
+
 
