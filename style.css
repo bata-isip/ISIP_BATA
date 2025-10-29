@@ -217,12 +217,3 @@ button:active{ transform: translateY(2px); }
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-/* highlighted navigation focus (for remote button navigation) */
-.nav-focused {
-  outline: 3px solid rgba(79,146,255,0.9);
-  box-shadow: 0 6px 18px rgba(79,146,255,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
-  transform: translateY(-2px);
-  transition: all 120ms ease;
-  z-index: 5;
-}
